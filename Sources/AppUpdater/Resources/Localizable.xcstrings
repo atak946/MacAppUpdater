@@ -8388,6 +8388,146 @@
           }
         }
       }
+    },
+    "Last hour": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son 1 saat"
+          }
+        }
+      }
+    },
+    "Last 6 hours": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son 6 saat"
+          }
+        }
+      }
+    },
+    "Last 24 hours": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son 24 saat"
+          }
+        }
+      }
+    },
+    "Time range": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaman aralığı"
+          }
+        }
+      }
+    },
+    "1h": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 sa"
+          }
+        }
+      }
+    },
+    "6h": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "6 sa"
+          }
+        }
+      }
+    },
+    "24h": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "24 sa"
+          }
+        }
+      }
+    },
+    "Average CPU": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ortalama CPU"
+          }
+        }
+      }
+    },
+    "Peak memory": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En yüksek bellek"
+          }
+        }
+      }
+    },
+    "Recording… the first entries appear after a couple of minutes.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaydediliyor… ilk kayıtlar birkaç dakika içinde görünür."
+          }
+        }
+      }
+    },
+    "Usage history recording is off.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanım geçmişi kaydı kapalı."
+          }
+        }
+      }
+    },
+    "%@ averaged %@ CPU for %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %3$@ boyunca ortalama %2$@ CPU kullandı"
+          }
+        }
+      }
+    },
+    "%@ is using a lot of CPU": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ çok CPU kullanıyor"
+          }
+        }
+      }
+    },
+    "It averaged %@ CPU over the last %@.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son %2$@ boyunca ortalama %1$@ CPU kullandı."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
