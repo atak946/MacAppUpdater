@@ -8238,6 +8238,156 @@
           }
         }
       }
+    },
+    "Update All Apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm Uygulamaları Güncelle"
+          }
+        }
+      }
+    },
+    "Clean Caches": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önbellekleri Temizle"
+          }
+        }
+      }
+    },
+    "Checks your apps for updates and returns how many are available.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamalarınızda güncelleme olup olmadığını denetler ve kaç tane olduğunu döndürür."
+          }
+        }
+      }
+    },
+    "Checks for updates, then installs every update that Update All can install without asking.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeleri denetler, ardından Tümünü Güncelle'nin sormadan kurabildiği her güncellemeyi kurar."
+          }
+        }
+      }
+    },
+    "Moves app, Xcode, simulator and package manager caches to the Trash and returns the bytes freed.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama, Xcode, simülatör ve paket yöneticisi önbelleklerini Çöp'e taşır ve boşalan alanı döndürür."
+          }
+        }
+      }
+    },
+    "All your apps are up to date.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm uygulamalarınız güncel."
+          }
+        }
+      }
+    },
+    "%lld updates available: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld güncelleme var: %@"
+          }
+        }
+      }
+    },
+    "Updated: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellendi: %@"
+          }
+        }
+      }
+    },
+    "Needs your attention: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlgilenmeniz gerekiyor: %@"
+          }
+        }
+      }
+    },
+    "Failed: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başarısız: %@"
+          }
+        }
+      }
+    },
+    "Update in the app: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama içinden güncelleyin: %@"
+          }
+        }
+      }
+    },
+    "Freed %@.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ boşaltıldı."
+          }
+        }
+      }
+    },
+    "Freed %@. %lld items couldn't be moved to the Trash.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ boşaltıldı. %lld öğe Çöp'e taşınamadı."
+          }
+        }
+      }
+    },
+    "App Updater isn't ready yet. Try again in a moment.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Updater henüz hazır değil. Biraz sonra tekrar deneyin."
+          }
+        }
+      }
+    },
+    "App Updater is busy with another check or cleanup. Try again when it finishes.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Updater başka bir denetim veya temizlikle meşgul. Bitince tekrar deneyin."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
