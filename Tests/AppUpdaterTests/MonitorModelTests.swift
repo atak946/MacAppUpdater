@@ -172,6 +172,8 @@ struct MonitorModelTests {
 
         await model.sampleOnce(including: .ports, now: start.addingTimeInterval(4))
         #expect(network.calls == 2)
+        // A tick without a read keeps the last rates.
+        #expect(model.networkByPID[10] == rate)
         await model.sampleOnce(including: .ports, now: start.addingTimeInterval(8))
         #expect(network.calls == 3)
         #expect(model.networkByPID.isEmpty)

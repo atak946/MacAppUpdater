@@ -131,7 +131,7 @@ final class MonitorModel {
         if networkReader != nil { lastNetworkRead = now }
         async let systemSample = system.sample()
         async let processSample: [ProcessSnapshot]? = wantsProcesses ? processes.sample() : nil
-        async let networkSample: [Int32: NetworkThroughput]?? = networkReader?.sample()
+        async let networkSample = Self.read(networkReader)
         record(await systemSample)
         if case .some(let rates) = await networkSample { recordNetwork(rates) }
         if let list = await processSample { apply(list) }
@@ -147,6 +147,13 @@ final class MonitorModel {
     /// spawns `nettop` (about 15 ms of CPU, roughly 0.75% of a core if it ran every 2 s tick).
     private func isNetworkReadDue(_ demand: MonitorDemand, now: Date) -> Bool {
         network != nil && demand >= .ports && now.timeIntervalSince(lastNetworkRead) >= networkInterval
+    }
+
+    /// `.none` when no read was due. Optional chaining (`reader?.sample()`) would flatten that into
+    /// `.some(nil)`, a baseline, and drop the rates on every tick between two reads.
+    private static func read(_ reader: (any ProcessNetworkSampling)?) async -> [Int32: NetworkThroughput]?? {
+        guard let reader else { return .none }
+        return .some(await reader.sample())
     }
 
     /// A nil read is only a baseline (first read, or the page was hidden for a while):
