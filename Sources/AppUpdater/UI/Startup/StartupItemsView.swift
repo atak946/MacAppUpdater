@@ -109,22 +109,23 @@ struct StartupItemsView: View {
 
     // MARK: List
 
-    @ViewBuilder
     private var listCard: some View {
-        VStack(spacing: 0) {
+        // Filter + search + sort once per body pass.
+        let items = visibleItems
+        return VStack(spacing: 0) {
             StartupColumnHeader()
             GlassDivider()
-            listContent
+            listContent(items)
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .surface(.raised)
     }
 
     @ViewBuilder
-    private var listContent: some View {
+    private func listContent(_ items: [StartupItem]) -> some View {
         if model.isLoading && model.items.isEmpty {
             EmptyStateView(symbol: nil, title: String(localized: "Reading startup items…"))
-        } else if visibleItems.isEmpty {
+        } else if items.isEmpty {
             EmptyStateView(
                 symbol: "line.3.horizontal.decrease.circle",
                 title: String(localized: "No startup items match"),
@@ -133,12 +134,17 @@ struct StartupItemsView: View {
         } else {
             ScrollView {
                 LazyVStack(spacing: 0) {
-                    ForEach(Array(visibleItems.enumerated()), id: \.element.id) { index, item in
-                        if index > 0 {
-                            GlassDivider(leadingInset: StartupListMetrics.dividerInset)
-                                .padding(.trailing, Theme.Spacing.m)
+                    // Exactly one view per item: a variable number of views per element
+                    // makes SwiftUI evaluate every row instead of only the visible ones.
+                    let firstID = items.first?.id
+                    ForEach(items) { item in
+                        VStack(spacing: 0) {
+                            if item.id != firstID {
+                                GlassDivider(leadingInset: StartupListMetrics.dividerInset)
+                                    .padding(.trailing, Theme.Spacing.m)
+                            }
+                            row(for: item)
                         }
-                        row(for: item)
                     }
                 }
                 .padding(.vertical, Theme.Spacing.xs)

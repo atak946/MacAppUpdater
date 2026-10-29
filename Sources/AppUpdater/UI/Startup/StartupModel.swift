@@ -31,7 +31,12 @@ final class StartupModel {
     private let scanner: any StartupScanning
     private let controller: any StartupControlling
     private let logger = Logger(subsystem: "com.macappupdater", category: "StartupModel")
-    @ObservationIgnored private var iconCache: [String: NSImage] = [:]
+    /// Bounded so icons for bundles that come and go don't accumulate for the app's lifetime.
+    @ObservationIgnored private let iconCache: NSCache<NSString, NSImage> = {
+        let cache = NSCache<NSString, NSImage>()
+        cache.countLimit = 200
+        return cache
+    }()
 
     init(scanner: any StartupScanning, controller: any StartupControlling) {
         self.scanner = scanner
@@ -109,9 +114,10 @@ final class StartupModel {
     /// Owning app's icon; nil when no app was found (the row shows an `IconTile`).
     func icon(for item: StartupItem) -> NSImage? {
         guard let url = item.appBundleURL else { return nil }
-        if let cached = iconCache[url.path] { return cached }
+        let key = url.path as NSString
+        if let cached = iconCache.object(forKey: key) { return cached }
         let image = NSWorkspace.shared.icon(forFile: url.path)
-        iconCache[url.path] = image
+        iconCache.setObject(image, forKey: key)
         return image
     }
 }
