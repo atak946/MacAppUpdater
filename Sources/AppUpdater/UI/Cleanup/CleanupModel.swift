@@ -162,12 +162,46 @@ final class CleanupModel {
         let items = selectedItems
         guard !items.isEmpty, !isBusy else { return }
         state = .cleaning
-        let result = await cleaner.clean(items)
+        state = .finished(await clean(items))
+    }
+
+    /// Categories an unattended run (Shortcuts) may clean: the cache-like defaults. Logs and the
+    /// Trash are preselected on screen too, but logs aren't caches and the Trash is deleted for good.
+    static let unattendedCategories: Set<CleanupCategory> = Set(
+        CleanupCategory.allCases.filter(\.isSelectedByDefault)
+    ).subtracting([.logs, .trash])
+
+    /// Shortcuts path: scans `unattendedCategories` and cleans what the screen would preselect.
+    /// Returns nil when a scan or clean is already running.
+    func cleanUnattended() async throws -> CleanupResult? {
+        guard !isBusy else { return nil }
+        state = .cleaning
+        let scanned: CleanupScanReport
+        do {
+            scanned = try await scanner.scan(categories: Self.unattendedCategories) { _ in }
+        } catch {
+            logger.error("Unattended cleanup scan failed: \(error.localizedDescription, privacy: .public)")
+            state = report.map(State.ready) ?? .idle
+            throw error
+        }
+        let selected = Self.defaultSelection(for: scanned)
+        let items = scanned.groups
+            .filter { Self.unattendedCategories.contains($0.category) }
+            .flatMap(\.items)
+            .filter { selected.contains($0.id) }
+        let result = await clean(items)
+        state = .finished(result)
+        return result
+    }
+
+    /// Moves `items` to the Trash, logs failures and refreshes the report.
+    private func clean(_ items: [CleanupItem]) async -> CleanupResult {
+        let result = items.isEmpty ? CleanupResult(removed: [], failed: []) : await cleaner.clean(items)
         for failure in result.failed {
             logger.error("Cleanup failed for \(failure.item.url.path, privacy: .public): \(failure.reason, privacy: .public)")
         }
         await rescanQuietly()
-        state = .finished(result)
+        return result
     }
 
     /// "Done" on the result screen: back to the fresh report.

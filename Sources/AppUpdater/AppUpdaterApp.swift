@@ -47,6 +47,12 @@ struct AppUpdaterApp: App {
 final class AppDelegate: NSObject, NSApplicationDelegate {
     let environment = AppEnvironment()
 
+    override init() {
+        super.init()
+        // Shortcuts can run an intent before launching finishes; the environment exists by now.
+        AppEnvironment.current = environment
+    }
+
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Regular app: Dock icon + main window; the menu bar item stays for quick access.
         NSApp.setActivationPolicy(.regular)

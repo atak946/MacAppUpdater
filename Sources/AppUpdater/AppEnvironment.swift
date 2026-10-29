@@ -11,6 +11,9 @@ extension UpdateHistoryStore: UpdateHistoryRecording {}
 /// Composition root: the only place that knows concrete core types.
 @MainActor
 final class AppEnvironment {
+    /// The running app's environment, for App Intents performed in-process. Set by `AppDelegate`.
+    static var current: AppEnvironment?
+
     let viewModel: UpdatesViewModel
     let formulaeModel: FormulaeModel
     let cleanupModel: CleanupModel

@@ -79,6 +79,50 @@ assemble_bundle() {
     printf 'APPL????' > "$CONTENTS/PkgInfo"
 }
 
+# Shortcuts and Spotlight only see App Intents listed in Contents/Resources/Metadata.appintents.
+# Xcode runs appintentsmetadataprocessor for that; SwiftPM doesn't, so we run it the same way on
+# the .swiftconstvalues files the compiler already emits next to the app target's objects.
+extract_app_intents_metadata() {
+    local bin="$1"
+    local tool target_dir arch_dir arch const_list min_os xcode_build
+    tool="$(xcrun --find appintentsmetadataprocessor 2>/dev/null)" \
+        || fail "appintentsmetadataprocessor not found (needs Xcode, not only the Command Line Tools)"
+    # $bin is .../Products/<Config>; the module's intermediates sit beside it.
+    target_dir="$(dirname "$(dirname "$bin")")/Intermediates.noindex/MacAppUpdater.build/$(basename "$bin")/AppUpdater-p.build"
+    # Metadata is architecture neutral: one architecture's const values describe all of them.
+    for arch_dir in "$target_dir"/Objects-normal/*; do
+        [[ -f "$arch_dir/AppUpdater.SwiftFileList" ]] && break
+    done
+    [[ -f "${arch_dir:-}/AppUpdater.SwiftFileList" ]] || fail "AppUpdater build intermediates not found in $target_dir"
+    arch="$(basename "$arch_dir")"
+    const_list="$arch_dir/AppUpdater.SwiftConstValuesFileList"
+    find "$arch_dir" -maxdepth 1 -name '*.swiftconstvalues' > "$const_list"
+    [[ -s "$const_list" ]] || fail "no .swiftconstvalues in $arch_dir; App Intents metadata can't be extracted"
+    min_os="$(plist_value "$CONTENTS/Info.plist" LSMinimumSystemVersion)"
+    xcode_build="$(xcodebuild -version | awk '/Build version/ { print $3 }')"
+
+    log "Extracting App Intents metadata ($arch)"
+    "$tool" \
+        --output "$CONTENTS/Resources" \
+        --toolchain-dir "$(dirname "$(dirname "$(dirname "$tool")")")" \
+        --module-name AppUpdater \
+        --sdk-root "$(xcrun --sdk macosx --show-sdk-path)" \
+        --xcode-version "$xcode_build" \
+        --platform-family macOS \
+        --deployment-target "$min_os" \
+        --bundle-identifier "$(plist_value "$CONTENTS/Info.plist" CFBundleIdentifier)" \
+        --target-triple "$arch-apple-macos$min_os" \
+        --binary-file "$CONTENTS/MacOS/AppUpdater" \
+        --source-file-list "$arch_dir/AppUpdater.SwiftFileList" \
+        --swift-const-vals-list "$const_list" \
+        --compile-time-extraction \
+        --deployment-aware-processing \
+        --no-app-shortcuts-localization \
+        --force >&2
+    grep -q '"CheckForUpdatesIntent"' "$CONTENTS/Resources/Metadata.appintents/extract.actionsdata" 2>/dev/null \
+        || fail "Metadata.appintents is missing the app's intents"
+}
+
 # Ad-hoc signature so the bundle launches locally. Release signing lives in release.sh.
 sign_bundle() {
     if [[ -n "${SIGN_IDENTITY:-}" ]]; then
@@ -111,6 +155,7 @@ main() {
     bin="$(build_products | tail -n 1)"
     [[ -x "$bin/AppUpdater" ]] || fail "AppUpdater binary missing in $bin"
     assemble_bundle "$bin"
+    extract_app_intents_metadata "$bin"
     sign_bundle
     warn_release_readiness
     log "Done: $APP ($VERSION build $BUILD)"
