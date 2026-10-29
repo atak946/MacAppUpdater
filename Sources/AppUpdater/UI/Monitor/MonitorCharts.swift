@@ -87,8 +87,6 @@ struct ChartCard<Chart: View, Legend: View>: View {
                     Text(value)
                         .font(Theme.Typography.numeral(24))
                         .foregroundStyle(Theme.textGradient)
-                        .contentTransition(.numericText())
-                        .animation(Theme.Motion.tick, value: value)
                 }
                 Spacer(minLength: Theme.Spacing.s)
                 legend
@@ -120,7 +118,6 @@ struct LegendItem: View {
             Text(value)
                 .font(.system(size: 11.5, weight: .semibold, design: .rounded).monospacedDigit())
                 .foregroundStyle(Theme.Palette.textSecondary)
-                .contentTransition(.numericText())
         }
     }
 }
@@ -141,7 +138,6 @@ struct GaugeCard: View {
                     Text(MonitorFormat.percent(fraction))
                         .font(Theme.Typography.numeral(28))
                         .foregroundStyle(Theme.textGradient)
-                        .contentTransition(.numericText())
                     Image(systemName: symbol)
                         .font(.system(size: 11, weight: .bold))
                         .foregroundStyle(tint)
@@ -161,7 +157,6 @@ struct GaugeCard: View {
                             Text(detail.value)
                                 .foregroundStyle(Theme.Palette.textSecondary)
                                 .monospacedDigit()
-                                .contentTransition(.numericText())
                         }
                         .font(.system(size: 11.5, weight: .medium))
                         .lineLimit(1)
@@ -176,7 +171,6 @@ struct GaugeCard: View {
                 .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.l, style: .continuous))
         )
         .surface(.raised)
-        .animation(Theme.Motion.tick, value: fraction)
         .accessibilityElement(children: .combine)
     }
 }

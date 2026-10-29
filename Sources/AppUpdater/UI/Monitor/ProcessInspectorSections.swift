@@ -73,7 +73,6 @@ struct InspectorStatTile: View {
             Text(value)
                 .font(Theme.Typography.numeral(18))
                 .foregroundStyle(Theme.Palette.textPrimary)
-                .contentTransition(.numericText())
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
             if let history {
@@ -87,7 +86,6 @@ struct InspectorStatTile: View {
         .padding(Theme.Spacing.s + 2)
         .frame(maxWidth: .infinity, alignment: .leading)
         .surface(.inset, radius: Theme.Radius.m)
-        .animation(Theme.Motion.tick, value: value)
         .accessibilityElement(children: .combine)
     }
 }

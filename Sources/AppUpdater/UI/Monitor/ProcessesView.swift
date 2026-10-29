@@ -143,12 +143,17 @@ struct ProcessesView: View {
             } else {
                 ScrollView {
                     LazyVStack(spacing: 0) {
-                        ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                            if index > 0 {
-                                GlassDivider(leadingInset: ProcessListMetrics.dividerInset)
-                                    .padding(.trailing, Theme.Spacing.m)
+                        // Exactly one view per item: a variable number of views per element
+                        // makes SwiftUI evaluate every row on each sample instead of only visible ones.
+                        let firstID = items.first?.id
+                        ForEach(items) { item in
+                            VStack(spacing: 0) {
+                                if item.id != firstID {
+                                    GlassDivider(leadingInset: ProcessListMetrics.dividerInset)
+                                        .padding(.trailing, Theme.Spacing.m)
+                                }
+                                groupRows(item)
                             }
-                            groupRows(item)
                         }
                     }
                     .padding(.vertical, Theme.Spacing.xs)

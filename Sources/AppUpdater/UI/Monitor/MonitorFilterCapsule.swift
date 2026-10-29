@@ -35,7 +35,6 @@ struct MonitorFilterCapsule: View {
                     .padding(.horizontal, 5)
                     .padding(.vertical, 1)
                     .background(Capsule().fill(Color.white.opacity(isSelected ? 0.18 : 0.06)))
-                    .contentTransition(.numericText())
             }
             .font(.system(size: 12, weight: .semibold))
             .foregroundStyle(isSelected ? Theme.Palette.textPrimary : Theme.Palette.textSecondary)

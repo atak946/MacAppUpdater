@@ -149,6 +149,8 @@ struct StatTile: View {
 }
 
 /// Circular progress ring with a glowing gradient stroke and a centered label.
+/// Live gauge: no glow and no animation, since a blurred or interpolated ring is
+/// re-rendered on the CPU every time the value changes.
 struct ProgressRing<Label: View>: View {
     /// 0...1
     let value: Double
@@ -166,8 +168,6 @@ struct ProgressRing<Label: View>: View {
                     style: StrokeStyle(lineWidth: lineWidth, lineCap: .round)
                 )
                 .rotationEffect(.degrees(-90))
-                .glow(tint, radius: lineWidth, opacity: 0.6)
-                .animation(Theme.Motion.content, value: value)
             label
         }
     }

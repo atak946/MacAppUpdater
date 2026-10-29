@@ -62,7 +62,7 @@ final class MonitorModel {
         processes: any ProcessSampling,
         ports: any PortScanning,
         terminator: any ProcessTerminating,
-        interval: Duration = .milliseconds(1500),
+        interval: Duration = .seconds(2),
         portInterval: TimeInterval = 5,
         currentUserID: UInt32 = getuid()
     ) {

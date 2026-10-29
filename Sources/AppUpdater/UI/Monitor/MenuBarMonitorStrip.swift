@@ -47,8 +47,6 @@ struct MenuBarMonitorStrip: View {
                 Text(value)
                     .font(Theme.Typography.numeral(13))
                     .foregroundStyle(Theme.Palette.textPrimary)
-                    .contentTransition(.numericText())
-                    .animation(Theme.Motion.tick, value: value)
             }
             GlowAreaChart(series: [ChartSeries(id: title, values: Array(history.suffix(40)), tint: tint)],
                           capacity: 40, maxValue: maxValue)
@@ -78,7 +76,6 @@ struct MenuBarMonitorStrip: View {
                 .font(.system(size: 11.5, weight: .semibold, design: .rounded).monospacedDigit())
                 .foregroundStyle(Theme.Palette.textSecondary)
                 .lineLimit(1)
-                .contentTransition(.numericText())
         }
     }
 }

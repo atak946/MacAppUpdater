@@ -34,10 +34,8 @@ struct CoreBarsCard: View {
             Capsule()
                 .fill(Theme.gradient(for: tint))
                 .scaleEffect(x: 1, y: max(0.04, min(value, 1)), anchor: .bottom)
-                .glow(tint, radius: 4, opacity: 0.5)
         }
         .frame(maxWidth: 14)
-        .animation(Theme.Motion.tick, value: value)
     }
 }
 
@@ -58,7 +56,6 @@ struct BatteryCard: View {
                     Text(MonitorFormat.percent(battery.level))
                         .font(Theme.Typography.numeral(18))
                         .foregroundStyle(Theme.textGradient)
-                        .contentTransition(.numericText())
                     Image(systemName: battery.isCharging ? "bolt.fill" : "battery.75percent")
                         .font(.system(size: 10, weight: .bold))
                         .foregroundStyle(tint)
@@ -93,7 +90,6 @@ struct BatteryCard: View {
             Text(value)
                 .font(Theme.Typography.numeral(15))
                 .foregroundStyle(Theme.Palette.textPrimary)
-                .contentTransition(.numericText())
             Text(label)
                 .font(.system(size: 10.5, weight: .medium))
                 .foregroundStyle(Theme.Palette.textTertiary)
@@ -121,7 +117,6 @@ struct TopConsumersCard: View {
                         row(group, peak: peak)
                     }
                 }
-                .animation(Theme.Motion.tick, value: top.map(\.id))
             }
         }
         .padding(Theme.Spacing.l)
@@ -142,12 +137,10 @@ struct TopConsumersCard: View {
                 .font(.system(size: 12, weight: .semibold, design: .rounded).monospacedDigit())
                 .foregroundStyle(Theme.Palette.textPrimary)
                 .frame(width: 56, alignment: .trailing)
-                .contentTransition(.numericText())
             Text(MonitorFormat.bytes(group.memoryBytes))
                 .font(.system(size: 11.5).monospacedDigit())
                 .foregroundStyle(Theme.Palette.textTertiary)
                 .frame(width: 72, alignment: .trailing)
-                .contentTransition(.numericText())
         }
         .accessibilityElement(children: .combine)
     }
@@ -166,10 +159,8 @@ struct UsageBar: View {
             Capsule()
                 .fill(LinearGradient(colors: [tint.opacity(0.6), tint], startPoint: .leading, endPoint: .trailing))
                 .scaleEffect(x: max(0.02, min(fraction, 1)), y: 1, anchor: .leading)
-                .glow(tint, radius: 3, opacity: 0.5)
         }
         .frame(height: height)
-        .animation(Theme.Motion.tick, value: fraction)
         .accessibilityHidden(true)
     }
 }

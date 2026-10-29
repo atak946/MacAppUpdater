@@ -19,30 +19,11 @@ struct MainWindowView: View {
     @State private var mappingApp: InstalledApp?
 
     var body: some View {
-        HStack(spacing: 0) {
-            GlassSidebar(
-                viewModel: viewModel,
-                formulaeModel: formulaeModel,
-                selection: $selection,
-                searchText: $searchText
-            )
-            .frame(width: 236)
-            // The top bar sits outside the transitioning page so it never doubles during a switch.
-            ZStack {
-                detail
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .id(selection)
-                    .transition(.opacity)
-            }
-            .animation(.easeOut(duration: 0.16), value: selection)
-            .safeAreaInset(edge: .top, spacing: 0) { topBar }
+        // GeometryReader takes the proposed size without measuring its content, so AppKit's
+        // per-update minimum-size query stops laying out the whole page a second time.
+        GeometryReader { _ in
+            windowContent
         }
-        .scrollContentBackground(.hidden)
-        // Static: an animated backdrop forces every glass surface to re-blur each frame.
-        .background { AppBackdrop(isAnimated: false).ignoresSafeArea() }
-        .environment(\.isOnBackdrop, true)
-        .preferredColorScheme(.dark)
-        .ignoresSafeArea(.container, edges: .top)
         .frame(minWidth: 900, minHeight: 600)
         .background(shortcuts)
         .sheet(item: $detailApp) { app in
@@ -57,6 +38,37 @@ struct MainWindowView: View {
         .task {
             if viewModel.state == .idle { await viewModel.refresh() }
         }
+    }
+
+    private var windowContent: some View {
+        HStack(spacing: 0) {
+            GlassSidebar(
+                viewModel: viewModel,
+                formulaeModel: formulaeModel,
+                selection: $selection,
+                searchText: $searchText
+            )
+            .frame(width: 236)
+            // The top bar sits outside the transitioning page so it never doubles during a switch.
+            // A plain stack, not `safeAreaInset`: the inset re-measures the whole page on every
+            // update, which made each Monitor sample cost ~0.7 s of main-thread layout.
+            VStack(spacing: 0) {
+                topBar
+                ZStack {
+                    detail
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .id(selection)
+                        .transition(.opacity)
+                }
+                .animation(.easeOut(duration: 0.16), value: selection)
+            }
+        }
+        .scrollContentBackground(.hidden)
+        // Static: an animated backdrop forces every glass surface to re-blur each frame.
+        .background { AppBackdrop(isAnimated: false).ignoresSafeArea() }
+        .environment(\.isOnBackdrop, true)
+        .preferredColorScheme(.dark)
+        .ignoresSafeArea(.container, edges: .top)
     }
 
     // MARK: Detail

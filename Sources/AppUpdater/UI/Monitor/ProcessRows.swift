@@ -46,7 +46,6 @@ struct ProcessGroupRow: View {
             Text(MonitorFormat.bytes(item.memoryBytes))
                 .font(.system(size: 12, weight: .medium).monospacedDigit())
                 .foregroundStyle(Theme.Palette.textSecondary)
-                .contentTransition(.numericText())
                 .frame(width: ProcessListMetrics.memory, alignment: .trailing)
             ThreadCell(count: item.threadCount, size: 12)
             // The pill is empty for user processes; the fixed spacer keeps the column in place.
@@ -167,7 +166,6 @@ struct ProcessMemberRow: View {
             Text(MonitorFormat.bytes(process.memoryBytes))
                 .font(.system(size: 11.5).monospacedDigit())
                 .foregroundStyle(Theme.Palette.textTertiary)
-                .contentTransition(.numericText())
                 .frame(width: ProcessListMetrics.memory, alignment: .trailing)
             ThreadCell(count: process.threadCount, size: 11.5)
             Color.clear.frame(width: ProcessListMetrics.kind + ProcessListMetrics.actions + Theme.Spacing.m, height: 1)
@@ -191,7 +189,6 @@ private struct ThreadCell: View {
         Text(verbatim: "\(count)")
             .font(.system(size: size).monospacedDigit())
             .foregroundStyle(Theme.Palette.textTertiary)
-            .contentTransition(.numericText())
             .frame(width: ProcessListMetrics.threads, alignment: .trailing)
     }
 }
@@ -205,7 +202,6 @@ private struct CPUCell: View {
             Text(MonitorFormat.cpu(percent))
                 .font(.system(size: 12, weight: .semibold, design: .rounded).monospacedDigit())
                 .foregroundStyle(percent >= 1 ? Theme.Palette.textPrimary : Theme.Palette.textTertiary)
-                .contentTransition(.numericText())
             UsageBar(
                 fraction: percent / ProcessListMetrics.cpuBarScale,
                 tint: cpuTint(percent / ProcessListMetrics.cpuBarScale),

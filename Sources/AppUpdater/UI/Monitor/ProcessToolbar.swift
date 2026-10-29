@@ -67,7 +67,6 @@ struct ProcessToolbar: View {
             Text("\(shownCount) shown")
                 .font(.system(size: 11.5, weight: .medium).monospacedDigit())
                 .foregroundStyle(Theme.Palette.textTertiary)
-                .contentTransition(.numericText())
             if isNarrowed {
                 Button("Clear filters", systemImage: "xmark.circle.fill", action: onClear)
                     .buttonStyle(.secondary)
