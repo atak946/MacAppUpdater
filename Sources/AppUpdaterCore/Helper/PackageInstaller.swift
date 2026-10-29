@@ -77,10 +77,11 @@ public struct PackageInstaller: UpdateInstalling {
     }
 
     /// Nil when no verifier is configured or the installed app is unsigned/ad-hoc/invalid.
+    /// Read without resource hashing, like `AppInstaller.pinnedTeam(for:)`: it only names the publisher.
     private func installedTeamIdentifier(of app: InstalledApp) async -> String? {
         guard let appSignatureVerifier else { return nil }
         do {
-            return try await appSignatureVerifier.teamIdentifier(of: app.url)
+            return try await appSignatureVerifier.signingTeam(of: app.url)
         } catch {
             Self.logger.notice("No team id for \(app.url.lastPathComponent, privacy: .public): \(error.localizedDescription, privacy: .private)")
             return nil

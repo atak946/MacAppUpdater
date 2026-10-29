@@ -37,8 +37,9 @@ public protocol UpdateDownloading: Sendable {
 public protocol SignatureVerifying: Sendable {
     /// Returns Team Identifier of a signed bundle, throws if signature is invalid.
     func teamIdentifier(of bundleURL: URL) async throws -> String
-    /// Team of a signed bundle for display and bookkeeping. May skip hashing the bundle's
-    /// resources, so never use it to decide whether to install or trust a bundle.
+    /// Apple-anchored team of a signed bundle without hashing its resources. It names the
+    /// publisher (for display, or for the team an update must be signed by), but never proves
+    /// the bundle's contents are intact, so never use it to trust a bundle you are about to run.
     func signingTeam(of bundleURL: URL) async throws -> String
 }
 

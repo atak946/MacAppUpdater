@@ -113,11 +113,14 @@ public struct AppInstaller: UpdateInstalling {
     /// - installed team (anchored) and `expectedTeamID` present → they must match;
     /// - only one of them → that one;
     /// - neither → refused: without a trusted publisher there is nothing to pin the update to.
+    /// The installed team is read without resource hashing: apps that write into their own bundle
+    /// (LM Studio adds files under Resources) break the seal but keep their Developer ID. The
+    /// update itself still gets the full check against this team.
     func pinnedTeam(for update: AvailableUpdate) async throws -> String {
         let installedTeam: String?
         let problem: String?
         do {
-            installedTeam = try await signatureVerifier.teamIdentifier(of: update.app.url)
+            installedTeam = try await signatureVerifier.signingTeam(of: update.app.url)
             problem = nil
         } catch {
             installedTeam = nil

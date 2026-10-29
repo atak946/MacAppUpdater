@@ -344,3 +344,40 @@ struct AppInstallerTests {
         return plist?["CFBundleShortVersionString"] as? String
     }
 }
+
+@Suite("AppInstaller team pin with a broken resource seal")
+struct AppInstallerBrokenSealTests {
+    /// The installed app's resources fail full validation; its signature still names the team.
+    private struct BrokenSealVerifier: SignatureVerifying {
+        func teamIdentifier(of bundleURL: URL) async throws -> String {
+            throw UpdaterError.signatureInvalid("a sealed resource is missing or invalid")
+        }
+        func signingTeam(of bundleURL: URL) async throws -> String { "ABCDE12345" }
+    }
+
+    @Test("an app that wrote into its own bundle still pins its update to its team")
+    func pinsToSigningTeam() async throws {
+        let installer = AppInstaller(
+            commandRunner: ProcessCommandRunner(),
+            signatureVerifier: BrokenSealVerifier(),
+            terminator: NoopTerminator(),
+            backupStore: BackupStore(
+                baseDirectory: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString),
+                terminator: RecordingTerminator(), relauncher: RecordingRelauncher()
+            ),
+            relauncher: RecordingRelauncher(),
+            relaunchAfterInstall: false,
+            gatekeeperAssessor: FixedGatekeeperAssessor(.notarized),
+            notarizationPolicy: .require,
+            downloadHostStore: nil
+        )
+        let app = InstalledApp(
+            bundleIdentifier: "com.example.foo", name: "Foo", url: URL(fileURLWithPath: "/nonexistent/Foo.app"),
+            shortVersion: "1.0", buildVersion: "1", sparkleFeedURL: nil, isFromAppStore: false
+        )
+        let update = AvailableUpdate(
+            app: app, newVersion: "2.0", downloadURL: URL(string: "https://example.com/Foo-2.0.zip")!, source: .github
+        )
+        #expect(try await installer.pinnedTeam(for: update) == "ABCDE12345")
+    }
+}
