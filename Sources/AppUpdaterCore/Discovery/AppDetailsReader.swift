@@ -60,7 +60,7 @@ public struct AppDetailsReader: Sendable {
 
     private func signature(of url: URL) async -> AppDetails.Signature {
         do {
-            return .signed(teamIdentifier: try await verifier.teamIdentifier(of: url))
+            return .signed(teamIdentifier: try await verifier.signingTeam(of: url))
         } catch {
             logger.info(
                 """

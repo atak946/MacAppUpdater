@@ -95,7 +95,7 @@ public struct AppScanner: AppScanning, DuplicateBundleFinding {
 
     private func hasValidTeamSignature(_ url: URL) async -> Bool {
         do {
-            _ = try await signatureVerifier.teamIdentifier(of: url)
+            _ = try await signatureVerifier.signingTeam(of: url)
             return true
         } catch {
             return false

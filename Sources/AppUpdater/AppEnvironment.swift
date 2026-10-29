@@ -105,7 +105,8 @@ final class AppEnvironment {
             insights: InsightsCollector(
                 teamStore: UserDefaultsTeamIdentifierStore(defaults: defaults),
                 gatekeeper: gatekeeper,
-                downloadHostStore: downloadHosts
+                downloadHostStore: downloadHosts,
+                verdictCache: GatekeeperVerdictCache(storage: .standardDefaults)
             ),
             compatibility: CompatibilityAnalyzer(),
             runningApps: WorkspaceRunningAppChecker(),

@@ -1,7 +1,7 @@
 import Foundation
 
 /// Outcome of a Gatekeeper (`spctl`) assessment of an app bundle.
-public enum GatekeeperVerdict: Sendable, Hashable {
+public enum GatekeeperVerdict: Sendable, Hashable, Codable {
     /// Accepted as notarized Developer ID software (or Apple / Mac App Store signed).
     case notarized
     /// Accepted as Developer ID signed, but without a notarization ticket.

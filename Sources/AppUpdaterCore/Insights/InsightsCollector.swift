@@ -4,7 +4,7 @@ import os
 /// Gathers `AppInsight`s for every app with bounded concurrency, then builds the report.
 /// Runs off the main actor; safe to `await` from a `@MainActor` view model.
 public struct InsightsCollector: Sendable {
-    public static let maxConcurrentReads = 6
+    public static let maxConcurrentReads = 3
 
     private let detailsReader: AppDetailsReader
     private let usageReader: any AppUsageReading
@@ -13,7 +13,7 @@ public struct InsightsCollector: Sendable {
     private let builder: InsightsBuilder
     /// Assesses installed bundles (one `spctl` each); nil skips notarization warnings.
     private let gatekeeper: (any GatekeeperAssessing)?
-    private let verdictCache = GatekeeperVerdictCache()
+    private let verdictCache: GatekeeperVerdictCache
     private let downloadHostStore: (any DownloadHostStoring)?
     private let maxConcurrency: Int
     private let logger = Logger(subsystem: "com.macappupdater", category: "InsightsCollector")
@@ -26,8 +26,10 @@ public struct InsightsCollector: Sendable {
         builder: InsightsBuilder = InsightsBuilder(),
         gatekeeper: (any GatekeeperAssessing)? = nil,
         downloadHostStore: (any DownloadHostStoring)? = nil,
+        verdictCache: GatekeeperVerdictCache = GatekeeperVerdictCache(),
         maxConcurrency: Int = InsightsCollector.maxConcurrentReads
     ) {
+        self.verdictCache = verdictCache
         self.gatekeeper = gatekeeper
         self.downloadHostStore = downloadHostStore
         self.detailsReader = detailsReader
@@ -45,7 +47,10 @@ public struct InsightsCollector: Sendable {
         vendorManagement: [String: VendorManagement] = [:]
     ) async -> InsightsReport {
         let updatesByID = Dictionary(updates.map { ($0.app.bundleIdentifier, $0) }) { first, _ in first }
-        let insights = await gather(apps: apps, updatesByID: updatesByID, vendorManagement: vendorManagement)
+        // Background work: it reads every bundle on disk and must not compete with the UI.
+        let insights = await Task.detached(priority: .utility) { [self] in
+            await gather(apps: apps, updatesByID: updatesByID, vendorManagement: vendorManagement)
+        }.value
         logger.info("Collected insights for \(insights.count, privacy: .public) apps")
         return builder.build(from: insights)
     }
@@ -79,7 +84,8 @@ public struct InsightsCollector: Sendable {
         )
     }
 
-    /// Cached per bundle id + version: `spctl` is slow and may hit the network.
+    /// Cached per bundle id + version (across launches when the cache has defaults):
+    /// `spctl` hashes the whole bundle and may hit the network.
     private func installedVerdict(for app: InstalledApp) async -> GatekeeperVerdict? {
         guard let gatekeeper, !app.isFromAppStore else { return nil }
         return await verdictCache.verdict(for: app, assessor: gatekeeper)
@@ -114,15 +120,44 @@ public struct InsightsCollector: Sendable {
     }
 }
 
-/// Remembers Gatekeeper verdicts per `bundleID@version` for the lifetime of the collector.
-actor GatekeeperVerdictCache {
-    private var verdicts: [String: GatekeeperVerdict] = [:]
+/// Remembers Gatekeeper verdicts per `bundleID@version`. Persisted storage keeps definite
+/// verdicts across relaunches; `.unknown` is never stored so a transient failure is retried.
+public actor GatekeeperVerdictCache {
+    public enum Storage: Sendable {
+        case memory
+        case standardDefaults
+        case defaultsSuite(String)
+    }
+
+    public static let defaultsKey = "insights.gatekeeperVerdicts"
+
+    private var verdicts: [String: GatekeeperVerdict]
+    private let defaults: UserDefaults?
+
+    public init(storage: Storage = .memory) {
+        let defaults: UserDefaults? = switch storage {
+        case .memory: nil
+        case .standardDefaults: .standard
+        case .defaultsSuite(let name): UserDefaults(suiteName: name)
+        }
+        self.defaults = defaults
+        let stored = defaults?.dictionary(forKey: Self.defaultsKey) as? [String: Data] ?? [:]
+        verdicts = stored.compactMapValues { try? JSONDecoder().decode(GatekeeperVerdict.self, from: $0) }
+    }
 
     func verdict(for app: InstalledApp, assessor: any GatekeeperAssessing) async -> GatekeeperVerdict {
         let key = "\(app.bundleIdentifier)@\(app.shortVersion)"
         if let cached = verdicts[key] { return cached }
         let verdict = await assessor.assess(app.url)
         verdicts = verdicts.merging([key: verdict]) { _, new in new }
+        persist()
         return verdict
+    }
+
+    private func persist() {
+        guard let defaults else { return }
+        let definite = verdicts.filter { if case .unknown = $0.value { false } else { true } }
+        let encoded = definite.compactMapValues { try? JSONEncoder().encode($0) }
+        defaults.set(encoded, forKey: Self.defaultsKey)
     }
 }

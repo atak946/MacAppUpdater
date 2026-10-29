@@ -45,6 +45,9 @@ extension SignatureVerifying {
 public struct CodeSignatureVerifier: TeamPinnedSignatureVerifying, DiskImageSignatureVerifying {
     /// Validation without nested code: used to *read* the team of an installed app.
     static let readFlags = SecCSFlags(rawValue: kSecCSCheckAllArchitectures | kSecCSStrictValidate)
+    /// Signature and certificate chain only, without hashing every resource file; a full read
+    /// of a large app (Xcode, Office) hashes gigabytes.
+    static let inspectFlags = SecCSFlags(rawValue: kSecCSStrictValidate | kSecCSDoNotValidateResources)
     /// Full validation: used for bundles that are about to be installed or restored.
     static let verifyFlags = SecCSFlags(
         rawValue: kSecCSCheckAllArchitectures | kSecCSStrictValidate | kSecCSCheckNestedCode
@@ -55,11 +58,20 @@ public struct CodeSignatureVerifier: TeamPinnedSignatureVerifying, DiskImageSign
     /// Team of a bundle signed by an Apple-issued identity (Developer ID Application or
     /// Mac App Store). The CodeDirectory team is bound to the certificate's leaf OU.
     public func teamIdentifier(of bundleURL: URL) async throws -> String {
-        let code = try Self.staticCode(at: bundleURL)
-        try Self.check(code, requirement: CodeSigningRequirement.trustedOrigin, flags: Self.readFlags)
-        let teamID = try Self.unverifiedTeamIdentifier(of: code)
+        try Self.anchoredTeam(of: bundleURL, flags: Self.readFlags)
+    }
+
+    /// Same Apple-anchored team check as `teamIdentifier(of:)`, without resource hashing.
+    public func signingTeam(of bundleURL: URL) async throws -> String {
+        try Self.anchoredTeam(of: bundleURL, flags: Self.inspectFlags)
+    }
+
+    private static func anchoredTeam(of bundleURL: URL, flags: SecCSFlags) throws -> String {
+        let code = try staticCode(at: bundleURL)
+        try check(code, requirement: CodeSigningRequirement.trustedOrigin, flags: flags)
+        let teamID = try unverifiedTeamIdentifier(of: code)
         let pinned = try CodeSigningRequirement.pinned(team: teamID)
-        try Self.check(code, requirement: pinned, flags: Self.readFlags)
+        try check(code, requirement: pinned, flags: flags)
         return teamID
     }
 

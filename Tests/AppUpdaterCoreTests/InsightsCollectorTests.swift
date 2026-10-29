@@ -121,6 +121,40 @@ struct InsightsCollectorTests {
         #expect(kinds(insight).contains { if case .notNotarized = $0 { true } else { false } })
     }
 
+    @Test("Gatekeeper verdicts persist across launches; unknown verdicts are asked again")
+    func gatekeeperVerdictsPersist() async throws {
+        defer { try? FileManager.default.removeItem(at: root) }
+        let suite = "InsightsCollectorTests.\(UUID().uuidString)"
+        let defaults = try #require(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let foo = try app("Foo")
+
+        let gatekeeper = CountingGatekeeper(verdict: .developerIDNotNotarized)
+        for _ in 0..<2 {
+            // A fresh collector and cache per iteration, as after a relaunch.
+            let collector = InsightsCollector(
+                detailsReader: AppDetailsReader(verifier: PathTeamVerifier(team: "T")),
+                usageReader: StubUsageReader(), teamStore: InMemoryTeamStore(), gatekeeper: gatekeeper,
+                verdictCache: GatekeeperVerdictCache(storage: .defaultsSuite(suite))
+            )
+            let insight = await collector.insight(for: foo, update: nil)
+            #expect(kinds(insight).contains { if case .notNotarized = $0 { true } else { false } })
+        }
+        #expect(gatekeeper.assessments == 1)
+
+        let unknownGatekeeper = CountingGatekeeper(verdict: .unknown(reason: "offline"))
+        let bar = try app("Bar")
+        for _ in 0..<2 {
+            let collector = InsightsCollector(
+                detailsReader: AppDetailsReader(verifier: PathTeamVerifier(team: "T")),
+                usageReader: StubUsageReader(), teamStore: InMemoryTeamStore(), gatekeeper: unknownGatekeeper,
+                verdictCache: GatekeeperVerdictCache(storage: .defaultsSuite(suite))
+            )
+            _ = await collector.insight(for: bar, update: nil)
+        }
+        #expect(unknownGatekeeper.assessments == 2)
+    }
+
     @Test("collect returns one insight per app with bounded concurrency", arguments: [1, 2, 6])
     func collectAll(maxConcurrency: Int) async throws {
         defer { try? FileManager.default.removeItem(at: root) }

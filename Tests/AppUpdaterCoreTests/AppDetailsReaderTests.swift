@@ -73,3 +73,33 @@ struct AppDetailsReaderTests {
         #expect(AppDetailsReader.categoryName(identifier) == expected)
     }
 }
+
+@Suite("AppDetailsReader signature cost")
+struct AppDetailsReaderSignatureCostTests {
+    /// Records which verifier entry point the reader used.
+    private final class RecordingVerifier: SignatureVerifying, @unchecked Sendable {
+        private(set) var fullChecks = 0
+        private(set) var lightChecks = 0
+        func teamIdentifier(of bundleURL: URL) async throws -> String {
+            fullChecks += 1
+            return "T"
+        }
+        func signingTeam(of bundleURL: URL) async throws -> String {
+            lightChecks += 1
+            return "T"
+        }
+    }
+
+    @Test("details read the signing team without full resource validation")
+    func usesLightSignatureRead() async {
+        let verifier = RecordingVerifier()
+        let app = InstalledApp(
+            bundleIdentifier: "com.example.foo", name: "Foo", url: URL(fileURLWithPath: "/nonexistent/Foo.app"),
+            shortVersion: "1.0", buildVersion: "1", sparkleFeedURL: nil, isFromAppStore: false
+        )
+        let details = await AppDetailsReader(verifier: verifier).details(for: app)
+        #expect(details.signature == .signed(teamIdentifier: "T"))
+        #expect(verifier.lightChecks == 1)
+        #expect(verifier.fullChecks == 0)
+    }
+}
