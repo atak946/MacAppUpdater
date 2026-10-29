@@ -3,10 +3,10 @@ import Testing
 @testable import MonitorCore
 
 /// Builds a snapshot with sensible defaults for tests.
-func makeProcess(pid: Int32, name: String = "proc", path: String? = nil, bundleID: String? = nil,
+func makeProcess(pid: Int32, parentPID: Int32 = 1, name: String = "proc", path: String? = nil, bundleID: String? = nil,
                  cpu: Double = 0, memory: UInt64 = 0, kind: ProcessKind = .user) -> ProcessSnapshot {
     let bundleURL = path.flatMap(ProcessClassifier.outermostAppURL(forExecutablePath:))
-    return ProcessSnapshot(pid: pid, parentPID: 1, name: name, executablePath: path, bundleURL: bundleURL,
+    return ProcessSnapshot(pid: pid, parentPID: parentPID, name: name, executablePath: path, bundleURL: bundleURL,
                            bundleIdentifier: bundleID, userID: 501, cpuPercent: cpu, memoryBytes: memory,
                            threadCount: 1, startDate: nil, kind: kind)
 }

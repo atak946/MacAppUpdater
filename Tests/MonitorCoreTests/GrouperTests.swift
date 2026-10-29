@@ -58,6 +58,22 @@ struct ProcessGrouperTests {
         #expect(groups.map(\.id) == ["pid:2", "pid:3", "pid:4", "pid:1"])
     }
 
+    @Test("system tools an app spawns stay standalone and out of its cpu")
+    func spawnedSystemTools() {
+        let groups = ProcessGrouper.group([
+            makeProcess(pid: 20, name: "Foo", path: fooMain, bundleID: "com.foo", cpu: 4),
+            makeProcess(pid: 21, parentPID: 20, name: "Foo Helper", path: fooHelper, bundleID: "com.foo", cpu: 2),
+            makeProcess(pid: 22, parentPID: 20, name: "spctl", path: "/usr/sbin/spctl", cpu: 180, kind: .system),
+            makeProcess(pid: 23, parentPID: 20, name: "codesign", path: "/usr/bin/codesign", cpu: 90, kind: .system),
+            makeProcess(pid: 24, parentPID: 20, name: "XPCService", path: "/System/Library/Frameworks/X.framework/XPCServices/S.xpc/Contents/MacOS/S", cpu: 30, kind: .system),
+            makeProcess(pid: 25, parentPID: 1, name: "Fetch", path: "/Applications/Foo.app/Contents/XPCServices/Fetch.xpc/Contents/MacOS/Fetch", cpu: 1),
+        ])
+        let foo = groups.first { $0.id == "com.foo" }
+        #expect(foo?.processes.map(\.pid) == [20, 21, 25])
+        #expect(foo?.cpuPercent == 7)
+        #expect(Set(groups.filter { $0.id != "com.foo" }.map(\.id)) == ["pid:22", "pid:23", "pid:24"])
+    }
+
     @Test("two copies of one app get distinct ids")
     func duplicateBundleIDs() {
         let groups = ProcessGrouper.group([

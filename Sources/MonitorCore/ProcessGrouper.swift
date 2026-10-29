@@ -1,6 +1,8 @@
 import Foundation
 
 /// Groups helpers under their app; everything outside a `.app` bundle stands alone.
+/// Membership follows the executable's location only, never the parent pid, so tools an
+/// app spawns (`spctl`, `codesign`, …) stay separate rows and out of the app's CPU.
 public enum ProcessGrouper {
     /// Groups sorted by CPU (desc), then memory (desc), then name.
     public static func group(_ processes: [ProcessSnapshot]) -> [ProcessGroup] {
