@@ -7968,6 +7968,276 @@
           }
         }
       }
+    },
+    "The release notes mention security fixes": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm notlarında güvenlik düzeltmeleri geçiyor"
+          }
+        }
+      }
+    },
+    "Security fixes: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenlik düzeltmeleri: %@"
+          }
+        }
+      }
+    },
+    "1 security update": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 güvenlik güncellemesi"
+          }
+        }
+      }
+    },
+    "%lld security updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld güvenlik güncellemesi"
+          }
+        }
+      }
+    },
+    "Migrate": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taşı"
+          }
+        }
+      }
+    },
+    "Export as Brewfile…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brewfile olarak dışa aktar…"
+          }
+        }
+      }
+    },
+    "Export as JSON…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JSON olarak dışa aktar…"
+          }
+        }
+      }
+    },
+    "Import App List…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama listesini içe aktar…"
+          }
+        }
+      }
+    },
+    "Export or import the app list to set up a new Mac": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni bir Mac kurmak için uygulama listesini dışa veya içe aktarın"
+          }
+        }
+      }
+    },
+    "Export App List": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama Listesini Dışa Aktar"
+          }
+        }
+      }
+    },
+    "Import App List": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama Listesini İçe Aktar"
+          }
+        }
+      }
+    },
+    "Choose a Brewfile or an App Updater JSON export.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir Brewfile veya App Updater JSON dışa aktarımı seçin."
+          }
+        }
+      }
+    },
+    "Missing Apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksik Uygulamalar"
+          }
+        }
+      }
+    },
+    "%lld of %lld apps in %@ are not on this Mac.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%3$@ içindeki %2$lld uygulamadan %1$lld tanesi bu Mac'te yok."
+          }
+        }
+      }
+    },
+    "Everything is installed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hepsi kurulu"
+          }
+        }
+      }
+    },
+    "Every app in the list is already on this Mac.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listedeki her uygulama bu Mac'te zaten kurulu."
+          }
+        }
+      }
+    },
+    "Show File in Finder": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dosyayı Finder'da Göster"
+          }
+        }
+      }
+    },
+    "Copy Install Command": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurulum Komutunu Kopyala"
+          }
+        }
+      }
+    },
+    "Copy brew bundle Command": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "brew bundle Komutunu Kopyala"
+          }
+        }
+      }
+    },
+    "Copied": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopyalandı"
+          }
+        }
+      }
+    },
+    "Open in App Store": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Store'da Aç"
+          }
+        }
+      }
+    },
+    "Homebrew": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Homebrew"
+          }
+        }
+      }
+    },
+    "Leftovers of Removed Apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silinmiş Uygulamaların Kalıntıları"
+          }
+        }
+      }
+    },
+    "Settings and data of apps that are no longer installed.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artık kurulu olmayan uygulamaların ayarları ve verileri."
+          }
+        }
+      }
+    },
+    "Modified %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Değiştirilme: %@"
+          }
+        }
+      }
+    },
+    "Select all leftovers of %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ uygulamasının tüm kalıntılarını seç"
+          }
+        }
+      }
+    },
+    "In %@ · Out %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gelen %@ · Giden %@"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

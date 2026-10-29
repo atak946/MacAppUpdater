@@ -1200,6 +1200,36 @@
           }
         }
       }
+    },
+    "The file is too large to be an app list": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dosya bir uygulama listesi olamayacak kadar büyük"
+          }
+        }
+      }
+    },
+    "The file is not an App Updater JSON export or a Brewfile": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dosya bir App Updater JSON dışa aktarımı veya Brewfile değil"
+          }
+        }
+      }
+    },
+    "The app list was exported by a newer App Updater (format %lld)": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama listesi daha yeni bir App Updater ile dışa aktarılmış (biçim %lld)"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
