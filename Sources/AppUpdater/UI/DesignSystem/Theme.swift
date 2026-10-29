@@ -30,6 +30,8 @@ enum Theme {
         static let hover = Animation.easeOut(duration: 0.18)
         static let press = Animation.spring(response: 0.25, dampingFraction: 0.7)
         static let content = Animation.spring(response: 0.5, dampingFraction: 0.85)
+        /// Live readings that change every sample. Short, so the window is idle between samples.
+        static let tick = Animation.easeOut(duration: 0.25)
     }
 
     enum Palette {

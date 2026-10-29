@@ -152,7 +152,6 @@ struct ProcessesView: View {
                         }
                     }
                     .padding(.vertical, Theme.Spacing.xs)
-                    .animation(Theme.Motion.content, value: items.map(\.id))
                 }
                 .scrollIndicators(.automatic)
                 // Freeze the row order under the pointer so rows don't move while aiming at them.

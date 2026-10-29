@@ -48,7 +48,6 @@ struct SystemMonitorView: View {
     private var pills: some View {
         HStack(spacing: Theme.Spacing.s) {
             StatusPill(title: String(localized: "Live"), symbol: "circle.fill", tint: Theme.Palette.success)
-                .symbolEffect(.pulse, options: .repeating, isActive: model.isSampling)
             if let snapshot {
                 StatusPill(title: snapshot.thermal.title, symbol: "thermometer.medium", tint: snapshot.thermal.tint)
                 StatusPill(

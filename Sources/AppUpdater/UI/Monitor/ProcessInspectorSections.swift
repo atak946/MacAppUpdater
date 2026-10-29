@@ -87,7 +87,7 @@ struct InspectorStatTile: View {
         .padding(Theme.Spacing.s + 2)
         .frame(maxWidth: .infinity, alignment: .leading)
         .surface(.inset, radius: Theme.Radius.m)
-        .animation(Theme.Motion.content, value: value)
+        .animation(Theme.Motion.tick, value: value)
         .accessibilityElement(children: .combine)
     }
 }

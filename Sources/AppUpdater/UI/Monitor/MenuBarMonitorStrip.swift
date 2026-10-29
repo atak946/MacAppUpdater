@@ -48,7 +48,7 @@ struct MenuBarMonitorStrip: View {
                     .font(Theme.Typography.numeral(13))
                     .foregroundStyle(Theme.Palette.textPrimary)
                     .contentTransition(.numericText())
-                    .animation(Theme.Motion.content, value: value)
+                    .animation(Theme.Motion.tick, value: value)
             }
             GlowAreaChart(series: [ChartSeries(id: title, values: Array(history.suffix(40)), tint: tint)],
                           capacity: 40, maxValue: maxValue)

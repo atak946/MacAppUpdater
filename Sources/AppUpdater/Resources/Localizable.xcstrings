@@ -6536,6 +6536,17 @@
         }
       }
     },
+    "Threads.column": {
+      "comment": "Short header of the threads column",
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thread"
+          }
+        }
+      }
+    },
     "Sort by %@": {
       "localizations": {
         "en": {

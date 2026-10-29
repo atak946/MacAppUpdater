@@ -49,7 +49,10 @@ struct ProcessGroupRow: View {
                 .contentTransition(.numericText())
                 .frame(width: ProcessListMetrics.memory, alignment: .trailing)
             ThreadCell(count: item.threadCount, size: 12)
-            ProcessKindPill(kind: group.kind).frame(width: ProcessListMetrics.kind, alignment: .leading)
+            // The pill is empty for user processes; the fixed spacer keeps the column in place.
+            Color.clear
+                .frame(width: ProcessListMetrics.kind, height: 1)
+                .overlay(alignment: .leading) { ProcessKindPill(kind: group.kind).fixedSize() }
             actions.frame(width: ProcessListMetrics.actions, alignment: .trailing)
         }
         .padding(.horizontal, ProcessListMetrics.rowHorizontal - Theme.Spacing.xs)
@@ -60,7 +63,6 @@ struct ProcessGroupRow: View {
         .contentShape(Rectangle())
         .onHover { isHovered = $0 }
         .onTapGesture(perform: onSelect)
-        .animation(Theme.Motion.content, value: item.cpuPercent)
         .animation(Theme.Motion.hover, value: isSelected)
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
@@ -176,7 +178,6 @@ struct ProcessMemberRow: View {
         .hoverHighlight(isHovered, radius: Theme.Radius.s)
         .padding(.horizontal, Theme.Spacing.xs)
         .onHover { isHovered = $0 }
-        .animation(Theme.Motion.content, value: process.cpuPercent)
         .accessibilityElement(children: .combine)
     }
 }

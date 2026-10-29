@@ -108,6 +108,14 @@ enum ProcessSortKey: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
+    /// Column header label; shorter than `title` where the full word overflows its column.
+    var columnTitle: String {
+        switch self {
+        case .threads: String(localized: "Threads.column", defaultValue: "Threads", comment: "Short header of the threads column")
+        default: title
+        }
+    }
+
     /// Text columns start A→Z; numeric columns start with the biggest consumer.
     var defaultAscending: Bool { self == .name || self == .pid }
 }

@@ -58,7 +58,6 @@ struct GlowAreaChart: View {
                 }
             )
         }
-        .shadow(color: (series.first?.tint ?? .clear).opacity(0.45), radius: 6)
         .accessibilityHidden(true)
     }
 
@@ -89,7 +88,7 @@ struct ChartCard<Chart: View, Legend: View>: View {
                         .font(Theme.Typography.numeral(24))
                         .foregroundStyle(Theme.textGradient)
                         .contentTransition(.numericText())
-                        .animation(Theme.Motion.content, value: value)
+                        .animation(Theme.Motion.tick, value: value)
                 }
                 Spacer(minLength: Theme.Spacing.s)
                 legend
@@ -177,7 +176,7 @@ struct GaugeCard: View {
                 .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.l, style: .continuous))
         )
         .surface(.raised)
-        .animation(Theme.Motion.content, value: fraction)
+        .animation(Theme.Motion.tick, value: fraction)
         .accessibilityElement(children: .combine)
     }
 }

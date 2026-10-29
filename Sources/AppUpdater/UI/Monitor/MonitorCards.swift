@@ -37,7 +37,7 @@ struct CoreBarsCard: View {
                 .glow(tint, radius: 4, opacity: 0.5)
         }
         .frame(maxWidth: 14)
-        .animation(Theme.Motion.content, value: value)
+        .animation(Theme.Motion.tick, value: value)
     }
 }
 
@@ -121,7 +121,7 @@ struct TopConsumersCard: View {
                         row(group, peak: peak)
                     }
                 }
-                .animation(Theme.Motion.content, value: top.map(\.id))
+                .animation(Theme.Motion.tick, value: top.map(\.id))
             }
         }
         .padding(Theme.Spacing.l)
@@ -169,7 +169,7 @@ struct UsageBar: View {
                 .glow(tint, radius: 3, opacity: 0.5)
         }
         .frame(height: height)
-        .animation(Theme.Motion.content, value: fraction)
+        .animation(Theme.Motion.tick, value: fraction)
         .accessibilityHidden(true)
     }
 }

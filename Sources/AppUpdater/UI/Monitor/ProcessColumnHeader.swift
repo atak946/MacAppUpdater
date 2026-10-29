@@ -29,7 +29,8 @@ struct ProcessColumnHeader: View {
 
     private func column(_ key: ProcessSortKey) -> some View {
         SortColumnButton(
-            title: key.title,
+            title: key.columnTitle,
+            helpTitle: key.title,
             isActive: sort.key == key,
             ascending: sort.ascending,
             action: { onSort(key) }
@@ -40,6 +41,7 @@ struct ProcessColumnHeader: View {
 /// One clickable column title with a direction chevron when active.
 private struct SortColumnButton: View {
     let title: String
+    let helpTitle: String
     let isActive: Bool
     let ascending: Bool
     let action: () -> Void
@@ -61,8 +63,8 @@ private struct SortColumnButton: View {
         .buttonStyle(.plain)
         .onHover { isHovered = $0 }
         .animation(Theme.Motion.hover, value: isHovered)
-        .help(String(localized: "Sort by \(title)"))
-        .accessibilityLabel(Text("Sort by \(title)"))
+        .help(String(localized: "Sort by \(helpTitle)"))
+        .accessibilityLabel(Text("Sort by \(helpTitle)"))
         .accessibilityValue(isActive ? Text(ascending ? "Ascending" : "Descending") : Text(verbatim: ""))
         .accessibilityAddTraits(isActive ? .isSelected : [])
     }
