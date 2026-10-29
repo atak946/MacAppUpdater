@@ -84,7 +84,7 @@ public struct InsightsCollector: Sendable {
         )
     }
 
-    /// Cached per bundle id + version (across launches when the cache has defaults):
+    /// Cached per bundle id, version and fingerprint (across launches when the cache has defaults):
     /// `spctl` hashes the whole bundle and may hit the network.
     private func installedVerdict(for app: InstalledApp) async -> GatekeeperVerdict? {
         guard let gatekeeper, !app.isFromAppStore else { return nil }
@@ -120,8 +120,11 @@ public struct InsightsCollector: Sendable {
     }
 }
 
-/// Remembers Gatekeeper verdicts per `bundleID@version`. Persisted storage keeps definite
-/// verdicts across relaunches; `.unknown` is never stored so a transient failure is retried.
+/// Remembers Gatekeeper verdicts per bundle id, version and bundle fingerprint (the modification
+/// date of `Contents`, which a reinstall or a stapled ticket changes). Persisted storage keeps
+/// definite verdicts across relaunches; `.unknown` is never stored so a transient failure is
+/// retried. Negative verdicts expire after `negativeLifetime`: an app can become notarized without
+/// any file changing, because Gatekeeper also looks the ticket up online.
 public actor GatekeeperVerdictCache {
     public enum Storage: Sendable {
         case memory
@@ -129,34 +132,66 @@ public actor GatekeeperVerdictCache {
         case defaultsSuite(String)
     }
 
-    public static let defaultsKey = "insights.gatekeeperVerdicts"
+    /// v2 entries carry the assessment date; v1 (`insights.gatekeeperVerdicts`) is dropped.
+    public static let defaultsKey = "insights.gatekeeperVerdicts.v2"
+    static let legacyDefaultsKey = "insights.gatekeeperVerdicts"
+    public static let defaultNegativeLifetime: TimeInterval = 86_400
 
-    private var verdicts: [String: GatekeeperVerdict]
+    struct Entry: Codable, Sendable {
+        let verdict: GatekeeperVerdict
+        let assessedAt: Date
+    }
+
+    private var entries: [String: Entry]
     private let defaults: UserDefaults?
+    private let negativeLifetime: TimeInterval
+    private let now: @Sendable () -> Date
 
-    public init(storage: Storage = .memory) {
+    public init(
+        storage: Storage = .memory,
+        negativeLifetime: TimeInterval = GatekeeperVerdictCache.defaultNegativeLifetime,
+        now: @escaping @Sendable () -> Date = Date.init
+    ) {
         let defaults: UserDefaults? = switch storage {
         case .memory: nil
         case .standardDefaults: .standard
         case .defaultsSuite(let name): UserDefaults(suiteName: name)
         }
         self.defaults = defaults
+        self.negativeLifetime = negativeLifetime
+        self.now = now
+        defaults?.removeObject(forKey: Self.legacyDefaultsKey)
         let stored = defaults?.dictionary(forKey: Self.defaultsKey) as? [String: Data] ?? [:]
-        verdicts = stored.compactMapValues { try? JSONDecoder().decode(GatekeeperVerdict.self, from: $0) }
+        entries = stored.compactMapValues { try? JSONDecoder().decode(Entry.self, from: $0) }
     }
 
     func verdict(for app: InstalledApp, assessor: any GatekeeperAssessing) async -> GatekeeperVerdict {
-        let key = "\(app.bundleIdentifier)@\(app.shortVersion)"
-        if let cached = verdicts[key] { return cached }
+        let key = Self.key(for: app)
+        if let cached = entries[key], isFresh(cached) { return cached.verdict }
         let verdict = await assessor.assess(app.url)
-        verdicts = verdicts.merging([key: verdict]) { _, new in new }
+        entries = entries.merging([key: Entry(verdict: verdict, assessedAt: now())]) { _, new in new }
         persist()
         return verdict
     }
 
+    static func key(for app: InstalledApp) -> String {
+        let contents = app.url.appendingPathComponent("Contents")
+        let modified = (try? contents.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate
+        let fingerprint = modified.map { String(Int($0.timeIntervalSince1970)) } ?? "-"
+        return "\(app.bundleIdentifier)@\(app.shortVersion)@\(fingerprint)"
+    }
+
+    private func isFresh(_ entry: Entry) -> Bool {
+        switch entry.verdict {
+        case .notarized: true
+        case .developerIDNotNotarized, .rejected: now().timeIntervalSince(entry.assessedAt) < negativeLifetime
+        case .unknown: false
+        }
+    }
+
     private func persist() {
         guard let defaults else { return }
-        let definite = verdicts.filter { if case .unknown = $0.value { false } else { true } }
+        let definite = entries.filter { if case .unknown = $0.value.verdict { false } else { true } }
         let encoded = definite.compactMapValues { try? JSONEncoder().encode($0) }
         defaults.set(encoded, forKey: Self.defaultsKey)
     }

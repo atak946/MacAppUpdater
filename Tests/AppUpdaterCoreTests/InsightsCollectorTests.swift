@@ -155,6 +155,47 @@ struct InsightsCollectorTests {
         #expect(unknownGatekeeper.assessments == 2)
     }
 
+    @Test("a reinstalled bundle with the same version is assessed again")
+    func reinstalledBundleReassessed() async throws {
+        defer { try? FileManager.default.removeItem(at: root) }
+        let foo = try app("Foo")
+        let gatekeeper = CountingGatekeeper(verdict: .notarized)
+        let cache = GatekeeperVerdictCache()
+        _ = await cache.verdict(for: foo, assessor: gatekeeper)
+        _ = await cache.verdict(for: foo, assessor: gatekeeper)
+        #expect(gatekeeper.assessments == 1)
+
+        // Notarizing and stapling, or reinstalling, rewrites Contents.
+        try FileManager.default.setAttributes(
+            [.modificationDate: Date(timeIntervalSinceNow: 60)], ofItemAtPath: foo.url.appendingPathComponent("Contents").path
+        )
+        _ = await cache.verdict(for: foo, assessor: gatekeeper)
+        #expect(gatekeeper.assessments == 2)
+    }
+
+    @Test("negative verdicts expire so a later notarization is noticed; notarized ones are kept")
+    func negativeVerdictsExpire() async throws {
+        defer { try? FileManager.default.removeItem(at: root) }
+        let foo = try app("Foo")
+        let clock = OSAllocatedUnfairLock(initialState: Date(timeIntervalSince1970: 1_000_000))
+        let cache = GatekeeperVerdictCache(negativeLifetime: 3_600, now: { clock.withLock { $0 } })
+        let unnotarized = CountingGatekeeper(verdict: .developerIDNotNotarized)
+        _ = await cache.verdict(for: foo, assessor: unnotarized)
+        clock.withLock { $0 += 1_800 }
+        _ = await cache.verdict(for: foo, assessor: unnotarized)
+        #expect(unnotarized.assessments == 1)
+        clock.withLock { $0 += 3_600 }
+        _ = await cache.verdict(for: foo, assessor: unnotarized)
+        #expect(unnotarized.assessments == 2)
+
+        let bar = try app("Bar")
+        let notarized = CountingGatekeeper(verdict: .notarized)
+        _ = await cache.verdict(for: bar, assessor: notarized)
+        clock.withLock { $0 += 365 * 86_400 }
+        _ = await cache.verdict(for: bar, assessor: notarized)
+        #expect(notarized.assessments == 1)
+    }
+
     @Test("collect returns one insight per app with bounded concurrency", arguments: [1, 2, 6])
     func collectAll(maxConcurrency: Int) async throws {
         defer { try? FileManager.default.removeItem(at: root) }
