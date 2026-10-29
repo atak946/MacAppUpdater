@@ -71,7 +71,6 @@ struct MenuBarMonitorStrip: View {
             Image(systemName: symbol)
                 .font(.system(size: 9, weight: .heavy))
                 .foregroundStyle(tint)
-                .glow(tint, radius: 3, opacity: 0.7) // perf-guard: allow (static arrow symbol; only the rate text beside it changes per sample)
             Text(MonitorFormat.rate(value))
                 .font(.system(size: 11.5, weight: .semibold, design: .rounded).monospacedDigit())
                 .foregroundStyle(Theme.Palette.textSecondary)

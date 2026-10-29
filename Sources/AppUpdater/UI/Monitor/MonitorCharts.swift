@@ -104,7 +104,7 @@ struct LegendItem: View {
 
     var body: some View {
         HStack(spacing: 6) {
-            Circle().fill(tint).frame(width: 7, height: 7).glow(tint, radius: 4, opacity: 0.8)
+            Circle().fill(tint).frame(width: 7, height: 7)
             Text(title)
                 .font(.system(size: 11, weight: .medium))
                 .foregroundStyle(Theme.Palette.textTertiary)

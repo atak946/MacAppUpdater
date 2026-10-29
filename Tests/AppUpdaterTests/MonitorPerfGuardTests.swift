@@ -11,9 +11,6 @@ struct MonitorPerfGuardTests {
     static let forbidden = ["numericText", ".animation(", ".glow(", ".shadow(", "symbolEffect", "repeatForever"]
     static let allowMarker = "// perf-guard: allow"
 
-    /// TODO: MonitorCharts.swift is being rewritten in parallel; drop this exclusion once that lands.
-    static let excludedFiles: Set<String> = ["MonitorCharts.swift"]
-
     /// Package root, found by walking up from this file to the directory holding Package.swift.
     static let packageRoot: URL = {
         var url = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
@@ -28,7 +25,7 @@ struct MonitorPerfGuardTests {
     func monitorSources() throws {
         let dir = Self.packageRoot.appendingPathComponent("Sources/AppUpdater/UI/Monitor")
         let files = try FileManager.default.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil)
-            .filter { $0.pathExtension == "swift" && !Self.excludedFiles.contains($0.lastPathComponent) }
+            .filter { $0.pathExtension == "swift" }
             .sorted { $0.lastPathComponent < $1.lastPathComponent }
         #expect(!files.isEmpty, "no Swift sources found in \(dir.path)")
 
