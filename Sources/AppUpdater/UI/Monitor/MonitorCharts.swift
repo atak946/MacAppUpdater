@@ -1,64 +1,57 @@
-import Charts
 import SwiftUI
 
 /// One line of an area chart.
-struct ChartSeries: Identifiable {
+struct ChartSeries: Identifiable, Equatable {
     let id: String
     let values: [Double]
     let tint: Color
 }
 
-/// Axis-free area chart: gradient fill fading to nothing under a glowing line, newest sample on the right.
-struct GlowAreaChart: View {
+/// Axis-free area chart: gradient fill fading to nothing under a line, newest sample on the right.
+/// Drawn with a single `Canvas` instead of Swift Charts: Charts re-laid out and redrew every mark on each
+/// sample, which was most of the monitor page's CPU. Equatable so parent refreshes with unchanged data skip it.
+struct GlowAreaChart: View, Equatable {
     let series: [ChartSeries]
     /// Slots across the x axis; short histories stay right-aligned.
     var capacity = MonitorModel.historyCapacity
     /// Nil scales to the largest value (with headroom).
     var maxValue: Double?
 
+    /// Faint baseline grid lines standing in for axes.
+    private static let gridLines = 3
+    private static let gridColor = Color.white.opacity(0.04)
+    private static let lineStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round)
+
     var body: some View {
-        Chart {
-            ForEach(series) { line in
-                let offset = capacity - line.values.count
-                ForEach(Array(line.values.enumerated()), id: \.offset) { index, value in
-                    AreaMark(
-                        x: .value("Time", offset + index),
-                        y: .value("Value", value),
-                        series: .value("Series", line.id),
-                        stacking: .unstacked
+        Canvas { context, size in
+            drawGrid(in: &context, size: size)
+            let top = yMax
+            for line in series where line.values.count > 1 {
+                let points = AreaChartGeometry.points(values: line.values, capacity: capacity, yMax: top, in: size)
+                let curve = AreaChartGeometry.monotonePath(through: points)
+                let area = AreaChartGeometry.areaPath(line: curve, from: points, baseline: size.height)
+                context.fill(
+                    Path(area),
+                    with: .linearGradient(
+                        Gradient(colors: [line.tint.opacity(0.42), line.tint.opacity(0)]),
+                        startPoint: .zero,
+                        endPoint: CGPoint(x: 0, y: size.height)
                     )
-                    .foregroundStyle(
-                        LinearGradient(colors: [line.tint.opacity(0.42), line.tint.opacity(0)], startPoint: .top, endPoint: .bottom)
-                    )
-                    .interpolationMethod(.monotone)
-                    LineMark(
-                        x: .value("Time", offset + index),
-                        y: .value("Value", value),
-                        series: .value("Series", line.id)
-                    )
-                    .foregroundStyle(line.tint)
-                    .lineStyle(StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
-                    .interpolationMethod(.monotone)
-                }
+                )
+                context.stroke(Path(curve), with: .color(line.tint), style: Self.lineStyle)
             }
         }
-        .chartXScale(domain: 0...max(1, capacity - 1))
-        .chartYScale(domain: 0...yMax)
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .chartLegend(.hidden)
-        .chartPlotStyle { plot in
-            plot.background(
-                // Faint baseline grid instead of axes.
-                VStack(spacing: 0) {
-                    ForEach(0..<3, id: \.self) { _ in
-                        Spacer()
-                        Rectangle().fill(Color.white.opacity(0.04)).frame(height: 1)
-                    }
-                }
-            )
-        }
         .accessibilityHidden(true)
+    }
+
+    /// Evenly spaced 1pt lines, the last one on the baseline (matches the old plot background).
+    private func drawGrid(in context: inout GraphicsContext, size: CGSize) {
+        let lines = CGFloat(Self.gridLines)
+        let gap = (size.height - lines) / lines
+        for index in 0..<Self.gridLines {
+            let y = CGFloat(index + 1) * gap + CGFloat(index)
+            context.fill(Path(CGRect(x: 0, y: y, width: size.width, height: 1)), with: .color(Self.gridColor))
+        }
     }
 
     private var yMax: Double {
