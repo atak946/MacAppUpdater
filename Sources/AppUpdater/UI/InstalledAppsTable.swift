@@ -6,6 +6,8 @@ import SwiftUI
 struct InstalledAppsTable: View {
     let viewModel: UpdatesViewModel
     let apps: [InstalledApp]
+    /// Export/import of the app list for a new Mac; the menu is hidden when nil.
+    var migrationModel: MigrationModel?
 
     @State private var filter: AppFilter = .all
     @State private var sort: AppSort = .name
@@ -16,7 +18,12 @@ struct InstalledAppsTable: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.xl) {
             PageHeader(title: String(localized: "All Apps"), subtitle: subtitle) {
-                sortMenu
+                HStack(spacing: Theme.Spacing.s) {
+                    if let migrationModel {
+                        MigrationMenu(model: migrationModel, installedApps: viewModel.installedApps)
+                    }
+                    sortMenu
+                }
             }
             FilterCapsule(selection: $filter, count: { count(for: $0) })
             listCard

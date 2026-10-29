@@ -17,6 +17,7 @@ final class AppEnvironment {
     let startupModel: StartupModel
     let securityModel: SecurityModel
     let monitorModel: MonitorModel
+    let migrationModel: MigrationModel
     let selfUpdater: SelfUpdater
     let helperClient: HelperClient
     let githubStore: GitHubRepositoryStore
@@ -83,6 +84,10 @@ final class AppEnvironment {
         self.tokenStore = KeychainTokenStore()
         self.homebrewSource = HomebrewCaskSource(http: http, comparator: comparator)
         self.selfUpdater = SelfUpdater()
+        // Shares the update check's cask index so an export doesn't download it again.
+        self.migrationModel = MigrationModel(resolver: LiveMigrationResolver(
+            caskSource: homebrewSource, appStoreSource: AppStoreSource(http: http, comparator: comparator)
+        ))
         self.formulaeModel = FormulaeModel(homebrew: HomebrewCLI())
         self.cleanupModel = CleanupModel(scanner: FileSystemCleanupScanner(), cleaner: TrashCleaner())
         self.startupModel = StartupModel(scanner: LiveStartupScanner(), controller: LaunchctlStartupController())

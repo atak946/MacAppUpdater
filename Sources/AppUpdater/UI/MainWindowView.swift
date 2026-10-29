@@ -12,6 +12,8 @@ struct MainWindowView: View {
     let monitorModel: MonitorModel
     /// Lets Coverage map an app to a GitHub repository in place.
     var githubMappings: GitHubMappingDependencies?
+    /// Export/import of the app list on All Apps.
+    var migrationModel: MigrationModel?
 
     @State private var selection: SidebarItem? = SidebarItem.launchArgument ?? .overview
     @State private var searchText = ""
@@ -84,7 +86,7 @@ struct MainWindowView: View {
                 onSelectHistory: showDetail(for:)
             )
         case .allApps:
-            InstalledAppsTable(viewModel: viewModel, apps: filteredApps)
+            InstalledAppsTable(viewModel: viewModel, apps: filteredApps, migrationModel: migrationModel)
         case .updates:
             UpdatesListView(viewModel: viewModel, updates: filteredUpdates(nil))
         case .source(let kind):

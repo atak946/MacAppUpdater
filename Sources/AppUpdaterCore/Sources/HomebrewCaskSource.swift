@@ -156,6 +156,12 @@ public struct HomebrewCaskSource: SourceMatching {
         try await lookup(app).update
     }
 
+    /// Token of the cask that installs this bundle (for a Brewfile export), or nil when none does.
+    public func caskToken(for app: InstalledApp) async throws -> String? {
+        guard canHandle(app) else { return nil }
+        return try await index.cask(forAppFileName: app.url.lastPathComponent)?.token
+    }
+
     /// A cask listing the app's bundle counts as a match even when it is not newer
     /// or uses `version :latest` (which cannot be compared).
     public func lookup(_ app: InstalledApp) async throws -> SourceLookup {

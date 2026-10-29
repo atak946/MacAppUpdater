@@ -55,6 +55,14 @@ public struct AppStoreSource: SourceMatching {
         ))
     }
 
+    /// The store's numeric ID for this app (`mas "Name", id: N`), or nil when the lookup
+    /// does not echo the bundle ID back.
+    public func appStoreID(for app: InstalledApp) async throws -> Int? {
+        guard canHandle(app), let url = lookupURL(for: app.bundleIdentifier) else { return nil }
+        let response = try decode(try await http.data(from: url))
+        return response.results.first(where: { $0.bundleId == app.bundleIdentifier })?.trackId
+    }
+
     func lookupURL(for bundleIdentifier: String) -> URL? {
         var components = URLComponents(url: lookupBaseURL, resolvingAgainstBaseURL: false)
         components?.queryItems = [
@@ -77,6 +85,7 @@ private struct LookupResponse: Decodable {
     struct Result: Decodable {
         let version: String
         let trackViewUrl: String
+        let trackId: Int?
         let bundleId: String?
         let releaseNotes: String?
         let minimumOsVersion: String?

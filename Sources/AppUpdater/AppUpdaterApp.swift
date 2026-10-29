@@ -14,7 +14,8 @@ struct AppUpdaterApp: App {
                 startupModel: appDelegate.environment.startupModel,
                 securityModel: appDelegate.environment.securityModel,
                 monitorModel: appDelegate.environment.monitorModel,
-                githubMappings: appDelegate.environment.githubMappingDependencies
+                githubMappings: appDelegate.environment.githubMappingDependencies,
+                migrationModel: appDelegate.environment.migrationModel
             )
         }
         .windowStyle(.hiddenTitleBar)
