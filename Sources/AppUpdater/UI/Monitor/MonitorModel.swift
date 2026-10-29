@@ -44,6 +44,8 @@ final class MonitorModel {
     private(set) var selection: ProcessSelection?
     /// Last termination failure, shown as an alert; the view clears it.
     var errorMessage: String?
+    /// Background per-minute history of the heaviest apps; nil when recording is turned off.
+    @ObservationIgnored var usageHistory: UsageHistoryModel?
 
     private let system: any SystemSampling
     private let processes: any ProcessSampling

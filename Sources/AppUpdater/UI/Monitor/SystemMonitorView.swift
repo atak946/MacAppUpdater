@@ -24,6 +24,9 @@ struct SystemMonitorView: View {
                         sideColumn
                     }
                 }
+                if let history = model.usageHistory {
+                    UsageHistoryCard(model: history)
+                }
             }
             .padding(.horizontal, Theme.Spacing.page)
             .padding(.bottom, Theme.Spacing.page)

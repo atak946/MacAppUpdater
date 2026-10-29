@@ -104,6 +104,13 @@ final class AppEnvironment {
             network: NettopNetworkSampler(),
             terminator: SignalProcessTerminator()
         )
+        // No monitor section in Settings: recording defaults on; `monitorUsageHistoryEnabled = false` turns it off.
+        if UsageHistoryModel.isEnabled(in: defaults) {
+            monitorModel.usageHistory = UsageHistoryModel(
+                recorder: LiveProcessUsageRecorder(), store: UsageHistoryStore(),
+                notifier: SustainedUsageNotifier(), defaults: defaults
+            )
+        }
 
         let services = UpdateServices(
             packageInstaller: PackageInstaller(installService: helperClient),
@@ -172,11 +179,13 @@ final class AppEnvironment {
             }
         }
         Task { await viewModel.loadHistory() }
+        monitorModel.usageHistory?.start()
         Task { await refreshHelperRegistration() }
     }
 
     func stop() {
         scheduler.stop()
+        monitorModel.usageHistory?.stop()
     }
 
     func reschedule(hours: Double) {

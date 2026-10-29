@@ -71,7 +71,7 @@ enum ProcessReader {
         return proc_pidinfo(pid, PROC_PIDTASKINFO, 0, &info, size) == size ? info : nil
     }
 
-    private static func footprint(pid: Int32) -> UInt64? {
+    static func footprint(pid: Int32) -> UInt64? {
         var usage = rusage_info_v4()
         let result = withUnsafeMutablePointer(to: &usage) { pointer in
             pointer.withMemoryRebound(to: rusage_info_t?.self, capacity: 1) {
@@ -81,7 +81,7 @@ enum ProcessReader {
         return result == 0 ? usage.ri_phys_footprint : nil
     }
 
-    private static func executablePath(pid: Int32) -> String? {
+    static func executablePath(pid: Int32) -> String? {
         var buffer = [CChar](repeating: 0, count: maxPathSize)
         let length = proc_pidpath(pid, &buffer, UInt32(maxPathSize))
         guard length > 0 else { return nil }
