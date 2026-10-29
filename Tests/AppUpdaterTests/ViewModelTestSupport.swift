@@ -194,7 +194,7 @@ func makeViewModel(
     policies: UpdatePolicies = UpdatePolicies(),
     extras: ViewModelExtras = ViewModelExtras()
 ) -> UpdatesViewModel {
-    let defaults = UserDefaults(suiteName: "AppUpdaterTests-\(UUID().uuidString)")!
+    let defaults = TestDefaults.suite(named: "AppUpdaterTests-\(UUID().uuidString)")!
     let strategies = extras.vendorStrategy
     let services = UpdateServices(
         packageInstaller: extras.packageInstaller,

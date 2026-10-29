@@ -125,8 +125,8 @@ struct InsightsCollectorTests {
     func gatekeeperVerdictsPersist() async throws {
         defer { try? FileManager.default.removeItem(at: root) }
         let suite = "InsightsCollectorTests.\(UUID().uuidString)"
-        let defaults = try #require(UserDefaults(suiteName: suite))
-        defer { defaults.removePersistentDomain(forName: suite) }
+        let defaults = try #require(TestDefaults.suite(named: suite))
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         let foo = try app("Foo")
 
         let gatekeeper = CountingGatekeeper(verdict: .developerIDNotNotarized)
@@ -135,7 +135,7 @@ struct InsightsCollectorTests {
             let collector = InsightsCollector(
                 detailsReader: AppDetailsReader(verifier: PathTeamVerifier(team: "T")),
                 usageReader: StubUsageReader(), teamStore: InMemoryTeamStore(), gatekeeper: gatekeeper,
-                verdictCache: GatekeeperVerdictCache(storage: .defaultsSuite(suite))
+                verdictCache: GatekeeperVerdictCache(storage: .defaultsSuite(TestDefaults.prefix + suite))
             )
             let insight = await collector.insight(for: foo, update: nil)
             #expect(kinds(insight).contains { if case .notNotarized = $0 { true } else { false } })
@@ -148,7 +148,7 @@ struct InsightsCollectorTests {
             let collector = InsightsCollector(
                 detailsReader: AppDetailsReader(verifier: PathTeamVerifier(team: "T")),
                 usageReader: StubUsageReader(), teamStore: InMemoryTeamStore(), gatekeeper: unknownGatekeeper,
-                verdictCache: GatekeeperVerdictCache(storage: .defaultsSuite(suite))
+                verdictCache: GatekeeperVerdictCache(storage: .defaultsSuite(TestDefaults.prefix + suite))
             )
             _ = await collector.insight(for: bar, update: nil)
         }
@@ -218,7 +218,7 @@ struct InsightsCollectorTests {
     func vendorAndHostWarnings() async throws {
         defer { try? FileManager.default.removeItem(at: root) }
         let foo = try app("Foo")
-        let defaults = UserDefaults(suiteName: "InsightsCollectorTests-\(UUID().uuidString)")!
+        let defaults = TestDefaults.suite(named: "InsightsCollectorTests-\(UUID().uuidString)")!
         let hosts = UserDefaultsDownloadHostStore(defaults: defaults)
         let old = AvailableUpdate(app: foo, newVersion: "1.5", downloadURL: URL(string: "https://good.example.com/a.dmg")!, source: .homebrew)
         hosts.record(old)

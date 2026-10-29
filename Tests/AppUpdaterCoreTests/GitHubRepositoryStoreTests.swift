@@ -31,8 +31,8 @@ final class InMemoryTokenStore: TokenStoring {
 /// Fresh, isolated UserDefaults suite per test.
 func makeIsolatedDefaults() -> UserDefaults {
     let name = "MacAppUpdaterTests.\(UUID().uuidString)"
-    let defaults = UserDefaults(suiteName: name)!
-    defaults.removePersistentDomain(forName: name)
+    let defaults = TestDefaults.suite(named: name)!
+    defaults.removePersistentDomain(forName: TestDefaults.prefix + name)
     return defaults
 }
 

@@ -46,8 +46,8 @@ struct ExclusionRulesTests {
 
     @Test func storeRoundTrips() throws {
         let suite = "ExclusionRulesTests.\(UUID().uuidString)"
-        let defaults = try #require(UserDefaults(suiteName: suite))
-        defer { defaults.removePersistentDomain(forName: suite) }
+        let defaults = try #require(TestDefaults.suite(named: suite))
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         let store = UserDefaultsExclusionRulesStore(defaults: defaults)
         let rules = ExclusionRules().ignoring("a").skipping(version: "1.2", of: "b")
 
@@ -58,8 +58,8 @@ struct ExclusionRulesTests {
 
     @Test func storeReturnsEmptyRulesWhenNothingSaved() throws {
         let suite = "ExclusionRulesTests.\(UUID().uuidString)"
-        let defaults = try #require(UserDefaults(suiteName: suite))
-        defer { defaults.removePersistentDomain(forName: suite) }
+        let defaults = try #require(TestDefaults.suite(named: suite))
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         #expect(UserDefaultsExclusionRulesStore(defaults: defaults).load() == ExclusionRules())
     }
 
@@ -136,8 +136,8 @@ struct ExclusionRulesTests {
 
     @Test func ceilingsRoundTripThroughStore() throws {
         let suite = "ExclusionRulesTests.\(UUID().uuidString)"
-        let defaults = try #require(UserDefaults(suiteName: suite))
-        defer { defaults.removePersistentDomain(forName: suite) }
+        let defaults = try #require(TestDefaults.suite(named: suite))
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         let store = UserDefaultsExclusionRulesStore(defaults: defaults)
         let rules = ExclusionRules().capping("a", at: "5.2")
         try store.save(rules)

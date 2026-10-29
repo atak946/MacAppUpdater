@@ -260,8 +260,8 @@ struct AppInstallerTests {
     func recordsDownloadHost() async throws {
         defer { cleanUp() }
         let suite = "AppInstallerTests-\(UUID().uuidString)"
-        let defaults = try #require(UserDefaults(suiteName: suite))
-        defer { defaults.removePersistentDomain(forName: suite) }
+        let defaults = try #require(TestDefaults.suite(named: suite))
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         let store = UserDefaultsDownloadHostStore(defaults: defaults)
 
         let blocked = makeInstaller(

@@ -56,9 +56,9 @@ struct DownloadHostStoreTests {
     private let suiteName = "DownloadHostStoreTests-\(UUID().uuidString)"
 
     private func withStore(_ body: (UserDefaultsDownloadHostStore, UserDefaults) throws -> Void) throws {
-        let defaults = try #require(UserDefaults(suiteName: suiteName))
-        defaults.removePersistentDomain(forName: suiteName)
-        defer { defaults.removePersistentDomain(forName: suiteName) }
+        let defaults = try #require(TestDefaults.suite(named: suiteName))
+        defaults.removePersistentDomain(forName: TestDefaults.prefix + suiteName)
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suiteName) }
         try body(UserDefaultsDownloadHostStore(defaults: defaults), defaults)
     }
 

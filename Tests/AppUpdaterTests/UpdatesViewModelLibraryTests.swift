@@ -103,7 +103,7 @@ struct UpdatesViewModelHistoryTests {
             scanner: StubScanner(apps: [update.app]), checker: StubChecker(updates: [update]),
             downloader: StubDownloader(), installer: RecordingInstaller(),
             services: UpdateServices(
-                betaStore: BetaChannelStore(defaults: UserDefaults(suiteName: "VMTests-\(UUID().uuidString)")!),
+                betaStore: BetaChannelStore(defaults: TestDefaults.suite(named: "VMTests-\(UUID().uuidString)")!),
                 runningApps: StubRunningApps(running: []),
                 conditions: FixedConditions(value: SystemConditionsSnapshot()),
                 firstSeen: StubFirstSeen(), vendorDetector: StubVendorDetector(managed: [:])

@@ -28,7 +28,7 @@ private actor CollectingNotifier: SustainedUsageNotifying {
 struct UsageHistoryModelTests {
     private let defaults: UserDefaults = {
         let suite = "UsageHistoryModelTests.\(UUID().uuidString)"
-        return UserDefaults(suiteName: suite)!
+        return TestDefaults.suite(named: suite)!
     }()
 
     private func makeStore() -> UsageHistoryStore {

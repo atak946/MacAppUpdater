@@ -97,8 +97,8 @@ struct NotarizationSettingAuditTests {
     private let suite = "NotarizationSettingAuditTests-\(UUID().uuidString)"
 
     private func withDefaults(_ body: (UserDefaults, NotarizationSettingAudit) -> Void) {
-        let defaults = UserDefaults(suiteName: suite)!
-        defer { defaults.removePersistentDomain(forName: suite) }
+        let defaults = TestDefaults.suite(named: suite)!
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         body(defaults, NotarizationSettingAudit(defaults: defaults))
     }
 

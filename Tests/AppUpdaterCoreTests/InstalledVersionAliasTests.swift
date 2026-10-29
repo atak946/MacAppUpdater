@@ -8,7 +8,7 @@ struct InstalledVersionAliasTests {
 
     /// A fresh `UserDefaults` handle per store (not Sendable, so never shared across isolation).
     private func makeStore() -> InstalledVersionAliasStore {
-        InstalledVersionAliasStore(defaults: UserDefaults(suiteName: suite)!)
+        InstalledVersionAliasStore(defaults: TestDefaults.suite(named: suite)!)
     }
 
     private static func update(short: String, build: String?, newVersion: String, url: URL? = nil) -> AvailableUpdate {

@@ -73,8 +73,8 @@ struct UpdatePolicyTests {
 
     @Test func storeRoundTrips() throws {
         let suite = "UpdatePolicyTests.\(UUID().uuidString)"
-        let defaults = try #require(UserDefaults(suiteName: suite))
-        defer { defaults.removePersistentDomain(forName: suite) }
+        let defaults = try #require(TestDefaults.suite(named: suite))
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         let store = UserDefaultsUpdatePoliciesStore(defaults: defaults)
         let policies = UpdatePolicies(defaultPolicy: .autoInstall).setting(.notifyOnly, for: "b")
 
@@ -85,8 +85,8 @@ struct UpdatePolicyTests {
 
     @Test func storeReturnsDefaultsWhenEmptyOrCorrupt() throws {
         let suite = "UpdatePolicyTests.\(UUID().uuidString)"
-        let defaults = try #require(UserDefaults(suiteName: suite))
-        defer { defaults.removePersistentDomain(forName: suite) }
+        let defaults = try #require(TestDefaults.suite(named: suite))
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         let store = UserDefaultsUpdatePoliciesStore(defaults: defaults)
         #expect(store.load() == UpdatePolicies())
 

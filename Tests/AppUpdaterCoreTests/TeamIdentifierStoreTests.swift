@@ -7,22 +7,22 @@ struct TeamIdentifierStoreTests {
     private let suiteName = "TeamIdentifierStoreTests-\(UUID().uuidString)"
 
     private func makeStore() throws -> (UserDefaultsTeamIdentifierStore, UserDefaults) {
-        let defaults = try #require(UserDefaults(suiteName: suiteName))
-        defaults.removePersistentDomain(forName: suiteName)
+        let defaults = try #require(TestDefaults.suite(named: suiteName))
+        defaults.removePersistentDomain(forName: TestDefaults.prefix + suiteName)
         return (UserDefaultsTeamIdentifierStore(defaults: defaults), defaults)
     }
 
     @Test("Unknown bundle returns nil")
     func unknown() throws {
         let (store, defaults) = try makeStore()
-        defer { defaults.removePersistentDomain(forName: suiteName) }
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suiteName) }
         #expect(store.lastKnownTeamIdentifier(for: "com.example.a") == nil)
     }
 
     @Test("Record, overwrite and forget")
     func roundTrip() throws {
         let (store, defaults) = try makeStore()
-        defer { defaults.removePersistentDomain(forName: suiteName) }
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suiteName) }
         store.record("TEAM1", for: "com.example.a")
         store.record("TEAM2", for: "com.example.b")
         store.record("TEAM3", for: "com.example.a")
@@ -36,7 +36,7 @@ struct TeamIdentifierStoreTests {
     @Test("Values persist across store instances sharing a suite")
     func persists() throws {
         let (store, defaults) = try makeStore()
-        defer { defaults.removePersistentDomain(forName: suiteName) }
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suiteName) }
         store.record("TEAM1", for: "com.example.a")
         let reopened = UserDefaultsTeamIdentifierStore(defaults: defaults)
         #expect(reopened.lastKnownTeamIdentifier(for: "com.example.a") == "TEAM1")

@@ -53,8 +53,8 @@ struct FirstSeenStoreTests {
 
     private func makeStore(clock: TestClock, retentionDays: Int = 180) throws -> (FirstSeenStore, UserDefaults) {
         // Separate instances of the same suite: one is handed to the actor, one stays with the test.
-        let defaults = try #require(UserDefaults(suiteName: suite))
-        let storeDefaults = try #require(UserDefaults(suiteName: suite))
+        let defaults = try #require(TestDefaults.suite(named: suite))
+        let storeDefaults = try #require(TestDefaults.suite(named: suite))
         let store = FirstSeenStore(
             defaults: storeDefaults,
             retention: TimeInterval(retentionDays) * 86_400,
@@ -66,7 +66,7 @@ struct FirstSeenStoreTests {
     @Test func recordsFirstSeenOnceAndKeepsOriginalDate() async throws {
         let clock = TestClock(AutoInstallFixtures.referenceDate)
         let (store, defaults) = try makeStore(clock: clock)
-        defer { defaults.removePersistentDomain(forName: suite) }
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         let update = AutoInstallFixtures.update()
 
         let first = await store.record([update])
@@ -80,7 +80,7 @@ struct FirstSeenStoreTests {
     @Test func publishedDateWinsOverFirstSeen() async throws {
         let clock = TestClock(AutoInstallFixtures.referenceDate)
         let (store, defaults) = try makeStore(clock: clock)
-        defer { defaults.removePersistentDomain(forName: suite) }
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         let published = AutoInstallFixtures.referenceDate.addingTimeInterval(-86_400)
         let update = AutoInstallFixtures.update(publishedAt: published)
 
@@ -93,12 +93,12 @@ struct FirstSeenStoreTests {
     @Test func persistsAcrossInstances() async throws {
         let clock = TestClock(AutoInstallFixtures.referenceDate)
         let (store, defaults) = try makeStore(clock: clock)
-        defer { defaults.removePersistentDomain(forName: suite) }
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         let update = AutoInstallFixtures.update()
         _ = await store.record([update])
 
         clock.advance(days: 5)
-        let reopened = FirstSeenStore(defaults: try #require(UserDefaults(suiteName: suite)), now: { clock.now })
+        let reopened = FirstSeenStore(defaults: try #require(TestDefaults.suite(named: suite)), now: { clock.now })
 
         #expect(await reopened.firstSeen(for: update) == AutoInstallFixtures.referenceDate)
     }
@@ -106,7 +106,7 @@ struct FirstSeenStoreTests {
     @Test func prunesSupersededVersionsAndExpiredEntries() async throws {
         let clock = TestClock(AutoInstallFixtures.referenceDate)
         let (store, defaults) = try makeStore(clock: clock, retentionDays: 10)
-        defer { defaults.removePersistentDomain(forName: suite) }
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         let old = AutoInstallFixtures.update(version: "2.0")
         let other = AutoInstallFixtures.update("com.other.app")
         _ = await store.record([old, other])
@@ -126,14 +126,14 @@ struct FirstSeenStoreTests {
     @Test func unknownUpdateHasNoDate() async throws {
         let clock = TestClock(AutoInstallFixtures.referenceDate)
         let (store, defaults) = try makeStore(clock: clock)
-        defer { defaults.removePersistentDomain(forName: suite) }
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         #expect(await store.releaseDate(for: AutoInstallFixtures.update()) == nil)
     }
 
     @Test func corruptDataIsDiscarded() async throws {
         let clock = TestClock(AutoInstallFixtures.referenceDate)
         let (store, defaults) = try makeStore(clock: clock)
-        defer { defaults.removePersistentDomain(forName: suite) }
+        defer { defaults.removePersistentDomain(forName: TestDefaults.prefix + suite) }
         defaults.set(Data("nope".utf8), forKey: FirstSeenStore.defaultKey)
         let update = AutoInstallFixtures.update()
 
