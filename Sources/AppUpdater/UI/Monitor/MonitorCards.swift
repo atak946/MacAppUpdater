@@ -177,7 +177,7 @@ struct ProcessIcon: View {
                 .resizable()
                 .interpolation(.high)
                 .frame(width: size, height: size)
-                .shadow(color: .black.opacity(0.35), radius: 3, y: 1.5)
+                .shadow(color: .black.opacity(0.35), radius: 3, y: 1.5) // perf-guard: allow (static app icon image; not sample-driven)
         } else {
             switch kind {
             case .critical: IconTile(symbol: "lock.shield.fill", tint: Theme.Palette.warning, size: size * 0.9)

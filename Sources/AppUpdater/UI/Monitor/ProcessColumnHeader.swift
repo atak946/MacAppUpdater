@@ -62,7 +62,7 @@ private struct SortColumnButton: View {
         }
         .buttonStyle(.plain)
         .onHover { isHovered = $0 }
-        .animation(Theme.Motion.hover, value: isHovered)
+        .animation(Theme.Motion.hover, value: isHovered) // perf-guard: allow (hover/focus/selection state, not sample-driven)
         .help(String(localized: "Sort by \(helpTitle)"))
         .accessibilityLabel(Text("Sort by \(helpTitle)"))
         .accessibilityValue(isActive ? Text(ascending ? "Ascending" : "Descending") : Text(verbatim: ""))

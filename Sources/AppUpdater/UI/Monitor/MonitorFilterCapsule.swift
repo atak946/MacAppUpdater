@@ -45,7 +45,7 @@ struct MonitorFilterCapsule: View {
                     Capsule()
                         .fill(Theme.brandGradient)
                         .overlay(Capsule().strokeBorder(Color.white.opacity(0.3), lineWidth: 0.5))
-                        .glow(Theme.Palette.brand, radius: 8, opacity: 0.45)
+                        .glow(Theme.Palette.brand, radius: 8, opacity: 0.45) // perf-guard: allow (selected filter pill; changes only on click)
                         .matchedGeometryEffect(id: "selection", in: namespace)
                 }
             }

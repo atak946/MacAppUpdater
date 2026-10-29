@@ -48,8 +48,8 @@ struct ProcessSearchField: View {
             RoundedRectangle(cornerRadius: Theme.Radius.m, style: .continuous)
                 .strokeBorder(isFocused ? AnyShapeStyle(Theme.brandGradient) : AnyShapeStyle(Theme.Palette.hairline), lineWidth: 1)
         )
-        .animation(Theme.Motion.hover, value: isFocused)
-        .animation(Theme.Motion.hover, value: text.isEmpty)
+        .animation(Theme.Motion.hover, value: isFocused) // perf-guard: allow (hover/focus/selection state, not sample-driven)
+        .animation(Theme.Motion.hover, value: text.isEmpty) // perf-guard: allow (hover/focus/selection state, not sample-driven)
         .onAppear { shortcut.install { isFocused = true } }
         .onDisappear { shortcut.remove() }
     }

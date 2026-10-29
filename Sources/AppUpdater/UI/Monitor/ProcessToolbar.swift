@@ -75,7 +75,7 @@ struct ProcessToolbar: View {
             }
         }
         .fixedSize()
-        .animation(Theme.Motion.hover, value: isNarrowed)
+        .animation(Theme.Motion.hover, value: isNarrowed) // perf-guard: allow (hover/focus/selection state, not sample-driven)
     }
 }
 
@@ -105,8 +105,8 @@ private struct FilterChip: View {
         }
         .buttonStyle(.plain)
         .onHover { isHovered = $0 }
-        .animation(Theme.Motion.hover, value: isHovered)
-        .animation(Theme.Motion.hover, value: isOn)
+        .animation(Theme.Motion.hover, value: isHovered) // perf-guard: allow (hover/focus/selection state, not sample-driven)
+        .animation(Theme.Motion.hover, value: isOn) // perf-guard: allow (hover/focus/selection state, not sample-driven)
         .accessibilityAddTraits(isOn ? [.isButton, .isSelected] : .isButton)
     }
 

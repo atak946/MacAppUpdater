@@ -62,7 +62,7 @@ struct ProcessGroupRow: View {
         .contentShape(Rectangle())
         .onHover { isHovered = $0 }
         .onTapGesture(perform: onSelect)
-        .animation(Theme.Motion.hover, value: isSelected)
+        .animation(Theme.Motion.hover, value: isSelected) // perf-guard: allow (hover/focus/selection state, not sample-driven)
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
         .accessibilityAction(named: Text("Show details"), onSelect)
@@ -121,7 +121,7 @@ struct ProcessGroupRow: View {
         .buttonStyle(IconButtonStyle())
         .disabled(!canTerminate)
         .opacity(isHovered ? 1 : 0)
-        .animation(Theme.Motion.hover, value: isHovered)
+        .animation(Theme.Motion.hover, value: isHovered) // perf-guard: allow (hover/focus/selection state, not sample-driven)
     }
 
     private var protectedHelp: String {
