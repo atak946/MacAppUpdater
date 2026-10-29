@@ -150,16 +150,18 @@ struct MenuBarView: View {
             .buttonStyle(IconButtonStyle())
             .help("Quit App Updater")
 
-            Spacer(minLength: Theme.Spacing.s)
-
+            // Icon only: next to "Update All" a titled button doesn't fit the panel in longer languages.
             Button {
                 openWindow(id: "main")
                 NSApp.activate()
             } label: {
-                Label("Open App Updater", systemImage: "macwindow")
+                Image(systemName: "macwindow")
             }
-            .buttonStyle(.secondary)
+            .buttonStyle(IconButtonStyle())
             .help("Open the main window")
+            .accessibilityLabel("Open App Updater")
+
+            Spacer(minLength: Theme.Spacing.s)
 
             if !viewModel.installableUpdates.isEmpty {
                 Button {
@@ -168,6 +170,7 @@ struct MenuBarView: View {
                     Label("Update All", systemImage: "arrow.down.circle.fill")
                 }
                 .buttonStyle(.primary)
+                .fixedSize()
                 .keyboardShortcut(.defaultAction)
                 .transition(.scale(scale: 0.9).combined(with: .opacity))
             }

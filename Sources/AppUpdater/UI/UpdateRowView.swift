@@ -67,7 +67,9 @@ struct UpdateRowView: View {
             if update.releaseNotes != nil {
                 notesButton
             }
-            action
+            // Buttons keep their natural width; the name and version column truncates instead.
+            // In the narrow menu bar panel a compressed button wrapped its title one letter per line.
+            action.fixedSize()
         }
         .padding(.horizontal, Theme.Spacing.s)
         .padding(.vertical, Theme.Spacing.s)
@@ -114,10 +116,14 @@ struct UpdateRowView: View {
                 .overlay(Capsule().strokeBorder(.white.opacity(0.25), lineWidth: 0.5))
                 .glow(newVersionTint, radius: 5, opacity: 0.4)
             if let downloadSize, installState == .pending {
-                Text(downloadSize)
-                    .foregroundStyle(Theme.Palette.textTertiary)
-                    .help("Download size")
-                    .layoutPriority(-1)
+                // Whole or not at all: a clipped size ("3" of "378,8 MB") reads as a wrong number.
+                ViewThatFits(in: .horizontal) {
+                    Text(downloadSize)
+                        .foregroundStyle(Theme.Palette.textTertiary)
+                        .help("Download size")
+                    Color.clear.frame(width: 0, height: 0)
+                }
+                .layoutPriority(-1)
             }
         }
         .font(.system(size: 11, design: .rounded))
