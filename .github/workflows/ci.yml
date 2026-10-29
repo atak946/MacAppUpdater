@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      # Actions are pinned by commit SHA (tag in the comment); bump both together.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Show toolchain
+        run: swift --version
+
+      - name: Cache SwiftPM build
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: .build
+          key: spm-${{ runner.os }}-${{ hashFiles('Package.resolved', 'Package.swift') }}
+          restore-keys: spm-${{ runner.os }}-
+
+      - name: Build
+        run: swift build
+
+      - name: Test
+        run: swift test --parallel
+
+      - name: Release build (warnings as errors)
+        run: swift build -c release -Xswiftc -warnings-as-errors
+
+      - name: Lint packaging plists
+        run: plutil -lint Packaging/*.plist
+
+      - name: Install ShellCheck
+        run: command -v shellcheck >/dev/null || brew install shellcheck
+
+      - name: Lint packaging scripts
+        run: |
+          for f in scripts/*.sh; do bash -n "$f"; done
+          shellcheck -x scripts/*.sh
