@@ -1,0 +1,7963 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "1 app": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 uygulama"
+          }
+        }
+      }
+    },
+    "%lld with updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld tanesinde güncelleme var"
+          }
+        }
+      }
+    },
+    "Sort by": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sırala"
+          }
+        }
+      }
+    },
+    "No apps match": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşleşen uygulama yok"
+          }
+        }
+      }
+    },
+    "Try another filter or search term.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başka bir filtre veya arama terimi deneyin."
+          }
+        }
+      }
+    },
+    "All": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tümü"
+          }
+        }
+      }
+    },
+    "Issues": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sorunlar"
+          }
+        }
+      }
+    },
+    "Filter": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtre"
+          }
+        }
+      }
+    },
+    "": {
+      "shouldTranslate": false
+    },
+    " — latest %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " — en son %@"
+          }
+        }
+      }
+    },
+    "%@\nClick to open the download page.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@\nİndirme sayfasını açmak için tıklayın."
+          }
+        }
+      }
+    },
+    "%@\nClick to retry.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@\nYeniden denemek için tıklayın."
+          }
+        }
+      }
+    },
+    "%@\nClick to try again once you're online.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@\nÇevrimiçi olduğunuzda yeniden denemek için tıklayın."
+          }
+        }
+      }
+    },
+    "%@ %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@"
+          }
+        }
+      }
+    },
+    "%@ available": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ mevcut"
+          }
+        }
+      }
+    },
+    "%@ manages updates for this app": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulamanın güncellemelerini %@ yönetiyor"
+          }
+        }
+      }
+    },
+    "%@ manages updates for this app. App Updater won't install them.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulamanın güncellemelerini %@ yönetiyor. App Updater bunları yüklemez."
+          }
+        }
+      }
+    },
+    "%@ moved to the Trash": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Çöp Sepeti'ne taşındı"
+          }
+        }
+      }
+    },
+    "%@ of %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ / %2$@"
+          }
+        }
+      }
+    },
+    "%@ selected": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ seçildi"
+          }
+        }
+      }
+    },
+    "%@ to download": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ indirilecek"
+          }
+        }
+      }
+    },
+    "%@ will quit while it's replaced. Its settings and data are not rolled back.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, değiştirilirken kapatılacak. Ayarları ve verileri geri alınmaz."
+          }
+        }
+      }
+    },
+    "%@ · %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "%@ · %@ download": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$@ indirme"
+          }
+        }
+      }
+    },
+    "%@ · %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$lld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$lld"
+          }
+        }
+      }
+    },
+    "%@ · %lld failed": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$lld failed"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$lld başarısız"
+          }
+        }
+      }
+    },
+    "%@ → %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ → %2$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ → %2$@"
+          }
+        }
+      }
+    },
+    "%@ → %@ via %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ → %2$@ via %3$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ → %2$@ (%3$@ üzerinden)"
+          }
+        }
+      }
+    },
+    "%@, %@ to %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@ to %3$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@ → %3$@"
+          }
+        }
+      }
+    },
+    "%@. %@ manages updates for this app.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@. %2$@ manages updates for this app."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@. Bu uygulamanın güncellemelerini %2$@ yönetiyor."
+          }
+        }
+      }
+    },
+    "%@. %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@. %2$@."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@. %2$@."
+          }
+        }
+      }
+    },
+    "%@. Updated by the vendor's own updater — open the app or the download page.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@. Üreticinin kendi güncelleyicisiyle güncellenir — uygulamayı veya indirme sayfasını açın."
+          }
+        }
+      }
+    },
+    "%@/s": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/sn"
+          }
+        }
+      }
+    },
+    "%lld": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
+          }
+        }
+      }
+    },
+    "%lld apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld uygulama"
+          }
+        }
+      }
+    },
+    "%lld apps checked.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld uygulama denetlendi."
+          }
+        }
+      }
+    },
+    "%lld apps checked. Nice and tidy.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld uygulama denetlendi. Her şey yolunda."
+          }
+        }
+      }
+    },
+    "%lld apps on this Mac.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu Mac'te %lld uygulama var."
+          }
+        }
+      }
+    },
+    "%lld days": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld gün"
+          }
+        }
+      }
+    },
+    "%lld events": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld olay"
+          }
+        }
+      }
+    },
+    "%lld formulae can be upgraded": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld formül yükseltilebilir"
+          }
+        }
+      }
+    },
+    "%lld ignored apps hidden": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yoksayılan %lld uygulama gizlendi"
+          }
+        }
+      }
+    },
+    "%lld of %lld apps have an update source": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld of %2$lld apps have an update source"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$lld uygulamanın %1$lld tanesinin güncelleme kaynağı var"
+          }
+        }
+      }
+    },
+    "%lld of %lld items selected": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld of %2$lld items selected"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$lld öğeden %1$lld tanesi seçildi"
+          }
+        }
+      }
+    },
+    "%lld percent of apps tracked": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamaların yüzde %lld kadarı izleniyor"
+          }
+        }
+      }
+    },
+    "%lld percent, %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld percent, %2$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yüzde %1$lld, %2$@"
+          }
+        }
+      }
+    },
+    "%lld rules keep updates out of your way": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld kural güncellemeleri uzak tutuyor"
+          }
+        }
+      }
+    },
+    "%lld still to install": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld tanesi yüklenmeyi bekliyor"
+          }
+        }
+      }
+    },
+    "%lld untracked apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İzlenmeyen %lld uygulama"
+          }
+        }
+      }
+    },
+    "%lld updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld güncelleme"
+          }
+        }
+      }
+    },
+    "%lld updates available": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld güncelleme mevcut"
+          }
+        }
+      }
+    },
+    "%lld updates ready": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld güncelleme hazır"
+          }
+        }
+      }
+    },
+    "%lld updates recorded": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld güncelleme kaydedildi"
+          }
+        }
+      }
+    },
+    "%lld warnings": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld uyarı"
+          }
+        }
+      }
+    },
+    "%lld%%": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%%%lld"
+          }
+        }
+      }
+    },
+    "1 day": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 gün"
+          }
+        }
+      }
+    },
+    "1 event": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 olay"
+          }
+        }
+      }
+    },
+    "1 formula can be upgraded": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 formül yükseltilebilir"
+          }
+        }
+      }
+    },
+    "1 ignored app hidden": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yoksayılan 1 uygulama gizlendi"
+          }
+        }
+      }
+    },
+    "1 rule keeps updates out of your way": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 kural güncellemeleri uzak tutuyor"
+          }
+        }
+      }
+    },
+    "1 update": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 güncelleme"
+          }
+        }
+      }
+    },
+    "1 update ready": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 güncelleme hazır"
+          }
+        }
+      }
+    },
+    "1 update recorded": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 güncelleme kaydedildi"
+          }
+        }
+      }
+    },
+    "A configuration profile excludes this app from updates.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir yapılandırma profili bu uygulamayı güncellemelerin dışında tutuyor."
+          }
+        }
+      }
+    },
+    "API token": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API belirteci"
+          }
+        }
+      }
+    },
+    "About": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hakkında"
+          }
+        }
+      }
+    },
+    "About %@ left": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yaklaşık %@ kaldı"
+          }
+        }
+      }
+    },
+    "Add": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekle"
+          }
+        }
+      }
+    },
+    "All Apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm Uygulamalar"
+          }
+        }
+      }
+    },
+    "All tools up to date": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm araçlar güncel"
+          }
+        }
+      }
+    },
+    "All versions": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm sürümler"
+          }
+        }
+      }
+    },
+    "All your apps are on their latest version.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm uygulamalarınız en son sürümde."
+          }
+        }
+      }
+    },
+    "Allow Versions Newer Than %@.x": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@.x Sürümünden Yenilerine İzin Ver"
+          }
+        }
+      }
+    },
+    "Allow updates that aren't notarized (warn)": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noter onaylı olmayan güncellemelere izin ver (uyar)"
+          }
+        }
+      }
+    },
+    "Allow “App Updater” in System Settings → General → Login Items.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem Ayarları → Genel → Giriş Öğeleri bölümünde “App Updater”a izin verin."
+          }
+        }
+      }
+    },
+    "Analyze Apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamaları Analiz Et"
+          }
+        }
+      }
+    },
+    "Analyzing your apps…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamalarınız analiz ediliyor…"
+          }
+        }
+      }
+    },
+    "Another app uses the same bundle ID (%@). Related files may belong to it, so only the app is selected.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başka bir uygulama aynı paket kimliğini kullanıyor (%@). İlgili dosyalar ona ait olabilir, bu nedenle yalnızca uygulama seçildi."
+          }
+        }
+      }
+    },
+    "App": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama"
+          }
+        }
+      }
+    },
+    "App Store": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Store"
+          }
+        }
+      }
+    },
+    "App Updater": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Updater"
+          }
+        }
+      }
+    },
+    "Application": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama"
+          }
+        }
+      }
+    },
+    "Applies to apps updated from a disk image or zip. App Store apps and installer packages always ask first.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disk görüntüsü veya zip ile güncellenen uygulamalara uygulanır. App Store uygulamaları ve yükleyici paketleri her zaman önce sorar."
+          }
+        }
+      }
+    },
+    "Apps installed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüklü uygulamalar"
+          }
+        }
+      }
+    },
+    "Architecture": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mimari"
+          }
+        }
+      }
+    },
+    "Asking Homebrew which formulae are outdated.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Homebrew'a hangi formüllerin güncel olmadığı soruluyor."
+          }
+        }
+      }
+    },
+    "At least %@ to download": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En az %@ indirilecek"
+          }
+        }
+      }
+    },
+    "At risk": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Risk altında"
+          }
+        }
+      }
+    },
+    "Attention": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dikkat"
+          }
+        }
+      }
+    },
+    "Automatic update failed. Download it manually from the website.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otomatik güncelleme başarısız. Web sitesinden elle indirin."
+          }
+        }
+      }
+    },
+    "Backups are not affected.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yedekler etkilenmez."
+          }
+        }
+      }
+    },
+    "Blind spots": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kör noktalar"
+          }
+        }
+      }
+    },
+    "Blocked: %@ isn't signed with a valid Developer ID, so the publisher of this update can't be verified. Update it manually from the vendor's website.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Engellendi: %@ geçerli bir Developer ID ile imzalanmamış, bu yüzden bu güncellemenin yayıncısı doğrulanamıyor. Uygulamayı üreticinin web sitesinden elle güncelleyin."
+          }
+        }
+      }
+    },
+    "Blocked: Apple has not notarized this update, and your organization requires notarization.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Engellendi: Apple bu güncellemeyi noter onayından geçirmedi ve kuruluşunuz noter onayını zorunlu tutuyor."
+          }
+        }
+      }
+    },
+    "Blocked: Apple has not notarized this update. You can allow it in Settings › General (not recommended).": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Engellendi: Bu güncelleme Apple tarafından noter onayı almamış. Ayarlar › Genel bölümünden izin verebilirsiniz (önerilmez)."
+          }
+        }
+      }
+    },
+    "Blocked: Gatekeeper rejected this update (for example, the developer's certificate was revoked). It can't be installed.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Engellendi: Gatekeeper bu güncellemeyi reddetti (örneğin geliştiricinin sertifikası iptal edilmiş olabilir). Yüklenemez."
+          }
+        }
+      }
+    },
+    "Build": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Derleme"
+          }
+        }
+      }
+    },
+    "CHECK-UP": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KONTROL"
+          }
+        }
+      }
+    },
+    "Caches, preferences and support files left behind by %@.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ uygulamasından kalan önbellekler, tercihler ve destek dosyaları."
+          }
+        }
+      }
+    },
+    "Can't uninstall this app": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulama kaldırılamıyor"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vazgeç"
+          }
+        }
+      }
+    },
+    "Cancel download": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirmeyi iptal et"
+          }
+        }
+      }
+    },
+    "Category": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategori"
+          }
+        }
+      }
+    },
+    "Check Now": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şimdi Denetle"
+          }
+        }
+      }
+    },
+    "Check failed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denetim başarısız"
+          }
+        }
+      }
+    },
+    "Check failed (%lld error(s))": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denetim başarısız (%lld hata)"
+          }
+        }
+      }
+    },
+    "Check for App Updater Updates…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Updater Güncellemelerini Denetle…"
+          }
+        }
+      }
+    },
+    "Check for Updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeleri Denetle"
+          }
+        }
+      }
+    },
+    "Check for updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeleri denetle"
+          }
+        }
+      }
+    },
+    "Check for updates (⌘R)": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeleri denetle (⌘R)"
+          }
+        }
+      }
+    },
+    "Check for updates to see which apps have a known update source.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hangi uygulamaların bilinen bir güncelleme kaynağı olduğunu görmek için güncellemeleri denetleyin."
+          }
+        }
+      }
+    },
+    "Checked %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son denetim: %@"
+          }
+        }
+      }
+    },
+    "Checking": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denetleme"
+          }
+        }
+      }
+    },
+    "Checking %lld apps for updates…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld uygulama güncellemeler için denetleniyor…"
+          }
+        }
+      }
+    },
+    "Checking command line tools…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komut satırı araçları denetleniyor…"
+          }
+        }
+      }
+    },
+    "Checking every app against its update source.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her uygulama kendi güncelleme kaynağıyla denetleniyor."
+          }
+        }
+      }
+    },
+    "Checking for updates…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeler denetleniyor…"
+          }
+        }
+      }
+    },
+    "Checking sources…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaynaklar denetleniyor…"
+          }
+        }
+      }
+    },
+    "Checking…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denetleniyor…"
+          }
+        }
+      }
+    },
+    "Checks that failed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başarısız denetimler"
+          }
+        }
+      }
+    },
+    "Choose an app…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir uygulama seçin…"
+          }
+        }
+      }
+    },
+    "Clear History": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçmişi Temizle"
+          }
+        }
+      }
+    },
+    "Clear the update history?": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme geçmişi temizlensin mi?"
+          }
+        }
+      }
+    },
+    "Command Line Tools": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komut Satırı Araçları"
+          }
+        }
+      }
+    },
+    "Command line tools are updated through Homebrew.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komut satırı araçları Homebrew ile güncellenir."
+          }
+        }
+      }
+    },
+    "Conditions": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koşullar"
+          }
+        }
+      }
+    },
+    "Connecting…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bağlanılıyor…"
+          }
+        }
+      }
+    },
+    "Copyright": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telif hakkı"
+          }
+        }
+      }
+    },
+    "Could not revert %@: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not revert %1$@: %2$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ geri alınamadı: %2$@"
+          }
+        }
+      }
+    },
+    "Couldn't check for updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeler denetlenemedi"
+          }
+        }
+      }
+    },
+    "Couldn't check formulae": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Formüller denetlenemedi"
+          }
+        }
+      }
+    },
+    "Coverage": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapsam"
+          }
+        }
+      }
+    },
+    "Default (%@)": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varsayılan (%@)"
+          }
+        }
+      }
+    },
+    "Deselect All": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm Seçimleri Kaldır"
+          }
+        }
+      }
+    },
+    "Details": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıntılar"
+          }
+        }
+      }
+    },
+    "Development build": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geliştirme derlemesi"
+          }
+        }
+      }
+    },
+    "Disable Helper": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yardımcıyı Devre Dışı Bırak"
+          }
+        }
+      }
+    },
+    "Disk": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disk"
+          }
+        }
+      }
+    },
+    "Done": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bitti"
+          }
+        }
+      }
+    },
+    "Dormant": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uykuda"
+          }
+        }
+      }
+    },
+    "Double-click to show %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ uygulamasını göstermek için çift tıklayın"
+          }
+        }
+      }
+    },
+    "Download & Install…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndir ve Yükle…"
+          }
+        }
+      }
+    },
+    "Download Manually…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elle İndir…"
+          }
+        }
+      }
+    },
+    "Download manually": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elle indir"
+          }
+        }
+      }
+    },
+    "Download progress": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirme ilerlemesi"
+          }
+        }
+      }
+    },
+    "Download size": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirme boyutu"
+          }
+        }
+      }
+    },
+    "Download, verify and replace automatically": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otomatik olarak indir, doğrula ve değiştir"
+          }
+        }
+      }
+    },
+    "Downloading": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndiriliyor"
+          }
+        }
+      }
+    },
+    "Downloading %@…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ indiriliyor…"
+          }
+        }
+      }
+    },
+    "Downloads the installer package and opens it — admin password required": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükleyici paketini indirip açar — yönetici parolası gerekir"
+          }
+        }
+      }
+    },
+    "Enable Helper…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yardımcıyı Etkinleştir…"
+          }
+        }
+      }
+    },
+    "Enabled": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etkin"
+          }
+        }
+      }
+    },
+    "Errors": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hatalar"
+          }
+        }
+      }
+    },
+    "Every %@ hours": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ saatte bir"
+          }
+        }
+      }
+    },
+    "Every %lld hours": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld saatte bir"
+          }
+        }
+      }
+    },
+    "Every app has an update source.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her uygulamanın bir güncelleme kaynağı var."
+          }
+        }
+      }
+    },
+    "Every app has been used recently.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm uygulamalar yakın zamanda kullanılmış."
+          }
+        }
+      }
+    },
+    "Every hour": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saatte bir"
+          }
+        }
+      }
+    },
+    "Everything is up to date": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her şey güncel"
+          }
+        }
+      }
+    },
+    "Everything runs natively on Apple Silicon.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her şey Apple Silicon üzerinde yerel olarak çalışıyor."
+          }
+        }
+      }
+    },
+    "Excellent": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mükemmel"
+          }
+        }
+      }
+    },
+    "Excluded": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hariç Tutulanlar"
+          }
+        }
+      }
+    },
+    "Exclusions": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hariç Tutmalar"
+          }
+        }
+      }
+    },
+    "Failed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başarısız"
+          }
+        }
+      }
+    },
+    "Filter apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamaları süz"
+          }
+        }
+      }
+    },
+    "Finish the update manually": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeyi elle tamamlayın"
+          }
+        }
+      }
+    },
+    "First seen %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk görülme: %@"
+          }
+        }
+      }
+    },
+    "From": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başlangıç"
+          }
+        }
+      }
+    },
+    "Gatekeeper couldn't confirm that Apple notarized this update — you may be offline. Connect to the internet and try again.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gatekeeper bu güncellemenin Apple tarafından noter onayından geçirildiğini doğrulayamadı — çevrimdışı olabilirsiniz. İnternete bağlanıp yeniden deneyin."
+          }
+        }
+      }
+    },
+    "General": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genel"
+          }
+        }
+      }
+    },
+    "Get Homebrew at brew.sh": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Homebrew'u brew.sh adresinden edinin"
+          }
+        }
+      }
+    },
+    "GitHub": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub"
+          }
+        }
+      }
+    },
+    "Gives a new release time to prove itself before it installs unattended. When a source publishes no release date, the day the update was first seen is used.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni bir sürüme, gözetimsiz yüklenmeden önce kendini kanıtlaması için zaman tanır. Kaynak bir yayın tarihi belirtmezse güncellemenin ilk görüldüğü gün kullanılır."
+          }
+        }
+      }
+    },
+    "Good": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İyi"
+          }
+        }
+      }
+    },
+    "Health": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sağlık"
+          }
+        }
+      }
+    },
+    "Health score": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sağlık puanı"
+          }
+        }
+      }
+    },
+    "History": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçmiş"
+          }
+        }
+      }
+    },
+    "Homebrew formulae installed on this Mac": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu Mac'te yüklü Homebrew formülleri"
+          }
+        }
+      }
+    },
+    "Homebrew not installed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Homebrew yüklü değil"
+          }
+        }
+      }
+    },
+    "Ignore": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yoksay"
+          }
+        }
+      }
+    },
+    "Ignore %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Uygulamasını Yoksay"
+          }
+        }
+      }
+    },
+    "Ignore Updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeleri Yoksay"
+          }
+        }
+      }
+    },
+    "Ignored": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yoksayıldı"
+          }
+        }
+      }
+    },
+    "Ignored apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yoksayılan uygulamalar"
+          }
+        }
+      }
+    },
+    "Ignored apps — never updated": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yoksayılan uygulamalar — hiç güncellenmez"
+          }
+        }
+      }
+    },
+    "Ignored by your organization": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuruluşunuz tarafından yoksayıldı"
+          }
+        }
+      }
+    },
+    "Include Again": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeniden Dahil Et"
+          }
+        }
+      }
+    },
+    "Include beta versions": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta sürümlerini dahil et"
+          }
+        }
+      }
+    },
+    "Insights": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İçgörüler"
+          }
+        }
+      }
+    },
+    "Install %lld updates one after another": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld güncellemeyi art arda yükle"
+          }
+        }
+      }
+    },
+    "Install Anyway": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yine de Yükle"
+          }
+        }
+      }
+    },
+    "Install all available updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mevcut tüm güncellemeleri yükle"
+          }
+        }
+      }
+    },
+    "Install anyway?": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yine de yüklensin mi?"
+          }
+        }
+      }
+    },
+    "Install automatically": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otomatik yükle"
+          }
+        }
+      }
+    },
+    "Install immediately": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hemen yükle"
+          }
+        }
+      }
+    },
+    "Install updates automatically": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeleri otomatik olarak yükle"
+          }
+        }
+      }
+    },
+    "Installed updates and rollbacks will appear here.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüklenen güncellemeler ve geri almalar burada görünür."
+          }
+        }
+      }
+    },
+    "Installer opened — follow its steps to finish.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükleyici açıldı — tamamlamak için adımlarını izleyin."
+          }
+        }
+      }
+    },
+    "Installer packages": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükleyici paketleri"
+          }
+        }
+      }
+    },
+    "Installing": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükleniyor"
+          }
+        }
+      }
+    },
+    "Installing %@…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ yükleniyor…"
+          }
+        }
+      }
+    },
+    "Install…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükle…"
+          }
+        }
+      }
+    },
+    "Intel-only apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca Intel uygulamaları"
+          }
+        }
+      }
+    },
+    "Keep Allowed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İzin Vermeye Devam Et"
+          }
+        }
+      }
+    },
+    "Keep this app on its current major or minor version": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulamayı mevcut ana veya ara sürümünde tut"
+          }
+        }
+      }
+    },
+    "Largest apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En büyük uygulamalar"
+          }
+        }
+      }
+    },
+    "Largest apps by size": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boyuta göre en büyük uygulamalar"
+          }
+        }
+      }
+    },
+    "Last check failed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son denetim başarısız"
+          }
+        }
+      }
+    },
+    "Launch at login": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Girişte başlat"
+          }
+        }
+      }
+    },
+    "Library": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arşiv"
+          }
+        }
+      }
+    },
+    "Loading": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükleniyor"
+          }
+        }
+      }
+    },
+    "Loading release notes…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm notları yükleniyor…"
+          }
+        }
+      }
+    },
+    "Location": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konum"
+          }
+        }
+      }
+    },
+    "Looking for related files…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlgili dosyalar aranıyor…"
+          }
+        }
+      }
+    },
+    "Looking for updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeler aranıyor"
+          }
+        }
+      }
+    },
+    "Looking for updates…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeler aranıyor…"
+          }
+        }
+      }
+    },
+    "Managed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yönetiliyor"
+          }
+        }
+      }
+    },
+    "Managed by %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tarafından yönetiliyor"
+          }
+        }
+      }
+    },
+    "Managed by the App Store": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Store tarafından yönetiliyor"
+          }
+        }
+      }
+    },
+    "Managed by your organization": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuruluşunuz tarafından yönetiliyor"
+          }
+        }
+      }
+    },
+    "Managed by your organization. This setting can't be changed.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuruluşunuz tarafından yönetiliyor. Bu ayar değiştirilemez."
+          }
+        }
+      }
+    },
+    "Manual": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elle"
+          }
+        }
+      }
+    },
+    "Manually…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elle…"
+          }
+        }
+      }
+    },
+    "Map %@ to GitHub": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Uygulamasını GitHub ile Eşle"
+          }
+        }
+      }
+    },
+    "Map GitHub Repo…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub Deposu Eşle…"
+          }
+        }
+      }
+    },
+    "Matching every app against Sparkle, Homebrew, GitHub and the App Store.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her uygulama Sparkle, Homebrew, GitHub ve App Store ile eşleştiriliyor."
+          }
+        }
+      }
+    },
+    "Measuring bundle sizes, launch dates and architectures.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paket boyutları, açılış tarihleri ve mimariler ölçülüyor."
+          }
+        }
+      }
+    },
+    "Modified": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Değiştirilme"
+          }
+        }
+      }
+    },
+    "More actions": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diğer işlemler"
+          }
+        }
+      }
+    },
+    "Move %@ and %lld related item(s) to the Trash?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Move %1$@ and %2$lld related item(s) to the Trash?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ve ilgili %2$lld öğe Çöp Sepeti'ne taşınsın mı?"
+          }
+        }
+      }
+    },
+    "Move %lld selected item(s) to the Trash?": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili %lld öğe Çöp Sepeti'ne taşınsın mı?"
+          }
+        }
+      }
+    },
+    "Move to Trash": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çöp Sepeti'ne Taşı"
+          }
+        }
+      }
+    },
+    "Move to Trash…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çöp Sepeti'ne Taşı…"
+          }
+        }
+      }
+    },
+    "Moved %lld item(s) to the Trash. You can restore them from the Trash.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld öğe Çöp Sepeti'ne taşındı. Bunları Çöp Sepeti'nden geri yükleyebilirsiniz."
+          }
+        }
+      }
+    },
+    "Moved %lld item(s); %lld could not be moved.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moved %1$lld item(s); %2$lld could not be moved."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld öğe taşındı; %2$lld öğe taşınamadı."
+          }
+        }
+      }
+    },
+    "Moving to Trash…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çöp Sepeti'ne taşınıyor…"
+          }
+        }
+      }
+    },
+    "Name": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ad"
+          }
+        }
+      }
+    },
+    "Named after the app, not its identifier. Review before selecting.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tanımlayıcısına göre değil, uygulamanın adına göre bulundu. Seçmeden önce gözden geçirin."
+          }
+        }
+      }
+    },
+    "Needs approval": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onay gerekiyor"
+          }
+        }
+      }
+    },
+    "Needs attention": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlgi gerekiyor"
+          }
+        }
+      }
+    },
+    "Never updated": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiç güncellenmez"
+          }
+        }
+      }
+    },
+    "Newer major or minor versions are held back": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni ana veya ara sürümler bekletiliyor"
+          }
+        }
+      }
+    },
+    "Newer releases will show up again": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni sürümler yeniden görünecek"
+          }
+        }
+      }
+    },
+    "No apps mapped yet. Map an app to check its GitHub releases.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz eşlenmiş uygulama yok. GitHub sürümlerini denetlemek için bir uygulama eşleyin."
+          }
+        }
+      }
+    },
+    "No apps scanned yet.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz uygulama taranmadı."
+          }
+        }
+      }
+    },
+    "No coverage data": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapsam verisi yok"
+          }
+        }
+      }
+    },
+    "No history yet": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz geçmiş yok"
+          }
+        }
+      }
+    },
+    "No insights yet": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz içgörü yok"
+          }
+        }
+      }
+    },
+    "No known source": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilinen kaynak yok"
+          }
+        }
+      }
+    },
+    "No known update source for this app.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulama için bilinen bir güncelleme kaynağı yok."
+          }
+        }
+      }
+    },
+    "No matching apps.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşleşen uygulama yok."
+          }
+        }
+      }
+    },
+    "No outdated Homebrew formulae.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncel olmayan Homebrew formülü yok."
+          }
+        }
+      }
+    },
+    "No pending updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bekleyen güncelleme yok"
+          }
+        }
+      }
+    },
+    "No release notes": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm notu yok"
+          }
+        }
+      }
+    },
+    "No results for “%@”": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” için sonuç yok"
+          }
+        }
+      }
+    },
+    "No update found": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme bulunamadı"
+          }
+        }
+      }
+    },
+    "No update source": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme kaynağı yok"
+          }
+        }
+      }
+    },
+    "No update source knows this app": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiçbir güncelleme kaynağı bu uygulamayı tanımıyor"
+          }
+        }
+      }
+    },
+    "Not available": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanılamıyor"
+          }
+        }
+      }
+    },
+    "Not checked": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denetlenmedi"
+          }
+        }
+      }
+    },
+    "Not checked yet": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz denetlenmedi"
+          }
+        }
+      }
+    },
+    "Not in Low Data Mode": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düşük Veri Modu'ndayken değil"
+          }
+        }
+      }
+    },
+    "Not moved": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taşınmadı"
+          }
+        }
+      }
+    },
+    "Not on expensive networks (hotspot, cellular)": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pahalı ağlarda değil (erişim noktası, hücresel)"
+          }
+        }
+      }
+    },
+    "Not opened in 90+ days": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "90 günden uzun süredir açılmadı"
+          }
+        }
+      }
+    },
+    "Not signed / invalid signature": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İmzasız / geçersiz imza"
+          }
+        }
+      }
+    },
+    "Nothing excluded": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hariç tutulan bir şey yok"
+          }
+        }
+      }
+    },
+    "Notify only": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca bildir"
+          }
+        }
+      }
+    },
+    "OK": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamam"
+          }
+        }
+      }
+    },
+    "Off": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapalı"
+          }
+        }
+      }
+    },
+    "Off (recommended): updates Apple hasn't notarized are blocked. On: they install with a warning.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapalı (önerilir): Apple'ın noter onayı vermediği güncellemeler engellenir. Açık: uyarıyla yüklenir."
+          }
+        }
+      }
+    },
+    "Once a day": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Günde bir"
+          }
+        }
+      }
+    },
+    "Only on AC power": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca güç adaptörüne bağlıyken"
+          }
+        }
+      }
+    },
+    "Open": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aç"
+          }
+        }
+      }
+    },
+    "Open %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Uygulamasını Aç"
+          }
+        }
+      }
+    },
+    "Open App Store": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Store'u Aç"
+          }
+        }
+      }
+    },
+    "Open App Updater": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Updater'ı Aç"
+          }
+        }
+      }
+    },
+    "Open Download Page": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirme Sayfasını Aç"
+          }
+        }
+      }
+    },
+    "Open Login Items…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giriş Öğelerini Aç…"
+          }
+        }
+      }
+    },
+    "Open in Browser": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarayıcıda Aç"
+          }
+        }
+      }
+    },
+    "Open the download page in your browser": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirme sayfasını tarayıcınızda açın"
+          }
+        }
+      }
+    },
+    "Open the main window": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ana pencereyi aç"
+          }
+        }
+      }
+    },
+    "Opened the downloaded file — finish the install manually.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirilen dosya açıldı — yüklemeyi elle tamamlayın."
+          }
+        }
+      }
+    },
+    "Opens the App Store updates page": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Store güncellemeler sayfasını açar"
+          }
+        }
+      }
+    },
+    "Open…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aç…"
+          }
+        }
+      }
+    },
+    "Overrides the default": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varsayılanı geçersiz kılar"
+          }
+        }
+      }
+    },
+    "Overview": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genel Bakış"
+          }
+        }
+      }
+    },
+    "Per-app": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama bazında"
+          }
+        }
+      }
+    },
+    "Personal access token (optional)": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kişisel erişim belirteci (isteğe bağlı)"
+          }
+        }
+      }
+    },
+    "Pinned": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sabitlendi"
+          }
+        }
+      }
+    },
+    "Pinned — run `brew unpin %@` first": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sabitlendi — önce `brew unpin %@` komutunu çalıştırın"
+          }
+        }
+      }
+    },
+    "Policies": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlkeler"
+          }
+        }
+      }
+    },
+    "Possible matches": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Olası eşleşmeler"
+          }
+        }
+      }
+    },
+    "Privileged helper": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıcalıklı yardımcı"
+          }
+        }
+      }
+    },
+    "Quiet hours": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessiz saatler"
+          }
+        }
+      }
+    },
+    "Quit %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Uygulamasından Çık"
+          }
+        }
+      }
+    },
+    "Quit App Updater": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Updater'dan Çık"
+          }
+        }
+      }
+    },
+    "RECLAIMABLE": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KAZANILABİLİR"
+          }
+        }
+      }
+    },
+    "RECLAIMED": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KAZANILAN"
+          }
+        }
+      }
+    },
+    "Raises the GitHub API rate limit. A token without any scopes is enough for public repositories.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub API istek sınırını yükseltir. Herkese açık depolar için kapsamı olmayan bir belirteç yeterlidir."
+          }
+        }
+      }
+    },
+    "Ready to install": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüklemeye hazır"
+          }
+        }
+      }
+    },
+    "Ready to update": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeye hazır"
+          }
+        }
+      }
+    },
+    "Recently updated": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son güncellenenler"
+          }
+        }
+      }
+    },
+    "Refresh": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yenile"
+          }
+        }
+      }
+    },
+    "Related files": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlgili dosyalar"
+          }
+        }
+      }
+    },
+    "Release Notes": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm Notları"
+          }
+        }
+      }
+    },
+    "Release notes unavailable": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm notları kullanılamıyor"
+          }
+        }
+      }
+    },
+    "Released %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yayınlanma: %@"
+          }
+        }
+      }
+    },
+    "Releases of the repository are then checked for updates.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardından deponun sürümleri güncellemeler için denetlenir."
+          }
+        }
+      }
+    },
+    "Remove": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaldır"
+          }
+        }
+      }
+    },
+    "Remove Ceiling": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sınırı Kaldır"
+          }
+        }
+      }
+    },
+    "Remove mapping": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşlemeyi kaldır"
+          }
+        }
+      }
+    },
+    "Remove mapping for %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ eşlemesini kaldır"
+          }
+        }
+      }
+    },
+    "Report Missing App": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksik Uygulamayı Bildir"
+          }
+        }
+      }
+    },
+    "Repositories": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depolar"
+          }
+        }
+      }
+    },
+    "Repository": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depo"
+          }
+        }
+      }
+    },
+    "Requires": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gereksinim"
+          }
+        }
+      }
+    },
+    "Restore the version installed before the last update (backed up %@)": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son güncellemeden önce yüklü olan sürümü geri yükle (yedekleme: %@)"
+          }
+        }
+      }
+    },
+    "Retry": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeniden Dene"
+          }
+        }
+      }
+    },
+    "Revert": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geri Al"
+          }
+        }
+      }
+    },
+    "Revert %@ to the previous version?": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ önceki sürüme geri alınsın mı?"
+          }
+        }
+      }
+    },
+    "Revert to %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Sürümüne Geri Dön"
+          }
+        }
+      }
+    },
+    "Revert to Previous Version": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önceki Sürüme Geri Dön"
+          }
+        }
+      }
+    },
+    "Reverted": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geri Alındı"
+          }
+        }
+      }
+    },
+    "Right-click an update to skip a version or ignore an app.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir sürümü atlamak veya bir uygulamayı yoksaymak için güncellemeye sağ tıklayın."
+          }
+        }
+      }
+    },
+    "Rolled back": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geri alındı"
+          }
+        }
+      }
+    },
+    "Rosetta": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rosetta"
+          }
+        }
+      }
+    },
+    "Runs brew upgrade %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "brew upgrade %@ komutunu çalıştırır"
+          }
+        }
+      }
+    },
+    "Runs brew upgrade for every unpinned formula, one at a time": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sabitlenmemiş her formül için brew upgrade komutunu sırayla çalıştırır"
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaydet"
+          }
+        }
+      }
+    },
+    "Scan your applications to see disk usage, unused apps and compatibility warnings.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disk kullanımını, kullanılmayan uygulamaları ve uyumluluk uyarılarını görmek için uygulamalarınızı tarayın."
+          }
+        }
+      }
+    },
+    "Scanning applications…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamalar taranıyor…"
+          }
+        }
+      }
+    },
+    "Scanning your apps…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamalarınız taranıyor…"
+          }
+        }
+      }
+    },
+    "Search Homebrew": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Homebrew'da Ara"
+          }
+        }
+      }
+    },
+    "Search apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamalarda ara"
+          }
+        }
+      }
+    },
+    "Search history": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçmişte ara"
+          }
+        }
+      }
+    },
+    "Search the Web for Updates…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeler İçin Web'de Ara…"
+          }
+        }
+      }
+    },
+    "Search the Web…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Web'de Ara…"
+          }
+        }
+      }
+    },
+    "Security": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenlik"
+          }
+        }
+      }
+    },
+    "Security setting changed outside App Updater": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenlik ayarı App Updater dışında değiştirildi"
+          }
+        }
+      }
+    },
+    "See all": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tümünü gör"
+          }
+        }
+      }
+    },
+    "Select All": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tümünü Seç"
+          }
+        }
+      }
+    },
+    "Self-update is available in the packaged App Updater.app.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kendi kendini güncelleme, paketlenmiş App Updater.app'te kullanılabilir."
+          }
+        }
+      }
+    },
+    "Settings": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayarlar"
+          }
+        }
+      }
+    },
+    "Show Details…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıntıları Göster…"
+          }
+        }
+      }
+    },
+    "Show in Finder": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder'da Göster"
+          }
+        }
+      }
+    },
+    "Signed by": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İmzalayan"
+          }
+        }
+      }
+    },
+    "Size": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boyut"
+          }
+        }
+      }
+    },
+    "Skip Version %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Sürümünü Atla"
+          }
+        }
+      }
+    },
+    "Skip apps that are running": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çalışan uygulamaları atla"
+          }
+        }
+      }
+    },
+    "Skipped versions": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atlanan sürümler"
+          }
+        }
+      }
+    },
+    "Skipped versions — newer releases will show up again": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atlanan sürümler — daha yeni sürümler yeniden görünür"
+          }
+        }
+      }
+    },
+    "Skipping %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ atlanıyor"
+          }
+        }
+      }
+    },
+    "Soak period": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bekleme süresi"
+          }
+        }
+      }
+    },
+    "Some settings are managed by your organization and can't be changed here.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bazı ayarlar kuruluşunuz tarafından yönetiliyor ve burada değiştirilemez."
+          }
+        }
+      }
+    },
+    "Something went wrong": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir sorun oluştu"
+          }
+        }
+      }
+    },
+    "Source": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaynak"
+          }
+        }
+      }
+    },
+    "Sources": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaynaklar"
+          }
+        }
+      }
+    },
+    "Status": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durum"
+          }
+        }
+      }
+    },
+    "Stay on %@.x": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@.x Sürümünde Kal"
+          }
+        }
+      }
+    },
+    "Stay on Version": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürümde Kal"
+          }
+        }
+      }
+    },
+    "Staying on %@.x": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@.x sürümünde kalınıyor"
+          }
+        }
+      }
+    },
+    "Stop Ignoring": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yoksaymayı Durdur"
+          }
+        }
+      }
+    },
+    "Suggested repository for this app.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulama için önerilen depo."
+          }
+        }
+      }
+    },
+    "Team %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekip %@"
+          }
+        }
+      }
+    },
+    "Team ID: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekip Kimliği: %@"
+          }
+        }
+      }
+    },
+    "The code signature of %@ could not be verified: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ uygulamasının kod imzası doğrulanamadı: %2$@"
+          }
+        }
+      }
+    },
+    "The developer didn't publish notes for this version.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geliştirici bu sürüm için not yayınlamadı."
+          }
+        }
+      }
+    },
+    "The helper is only available in the packaged App Updater.app.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yardımcı yalnızca paketlenmiş App Updater.app'te kullanılabilir."
+          }
+        }
+      }
+    },
+    "The installed app": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüklü uygulama"
+          }
+        }
+      }
+    },
+    "The update check failed: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme denetimi başarısız: %@"
+          }
+        }
+      }
+    },
+    "These updates need your attention one by one": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu güncellemelerle tek tek ilgilenmeniz gerekiyor"
+          }
+        }
+      }
+    },
+    "This app is excluded from update checks.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulama güncelleme denetimlerinin dışında tutuluyor."
+          }
+        }
+      }
+    },
+    "This copy of App Updater isn't signed with a Developer ID, so its privileged helper can't install packages. Install the update from the vendor's website, or use an official build.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Updater'ın bu kopyası Developer ID ile imzalanmamış, bu yüzden ayrıcalıklı yardımcısı paket yükleyemez. Güncellemeyi üreticinin web sitesinden yükleyin veya resmi bir sürüm kullanın."
+          }
+        }
+      }
+    },
+    "This download format can't be installed automatically — opens the vendor's page": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu indirme biçimi otomatik olarak yüklenemez — üreticinin sayfasını açar"
+          }
+        }
+      }
+    },
+    "This update can't be installed automatically — download it from the vendor's page.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu güncelleme otomatik olarak yüklenemez — üreticinin sayfasından indirin."
+          }
+        }
+      }
+    },
+    "This update can't be installed automatically — download it from the vendor's website.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu güncelleme otomatik olarak yüklenemez — üreticinin web sitesinden indirin."
+          }
+        }
+      }
+    },
+    "Today": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bugün"
+          }
+        }
+      }
+    },
+    "Token removed.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belirteç kaldırıldı."
+          }
+        }
+      }
+    },
+    "Token saved in Keychain": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belirteç Anahtar Zinciri'ne kaydedildi"
+          }
+        }
+      }
+    },
+    "Token saved.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belirteç kaydedildi."
+          }
+        }
+      }
+    },
+    "Tools upgradable": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükseltilebilir araçlar"
+          }
+        }
+      }
+    },
+    "Try Again": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeniden Dene"
+          }
+        }
+      }
+    },
+    "Try Again Online": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çevrimiçiyken Yeniden Dene"
+          }
+        }
+      }
+    },
+    "Try an app name, bundle identifier or version.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir uygulama adı, paket kimliği veya sürüm deneyin."
+          }
+        }
+      }
+    },
+    "Turn Off": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapat"
+          }
+        }
+      }
+    },
+    "Uninstall": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaldır"
+          }
+        }
+      }
+    },
+    "Uninstall · Mac App Store app": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaldır · Mac App Store uygulaması"
+          }
+        }
+      }
+    },
+    "Uninstall…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaldır…"
+          }
+        }
+      }
+    },
+    "Unknown": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilinmiyor"
+          }
+        }
+      }
+    },
+    "Until": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bitiş"
+          }
+        }
+      }
+    },
+    "Up to date": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncel"
+          }
+        }
+      }
+    },
+    "Up to date, or no known update source for this app.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncel veya bu uygulama için bilinen bir güncelleme kaynağı yok."
+          }
+        }
+      }
+    },
+    "Update": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelle"
+          }
+        }
+      }
+    },
+    "Update All": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tümünü Güncelle"
+          }
+        }
+      }
+    },
+    "Update Now": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şimdi Güncelle"
+          }
+        }
+      }
+    },
+    "Update available": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme mevcut"
+          }
+        }
+      }
+    },
+    "Update available: %@ → %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Update available: %1$@ → %2$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme mevcut: %1$@ → %2$@"
+          }
+        }
+      }
+    },
+    "Update coverage": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme kapsamı"
+          }
+        }
+      }
+    },
+    "Update failed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme başarısız"
+          }
+        }
+      }
+    },
+    "Update it from the App Store.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Store'dan güncelleyin."
+          }
+        }
+      }
+    },
+    "Update source": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme kaynağı"
+          }
+        }
+      }
+    },
+    "Updated": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellendi"
+          }
+        }
+      }
+    },
+    "Updated %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellendi: %@"
+          }
+        }
+      }
+    },
+    "Updated by %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tarafından güncellenir"
+          }
+        }
+      }
+    },
+    "Updated by %@'s own updater — open the app or the download page.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kendi güncelleyicisiyle güncellenir — uygulamayı veya indirme sayfasını açın."
+          }
+        }
+      }
+    },
+    "Updated by the vendor's own updater — opens the download page": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Üreticinin kendi güncelleyicisiyle güncellenir — indirme sayfasını açar"
+          }
+        }
+      }
+    },
+    "Updated by the vendor's updater": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Üreticinin güncelleyicisiyle güncellenir"
+          }
+        }
+      }
+    },
+    "Updated to %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sürümüne güncellendi"
+          }
+        }
+      }
+    },
+    "Updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeler"
+          }
+        }
+      }
+    },
+    "Updates available": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeler mevcut"
+          }
+        }
+      }
+    },
+    "Updates ignored": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeler yoksayılıyor"
+          }
+        }
+      }
+    },
+    "Updates that do not meet these conditions wait for the next check.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu koşulları karşılamayan güncellemeler bir sonraki denetimi bekler."
+          }
+        }
+      }
+    },
+    "Updates you install will appear here.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüklediğiniz güncellemeler burada görünecek."
+          }
+        }
+      }
+    },
+    "Upgrade": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükselt"
+          }
+        }
+      }
+    },
+    "Upgrade All": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tümünü Yükselt"
+          }
+        }
+      }
+    },
+    "Upgraded": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükseltildi"
+          }
+        }
+      }
+    },
+    "Upgraded to %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sürümüne yükseltildi"
+          }
+        }
+      }
+    },
+    "Upgrading": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükseltiliyor"
+          }
+        }
+      }
+    },
+    "Use the form owner/repo, e.g. rxhanson/Rectangle.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sahip/depo biçimini kullanın, ör. rxhanson/Rectangle."
+          }
+        }
+      }
+    },
+    "Uses the app's Sparkle \"beta\" channel when it publishes one.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama yayınlıyorsa Sparkle \"beta\" kanalını kullanır."
+          }
+        }
+      }
+    },
+    "Vendor": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Üretici"
+          }
+        }
+      }
+    },
+    "Vendor feed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Üretici akışı"
+          }
+        }
+      }
+    },
+    "Verifying signature and installing — large apps can take a few minutes": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İmza doğrulanıyor ve kuruluyor — büyük uygulamalarda birkaç dakika sürebilir"
+          }
+        }
+      }
+    },
+    "Version": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm"
+          }
+        }
+      }
+    },
+    "Version %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm %@"
+          }
+        }
+      }
+    },
+    "Version %@ available": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sürümü mevcut"
+          }
+        }
+      }
+    },
+    "Version ceilings": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm sınırları"
+          }
+        }
+      }
+    },
+    "Version ceilings — newer major or minor versions are held back": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm sınırları — daha yeni ana veya ara sürümler bekletilir"
+          }
+        }
+      }
+    },
+    "Wait after release": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yayından sonra bekle"
+          }
+        }
+      }
+    },
+    "Warnings": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uyarılar"
+          }
+        }
+      }
+    },
+    "We'll keep checking in the background.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arka planda denetlemeye devam edeceğiz."
+          }
+        }
+      }
+    },
+    "What's New in %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Sürümündeki Yenilikler"
+          }
+        }
+      }
+    },
+    "What's New…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yenilikler…"
+          }
+        }
+      }
+    },
+    "What's new in %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sürümündeki yenilikler"
+          }
+        }
+      }
+    },
+    "Which of your apps we can keep current — and which we can't, yet.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hangi uygulamalarınızı güncel tutabildiğimiz — ve hangilerini henüz tutamadığımız."
+          }
+        }
+      }
+    },
+    "With the helper enabled, .pkg updates install without opening Installer.app.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yardımcı etkinken .pkg güncellemeleri Installer.app açılmadan yüklenir."
+          }
+        }
+      }
+    },
+    "Yesterday": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dün"
+          }
+        }
+      }
+    },
+    "You can restore them from the Trash until it is emptied.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çöp Sepeti boşaltılana kadar bunları geri yükleyebilirsiniz."
+          }
+        }
+      }
+    },
+    "You're on the latest version (via %@).": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En son sürümü kullanıyorsunuz (%@ üzerinden)."
+          }
+        }
+      }
+    },
+    "You're on the latest version.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En son sürümü kullanıyorsunuz."
+          }
+        }
+      }
+    },
+    "Your library, at a glance": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arşiviniz, bir bakışta"
+          }
+        }
+      }
+    },
+    "apps installed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "uygulama yüklü"
+          }
+        }
+      }
+    },
+    "covered": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kapsamda"
+          }
+        }
+      }
+    },
+    "feed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "akış"
+          }
+        }
+      }
+    },
+    "macOS may shift checks slightly to save energy.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS, enerji tasarrufu için denetimleri biraz kaydırabilir."
+          }
+        }
+      }
+    },
+    "of %lld": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ %lld"
+          }
+        }
+      }
+    },
+    "on disk": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "diskte"
+          }
+        }
+      }
+    },
+    "owner/repo": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sahip/depo"
+          }
+        }
+      }
+    },
+    "still tracked via %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ üzerinden hâlâ izleniyor"
+          }
+        }
+      }
+    },
+    "tracked": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "izleniyor"
+          }
+        }
+      }
+    },
+    "untracked": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "izlenmiyor"
+          }
+        }
+      }
+    },
+    "update available": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "güncelleme mevcut"
+          }
+        }
+      }
+    },
+    "updates available": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "güncelleme mevcut"
+          }
+        }
+      }
+    },
+    "warning": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "uyarı"
+          }
+        }
+      }
+    },
+    "warnings": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "uyarı"
+          }
+        }
+      }
+    },
+    "· %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "· %@"
+          }
+        }
+      }
+    },
+    "“Allow updates that aren't notarized” was changed by another program. Until you confirm it here, notarization stays required.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Noter onaysız güncellemelere izin ver” ayarı başka bir program tarafından değiştirildi. Burada onaylayana kadar noter onayı zorunlu kalır."
+          }
+        }
+      }
+    },
+    "App Caches": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama Önbellekleri"
+          }
+        }
+      }
+    },
+    "Logs": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Günlükler"
+          }
+        }
+      }
+    },
+    "Xcode Derived Data": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xcode Derived Data"
+          }
+        }
+      }
+    },
+    "Xcode Archives": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xcode Arşivleri"
+          }
+        }
+      }
+    },
+    "Device Support": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cihaz Desteği"
+          }
+        }
+      }
+    },
+    "Simulator Caches": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simülatör Önbellekleri"
+          }
+        }
+      }
+    },
+    "Package Manager Caches": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paket Yöneticisi Önbellekleri"
+          }
+        }
+      }
+    },
+    "Trash": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çöp Sepeti"
+          }
+        }
+      }
+    },
+    "Old Installers": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eski Yükleyiciler"
+          }
+        }
+      }
+    },
+    "Large Old Files": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Büyük Eski Dosyalar"
+          }
+        }
+      }
+    },
+    "Temporary files apps rebuild on demand.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamaların gerektiğinde yeniden oluşturduğu geçici dosyalar."
+          }
+        }
+      }
+    },
+    "Diagnostic and crash logs older than a few days.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Birkaç günden eski tanı ve çökme günlükleri."
+          }
+        }
+      }
+    },
+    "Build products and indexes Xcode recreates.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xcode'un yeniden oluşturduğu derleme çıktıları ve dizinler."
+          }
+        }
+      }
+    },
+    "App archives you may need for symbolication or re-export.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sembolleştirme veya yeniden dışa aktarma için gerekebilecek uygulama arşivleri."
+          }
+        }
+      }
+    },
+    "Debug symbols for iOS, watchOS and tvOS versions.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS, watchOS ve tvOS sürümleri için hata ayıklama sembolleri."
+          }
+        }
+      }
+    },
+    "Simulator caches and unavailable devices.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simülatör önbellekleri ve kullanılamayan aygıtlar."
+          }
+        }
+      }
+    },
+    "Download caches of npm, Homebrew, Gradle and others.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "npm, Homebrew, Gradle ve diğerlerinin indirme önbellekleri."
+          }
+        }
+      }
+    },
+    "Items already in the Trash; removed permanently.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaten Çöp Sepeti'nde olan öğeler; kalıcı olarak silinir."
+          }
+        }
+      }
+    },
+    "Disk images and installers in Downloads.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirilenler'deki disk görüntüleri ve yükleyiciler."
+          }
+        }
+      }
+    },
+    "Big files you haven't opened in a long time.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uzun süredir açmadığın büyük dosyalar."
+          }
+        }
+      }
+    },
+    "Review": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İncele"
+          }
+        }
+      }
+    },
+    "Select all %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm %@ öğelerini seç"
+          }
+        }
+      }
+    },
+    "Collapse": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daralt"
+          }
+        }
+      }
+    },
+    "Expand": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genişlet"
+          }
+        }
+      }
+    },
+    "%lld of %lld selected": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld seçili"
+          }
+        }
+      }
+    },
+    "Show all %lld": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tümünü göster (%lld)"
+          }
+        }
+      }
+    },
+    "Selected": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili"
+          }
+        }
+      }
+    },
+    "Partially selected": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kısmen seçili"
+          }
+        }
+      }
+    },
+    "Not selected": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili değil"
+          }
+        }
+      }
+    },
+    "CLEANUP": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TEMİZLİK"
+          }
+        }
+      }
+    },
+    "Free up space": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yer aç"
+          }
+        }
+      }
+    },
+    "Scanning…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taranıyor…"
+          }
+        }
+      }
+    },
+    "Moving to the Trash…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çöp Sepeti'ne taşınıyor…"
+          }
+        }
+      }
+    },
+    "Find caches, logs and developer leftovers you can safely remove.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenle silebileceğin önbellekleri, günlükleri ve geliştirici artıklarını bul."
+          }
+        }
+      }
+    },
+    "Looking through %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ inceleniyor"
+          }
+        }
+      }
+    },
+    "Preparing scan": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarama hazırlanıyor"
+          }
+        }
+      }
+    },
+    "Selected items go to the Trash so you can still restore them.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçilen öğeler Çöp Sepeti'ne gider, böylece onları yine de geri yükleyebilirsin."
+          }
+        }
+      }
+    },
+    "Scan": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tara"
+          }
+        }
+      }
+    },
+    "READY TO CLEAN": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TEMİZLENMEYE HAZIR"
+          }
+        }
+      }
+    },
+    "of %@ found · %lld items selected": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bulunan %@ içinden · %lld öğe seçili"
+          }
+        }
+      }
+    },
+    "Rescan": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeniden Tara"
+          }
+        }
+      }
+    },
+    "Clean": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temizle"
+          }
+        }
+      }
+    },
+    "FREED": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BOŞALTILDI"
+          }
+        }
+      }
+    },
+    "%lld items moved to the Trash. Empty the Trash to reclaim the space for good.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld öğe Çöp Sepeti'ne taşındı. Alanı tamamen geri kazanmak için Çöp Sepeti'ni boşalt."
+          }
+        }
+      }
+    },
+    "%lld items moved to the Trash, %lld couldn't be removed.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld öğe Çöp Sepeti'ne taşındı, %lld öğe kaldırılamadı."
+          }
+        }
+      }
+    },
+    "Not removed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaldırılamayanlar"
+          }
+        }
+      }
+    },
+    "%lld items": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld öğe"
+          }
+        }
+      }
+    },
+    "and %lld more": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ve %lld tane daha"
+          }
+        }
+      }
+    },
+    "Nothing to clean up": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temizlenecek bir şey yok"
+          }
+        }
+      }
+    },
+    "Your Mac has no caches, logs or leftovers worth removing right now.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'inde şu an silmeye değer önbellek, günlük veya artık yok."
+          }
+        }
+      }
+    },
+    "Couldn't finish the scan": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarama tamamlanamadı"
+          }
+        }
+      }
+    },
+    "Scanned %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tarandı"
+          }
+        }
+      }
+    },
+    "Move %lld items to the Trash?": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld öğe Çöp Sepeti'ne taşınsın mı?"
+          }
+        }
+      }
+    },
+    "This frees %@. Items go to the Trash, so you can restore them until you empty it.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu işlem %@ yer açar. Öğeler Çöp Sepeti'ne gider; boşaltana kadar geri yükleyebilirsin."
+          }
+        }
+      }
+    },
+    "Items already in the Trash are deleted permanently.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaten Çöp Sepeti'nde olan öğeler kalıcı olarak silinir."
+          }
+        }
+      }
+    },
+    "Apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamalar"
+          }
+        }
+      }
+    },
+    "System": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem"
+          }
+        }
+      }
+    },
+    "CPU": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU"
+          }
+        }
+      }
+    },
+    "Memory": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bellek"
+          }
+        }
+      }
+    },
+    "Normal pressure": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal baskı"
+          }
+        }
+      }
+    },
+    "Elevated pressure": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüksek baskı"
+          }
+        }
+      }
+    },
+    "High pressure": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çok yüksek baskı"
+          }
+        }
+      }
+    },
+    "Thermal: Normal": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isı: Normal"
+          }
+        }
+      }
+    },
+    "Thermal: Fair": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isı: Orta"
+          }
+        }
+      }
+    },
+    "Thermal: Serious": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isı: Yüksek"
+          }
+        }
+      }
+    },
+    "Thermal: Critical": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isı: Kritik"
+          }
+        }
+      }
+    },
+    "Waiting for the first sample…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk ölçüm bekleniyor…"
+          }
+        }
+      }
+    },
+    "Per core": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çekirdek başına"
+          }
+        }
+      }
+    },
+    "%lld cores": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld çekirdek"
+          }
+        }
+      }
+    },
+    "Battery": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pil"
+          }
+        }
+      }
+    },
+    "Cycles": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Döngü"
+          }
+        }
+      }
+    },
+    "Until full": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dolmasına"
+          }
+        }
+      }
+    },
+    "Remaining": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalan"
+          }
+        }
+      }
+    },
+    "Charging": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şarj oluyor"
+          }
+        }
+      }
+    },
+    "Plugged in": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prize takılı"
+          }
+        }
+      }
+    },
+    "On battery": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilde"
+          }
+        }
+      }
+    },
+    "Right now": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şu anda"
+          }
+        }
+      }
+    },
+    "Top consumers": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En çok kullananlar"
+          }
+        }
+      }
+    },
+    "No processes reported.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiç işlem bildirilmedi."
+          }
+        }
+      }
+    },
+    "Reading processes…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlemler okunuyor…"
+          }
+        }
+      }
+    },
+    "Reading sensors…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sensörler okunuyor…"
+          }
+        }
+      }
+    },
+    "%@ memory · %lld cores": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ bellek · %lld çekirdek"
+          }
+        }
+      }
+    },
+    "Live": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canlı"
+          }
+        }
+      }
+    },
+    "Up %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açık: %@"
+          }
+        }
+      }
+    },
+    "Peak": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zirve"
+          }
+        }
+      }
+    },
+    "Processes": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlemler"
+          }
+        }
+      }
+    },
+    "Used": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanılan"
+          }
+        }
+      }
+    },
+    "Compressed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sıkıştırılmış"
+          }
+        }
+      }
+    },
+    "Swap": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takas"
+          }
+        }
+      }
+    },
+    "Pressure": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baskı"
+          }
+        }
+      }
+    },
+    "Available": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanılabilir"
+          }
+        }
+      }
+    },
+    "Capacity": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapasite"
+          }
+        }
+      }
+    },
+    "CPU load": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU yükü"
+          }
+        }
+      }
+    },
+    "Network": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ağ"
+          }
+        }
+      }
+    },
+    "In": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gelen"
+          }
+        }
+      }
+    },
+    "Out": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giden"
+          }
+        }
+      }
+    },
+    "Force quit %@?": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ zorla kapatılsın mı?"
+          }
+        }
+      }
+    },
+    "Force Quit": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zorla Kapat"
+          }
+        }
+      }
+    },
+    "Unsaved changes will be lost.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaydedilmemiş değişiklikler kaybolur."
+          }
+        }
+      }
+    },
+    "Couldn't quit": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapatılamadı"
+          }
+        }
+      }
+    },
+    "%lld processes": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld işlem"
+          }
+        }
+      }
+    },
+    "%lld processes · CPU %@ · %@ of %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld işlem · CPU %@ · %@ / %@"
+          }
+        }
+      }
+    },
+    "No processes match": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşleşen işlem yok"
+          }
+        }
+      }
+    },
+    "Quit": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapat"
+          }
+        }
+      }
+    },
+    "Force Quit…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zorla Kapat…"
+          }
+        }
+      }
+    },
+    "Copy PID": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PID'yi Kopyala"
+          }
+        }
+      }
+    },
+    "Copy Bundle Identifier": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paket Kimliğini Kopyala"
+          }
+        }
+      }
+    },
+    "Ports": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Portlar"
+          }
+        }
+      }
+    },
+    "Kind": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tür"
+          }
+        }
+      }
+    },
+    "Critical": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kritik"
+          }
+        }
+      }
+    },
+    "Protected by macOS: quitting it would destabilize your Mac.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS tarafından korunuyor: kapatmak Mac'inizi kararsız hale getirir."
+          }
+        }
+      }
+    },
+    "%@ is protected by macOS and can't be quit.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ macOS tarafından korunuyor ve kapatılamaz."
+          }
+        }
+      }
+    },
+    "You don't have permission to quit %@.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ uygulamasını kapatma izniniz yok."
+          }
+        }
+      }
+    },
+    "%@ is no longer running.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ artık çalışmıyor."
+          }
+        }
+      }
+    },
+    "Couldn't quit %@ (error %lld).": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kapatılamadı (hata %lld)."
+          }
+        }
+      }
+    },
+    "Kernel; also throttles CPU to cool the Mac": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çekirdek; Mac'i soğutmak için CPU'yu da yavaşlatır"
+          }
+        }
+      }
+    },
+    "Starts and supervises every other process": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diğer tüm işlemleri başlatır ve denetler"
+          }
+        }
+      }
+    },
+    "Draws everything on screen": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekrandaki her şeyi çizer"
+          }
+        }
+      }
+    },
+    "Manages your login session": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oturumunuzu yönetir"
+          }
+        }
+      }
+    },
+    "System logging": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem günlükleri"
+          }
+        }
+      }
+    },
+    "User accounts and directory services": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanıcı hesapları ve dizin hizmetleri"
+          }
+        }
+      }
+    },
+    "Network and system configuration": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ağ ve sistem yapılandırması"
+          }
+        }
+      }
+    },
+    "Core app and file services": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temel uygulama ve dosya hizmetleri"
+          }
+        }
+      }
+    },
+    "Keychain and security services": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anahtar Zinciri ve güvenlik hizmetleri"
+          }
+        }
+      }
+    },
+    "System notification messaging": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem bildirim iletişimi"
+          }
+        }
+      }
+    },
+    "Mounts and manages disks": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diskleri bağlar ve yönetir"
+          }
+        }
+      }
+    },
+    "Power management and sleep": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güç yönetimi ve uyku"
+          }
+        }
+      }
+    },
+    "Manages app lifecycles and resources": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama yaşam döngülerini ve kaynakları yönetir"
+          }
+        }
+      }
+    },
+    "Spotlight indexing": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight dizinleme"
+          }
+        }
+      }
+    },
+    "Analyzes photos for faces and objects": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotoğraflardaki yüzleri ve nesneleri analiz eder"
+          }
+        }
+      }
+    },
+    "Analyzes photos and videos": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotoğrafları ve videoları analiz eder"
+          }
+        }
+      }
+    },
+    "Manages the Photos library": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotoğraflar arşivini yönetir"
+          }
+        }
+      }
+    },
+    "iCloud sync": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud eşzamanlama"
+          }
+        }
+      }
+    },
+    "iCloud Drive and file provider sync": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud Drive ve dosya sağlayıcı eşzamanlama"
+          }
+        }
+      }
+    },
+    "Time Machine": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine"
+          }
+        }
+      }
+    },
+    "Checks for and installs macOS updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS güncellemelerini denetler ve yükler"
+          }
+        }
+      }
+    },
+    "Verifies certificates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sertifikaları doğrular"
+          }
+        }
+      }
+    },
+    "Background downloads": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arka plan indirmeleri"
+          }
+        }
+      }
+    },
+    "Audio playback and recording": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ses çalma ve kaydetme"
+          }
+        }
+      }
+    },
+    "Bluetooth": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bluetooth"
+          }
+        }
+      }
+    },
+    "Wi-Fi": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wi-Fi"
+          }
+        }
+      }
+    },
+    "Network name resolution (DNS, Bonjour)": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ağ adı çözümleme (DNS, Bonjour)"
+          }
+        }
+      }
+    },
+    "Gatekeeper app security checks": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gatekeeper uygulama güvenlik denetimleri"
+          }
+        }
+      }
+    },
+    "Malware protection": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kötü amaçlı yazılım koruması"
+          }
+        }
+      }
+    },
+    "Dock, Launchpad and Mission Control": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dock, Launchpad ve Mission Control"
+          }
+        }
+      }
+    },
+    "Finder": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder"
+          }
+        }
+      }
+    },
+    "Menu bar extras": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menü çubuğu öğeleri"
+          }
+        }
+      }
+    },
+    "Control Center and menu bar": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denetim Merkezi ve menü çubuğu"
+          }
+        }
+      }
+    },
+    "Notifications": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildirimler"
+          }
+        }
+      }
+    },
+    "Spotlight search": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight araması"
+          }
+        }
+      }
+    },
+    "AirDrop and Handoff": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AirDrop ve Handoff"
+          }
+        }
+      }
+    },
+    "Continuity between your devices": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aygıtlarınız arasında süreklilik"
+          }
+        }
+      }
+    },
+    "Siri suggestions": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Siri önerileri"
+          }
+        }
+      }
+    },
+    "Reminders sync": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anımsatıcılar eşzamanlama"
+          }
+        }
+      }
+    },
+    "Keychain sync": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anahtar Zinciri eşzamanlama"
+          }
+        }
+      }
+    },
+    "Notification messaging between apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamalar arası bildirim iletişimi"
+          }
+        }
+      }
+    },
+    "Preferences storage": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tercih depolama"
+          }
+        }
+      }
+    },
+    "System event handling": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem olaylarını işleme"
+          }
+        }
+      }
+    },
+    "Keyboard, mouse and trackpad input": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klavye, fare ve izleme dörtgeni girişi"
+          }
+        }
+      }
+    },
+    "Safari web browser": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safari web tarayıcısı"
+          }
+        }
+      }
+    },
+    "Safari/WebKit web content": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safari/WebKit web içeriği"
+          }
+        }
+      }
+    },
+    "Chrome web content": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chrome web içeriği"
+          }
+        }
+      }
+    },
+    "Maintenance": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bakım"
+          }
+        }
+      }
+    },
+    "Monitor": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monitör"
+          }
+        }
+      }
+    },
+    "Cleanup": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temizlik"
+          }
+        }
+      }
+    },
+    "Mac care, simplified": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac bakımı, kolaylaştırıldı"
+          }
+        }
+      }
+    },
+    "Grant Full Disk Access for a complete scan": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksiksiz tarama için Tam Disk Erişimi verin"
+          }
+        }
+      }
+    },
+    "Without it, macOS asks before App Updater can look in Downloads, Desktop and Documents.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu izin olmadan macOS, App Updater'ın İndirilenler, Masaüstü ve Belgeler klasörlerine bakması için her seferinde izin ister."
+          }
+        }
+      }
+    },
+    "Open Privacy Settings…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizlilik Ayarlarını Aç…"
+          }
+        }
+      }
+    },
+    "Background": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arka plan"
+          }
+        }
+      }
+    },
+    "Apps you can see in the Dock": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apps you can see in the Dock"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dock'ta görünen uygulamalar"
+          }
+        }
+      }
+    },
+    "Your helpers, agents and command line tools": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your helpers, agents and command line tools"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yardımcılarınız, ajanlarınız ve komut satırı araçlarınız"
+          }
+        }
+      }
+    },
+    "macOS services and protected processes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS services and protected processes"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS hizmetleri ve korumalı işlemler"
+          }
+        }
+      }
+    },
+    "Every running process": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every running process"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çalışan tüm işlemler"
+          }
+        }
+      }
+    },
+    "CPU > %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU > %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU > %@"
+          }
+        }
+      }
+    },
+    "Memory > %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memory > %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bellek > %@"
+          }
+        }
+      }
+    },
+    "Open ports": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open ports"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açık portlar"
+          }
+        }
+      }
+    },
+    "Mine only": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mine only"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca benimkiler"
+          }
+        }
+      }
+    },
+    "PID": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PID"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PID"
+          }
+        }
+      }
+    },
+    "Threads": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Threads"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İş parçacıkları"
+          }
+        }
+      }
+    },
+    "Sort by %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sort by %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ölçütüne göre sırala"
+          }
+        }
+      }
+    },
+    "Ascending": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ascending"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artan"
+          }
+        }
+      }
+    },
+    "Descending": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descending"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azalan"
+          }
+        }
+      }
+    },
+    "%lld shown": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld shown"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld gösteriliyor"
+          }
+        }
+      }
+    },
+    "Clear filters": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear filters"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtreleri temizle"
+          }
+        }
+      }
+    },
+    "Filters hide every process. Clear them or try another search term.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filters hide every process. Clear them or try another search term."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtreler tüm işlemleri gizliyor. Filtreleri temizleyin veya başka bir arama terimi deneyin."
+          }
+        }
+      }
+    },
+    "Try another search term.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try another search term."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başka bir arama terimi deneyin."
+          }
+        }
+      }
+    },
+    "User Agent": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanıcı Ajanı"
+          }
+        }
+      }
+    },
+    "Global Agent": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genel Ajan"
+          }
+        }
+      }
+    },
+    "Daemon": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arka Plan Servisi"
+          }
+        }
+      }
+    },
+    "At login": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oturum açılışında"
+          }
+        }
+      }
+    },
+    "Kept alive": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürekli çalışır"
+          }
+        }
+      }
+    },
+    "Every %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her %@"
+          }
+        }
+      }
+    },
+    "On a schedule": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zamanlanmış"
+          }
+        }
+      }
+    },
+    "On demand": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İsteğe bağlı"
+          }
+        }
+      }
+    },
+    "Apple": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple"
+          }
+        }
+      }
+    },
+    "Signed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İmzalı"
+          }
+        }
+      }
+    },
+    "Unsigned": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İmzasız"
+          }
+        }
+      }
+    },
+    "No developer signature (unsigned or ad-hoc signed).": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geliştirici imzası yok (imzasız veya ad-hoc imzalı)."
+          }
+        }
+      }
+    },
+    "Missing": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bulunamadı"
+          }
+        }
+      }
+    },
+    "The executable could not be found or inspected.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çalıştırılabilir dosya bulunamadı veya incelenemedi."
+          }
+        }
+      }
+    },
+    "Agents": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajanlar"
+          }
+        }
+      }
+    },
+    "Daemons": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servisler"
+          }
+        }
+      }
+    },
+    "Disabled": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Devre dışı"
+          }
+        }
+      }
+    },
+    "No executable": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çalıştırılabilir dosya yok"
+          }
+        }
+      }
+    },
+    "Reveal in Finder": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder'da Göster"
+          }
+        }
+      }
+    },
+    "Part of macOS — shown read-only.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS'in bir parçası — salt okunur gösterilir."
+          }
+        }
+      }
+    },
+    "Installed for all users. Changing it needs administrator rights; reveal the plist to manage it.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm kullanıcılar için yüklü. Değiştirmek yönetici izni gerektirir; yönetmek için plist dosyasını gösterin."
+          }
+        }
+      }
+    },
+    "Disable at login": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oturum açılışında devre dışı bırak"
+          }
+        }
+      }
+    },
+    "Enable at login": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oturum açılışında etkinleştir"
+          }
+        }
+      }
+    },
+    "On": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açık"
+          }
+        }
+      }
+    },
+    "Startup Items": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başlangıç Öğeleri"
+          }
+        }
+      }
+    },
+    "Programs launchd starts at login, on a schedule or in the background.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "launchd'nin oturum açılışında, zamanlanmış olarak veya arka planda başlattığı programlar."
+          }
+        }
+      }
+    },
+    "Show Apple items": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple öğelerini göster"
+          }
+        }
+      }
+    },
+    "Apple's own jobs are listed read-only.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple'ın kendi işleri salt okunur listelenir."
+          }
+        }
+      }
+    },
+    "Total items": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toplam öğe"
+          }
+        }
+      }
+    },
+    "Dismiss": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapat"
+          }
+        }
+      }
+    },
+    "Reading startup items…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başlangıç öğeleri okunuyor…"
+          }
+        }
+      }
+    },
+    "No startup items match": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşleşen başlangıç öğesi yok"
+          }
+        }
+      }
+    },
+    "Disable": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Devre Dışı Bırak"
+          }
+        }
+      }
+    },
+    "Enable": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etkinleştir"
+          }
+        }
+      }
+    },
+    "Needs administrator rights": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yönetici izni gerekir"
+          }
+        }
+      }
+    },
+    "Reveal Plist in Finder": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plist'i Finder'da Göster"
+          }
+        }
+      }
+    },
+    "Reveal Executable in Finder": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çalıştırılabilir Dosyayı Finder'da Göster"
+          }
+        }
+      }
+    },
+    "Copy Label": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etiketi Kopyala"
+          }
+        }
+      }
+    },
+    "Login Items & background apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giriş Öğeleri ve arka plan uygulamaları"
+          }
+        }
+      }
+    },
+    "Open Login Items Settings": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giriş Öğeleri Ayarlarını Aç"
+          }
+        }
+      }
+    },
+    "These apps are registered to open at login. Manage them in System Settings.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulamalar oturum açılışında açılmak üzere kayıtlı. Sistem Ayarları'ndan yönetin."
+          }
+        }
+      }
+    },
+    "macOS keeps the list of apps that open at login private. They aren't shown here — review and switch them off in System Settings.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS, oturum açılışında açılan uygulamaların listesini gizli tutar. Burada gösterilmezler — Sistem Ayarları'ndan inceleyip kapatabilirsiniz."
+          }
+        }
+      }
+    },
+    "FileVault": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FileVault"
+          }
+        }
+      }
+    },
+    "Firewall": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenlik Duvarı"
+          }
+        }
+      }
+    },
+    "Stealth Mode": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizli Mod"
+          }
+        }
+      }
+    },
+    "System Integrity Protection": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem Bütünlüğü Koruması"
+          }
+        }
+      }
+    },
+    "Gatekeeper": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gatekeeper"
+          }
+        }
+      }
+    },
+    "Automatic Updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otomatik Güncellemeler"
+          }
+        }
+      }
+    },
+    "Screen Lock": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran Kilidi"
+          }
+        }
+      }
+    },
+    "Remote Login": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uzaktan Giriş"
+          }
+        }
+      }
+    },
+    "XProtect Definitions": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XProtect Tanımları"
+          }
+        }
+      }
+    },
+    "Couldn't be read on this Mac.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu Mac'te okunamadı."
+          }
+        }
+      }
+    },
+    "Your disk is encrypted if the Mac is lost or stolen.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac kaybolur veya çalınırsa diskiniz şifreli kalır."
+          }
+        }
+      }
+    },
+    "Anyone with your Mac can read the disk. Turn on encryption.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'inize erişen herkes diski okuyabilir. Şifrelemeyi açın."
+          }
+        }
+      }
+    },
+    "Unwanted incoming connections are blocked.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İstenmeyen gelen bağlantılar engelleniyor."
+          }
+        }
+      }
+    },
+    "Apps can accept incoming connections freely.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamalar gelen bağlantıları serbestçe kabul edebilir."
+          }
+        }
+      }
+    },
+    "Your Mac ignores probes from the network.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'iniz ağdan gelen yoklamaları yanıtlamıyor."
+          }
+        }
+      }
+    },
+    "Your Mac answers network probes such as ping.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'iniz ping gibi ağ yoklamalarını yanıtlıyor."
+          }
+        }
+      }
+    },
+    "Core system files are protected from changes.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temel sistem dosyaları değişikliğe karşı korunuyor."
+          }
+        }
+      }
+    },
+    "System files can be modified. Re-enable it from Recovery.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem dosyaları değiştirilebilir. Kurtarma'dan yeniden açın."
+          }
+        }
+      }
+    },
+    "Only trusted, notarized apps open without a warning.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca güvenilir, noter onaylı uygulamalar uyarısız açılır."
+          }
+        }
+      }
+    },
+    "Apps from any source open without checks.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her kaynaktan uygulama denetimsiz açılıyor."
+          }
+        }
+      }
+    },
+    "Security fixes arrive in the background.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenlik düzeltmeleri arka planda yükleniyor."
+          }
+        }
+      }
+    },
+    "Security fixes aren't installed automatically.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenlik düzeltmeleri otomatik yüklenmiyor."
+          }
+        }
+      }
+    },
+    "A password is required after sleep or the screen saver.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uyku veya ekran koruyucudan sonra parola isteniyor."
+          }
+        }
+      }
+    },
+    "Your Mac unlocks without a password after sleep.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'iniz uykudan sonra parolasız açılıyor."
+          }
+        }
+      }
+    },
+    "SSH access is turned off.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SSH erişimi kapalı."
+          }
+        }
+      }
+    },
+    "Others can log in over SSH. Turn it off if unused.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başkaları SSH ile giriş yapabilir. Kullanmıyorsanız kapatın."
+          }
+        }
+      }
+    },
+    "Malware definitions are up to date.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kötü amaçlı yazılım tanımları güncel."
+          }
+        }
+      }
+    },
+    "Malware definitions haven't updated recently.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kötü amaçlı yazılım tanımları son zamanlarda güncellenmedi."
+          }
+        }
+      }
+    },
+    "Fair": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orta"
+          }
+        }
+      }
+    },
+    "At Risk": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Risk Altında"
+          }
+        }
+      }
+    },
+    "Camera": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera"
+          }
+        }
+      }
+    },
+    "Microphone": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mikrofon"
+          }
+        }
+      }
+    },
+    "Screen Recording": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran Kaydı"
+          }
+        }
+      }
+    },
+    "Accessibility": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erişilebilirlik"
+          }
+        }
+      }
+    },
+    "Full Disk Access": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tam Disk Erişimi"
+          }
+        }
+      }
+    },
+    "Input Monitoring": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Girdi İzleme"
+          }
+        }
+      }
+    },
+    "Contacts": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kişiler"
+          }
+        }
+      }
+    },
+    "Calendars": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takvimler"
+          }
+        }
+      }
+    },
+    "Photos": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotoğraflar"
+          }
+        }
+      }
+    },
+    "Automation": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otomasyon"
+          }
+        }
+      }
+    },
+    "Not installed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüklü değil"
+          }
+        }
+      }
+    },
+    "Unused": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanılmıyor"
+          }
+        }
+      }
+    },
+    "Security score": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenlik puanı"
+          }
+        }
+      }
+    },
+    "SECURITY": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GÜVENLİK"
+          }
+        }
+      }
+    },
+    "Checking your defenses…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Korumalarınız denetleniyor…"
+          }
+        }
+      }
+    },
+    "How safe is your Mac?": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'iniz ne kadar güvende?"
+          }
+        }
+      }
+    },
+    "Your Mac is well protected": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'iniz iyi korunuyor"
+          }
+        }
+      }
+    },
+    "1 setting needs attention": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 ayar dikkat istiyor"
+          }
+        }
+      }
+    },
+    "%lld settings need attention": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ayar dikkat istiyor"
+          }
+        }
+      }
+    },
+    "Checks encryption, firewall, malware protection and app permissions.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şifrelemeyi, güvenlik duvarını, kötü amaçlı yazılım korumasını ve uygulama izinlerini denetler."
+          }
+        }
+      }
+    },
+    "%lld permissions to review": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gözden geçirilecek %lld izin"
+          }
+        }
+      }
+    },
+    "Run Check": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denetle"
+          }
+        }
+      }
+    },
+    "SYSTEM": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SİSTEM"
+          }
+        }
+      }
+    },
+    "Protection checks": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koruma denetimleri"
+          }
+        }
+      }
+    },
+    "Open Settings": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayarları Aç"
+          }
+        }
+      }
+    },
+    "Version %@ · %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm %@ · %@"
+          }
+        }
+      }
+    },
+    "Immediately": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hemen"
+          }
+        }
+      }
+    },
+    "After %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sonra"
+          }
+        }
+      }
+    },
+    "PRIVACY": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GİZLİLİK"
+          }
+        }
+      }
+    },
+    "App permissions": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama izinleri"
+          }
+        }
+      }
+    },
+    "No apps have asked for these permissions.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiçbir uygulama bu izinleri istemedi."
+          }
+        }
+      }
+    },
+    "No apps match “%@”.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” ile eşleşen uygulama yok."
+          }
+        }
+      }
+    },
+    "Open Privacy Settings": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizlilik Ayarlarını Aç"
+          }
+        }
+      }
+    },
+    "Allowed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İzinli"
+          }
+        }
+      }
+    },
+    "Denied": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reddedildi"
+          }
+        }
+      }
+    },
+    "Last opened %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son açılış %@"
+          }
+        }
+      }
+    },
+    "Full Disk Access needed to list app permissions": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama izinlerini listelemek için Tam Disk Erişimi gerekli"
+          }
+        }
+      }
+    },
+    "macOS keeps privacy permissions in a protected database. Grant access, then come back to App Updater.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS gizlilik izinlerini korumalı bir veritabanında tutar. Erişim verin, sonra App Updater'a dönün."
+          }
+        }
+      }
+    },
+    "Check Again": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeniden Denetle"
+          }
+        }
+      }
+    },
+    "System daemon — macOS asks for your administrator password to change it.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem daemon'ı — değiştirmek için macOS yönetici şifrenizi ister."
+          }
+        }
+      }
+    },
+    "Search processes, PID or port": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlem, PID veya port ara"
+          }
+        }
+      }
+    },
+    "Clear search": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aramayı temizle"
+          }
+        }
+      }
+    },
+    "Hide processes": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlemleri gizle"
+          }
+        }
+      }
+    },
+    "Show processes": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlemleri göster"
+          }
+        }
+      }
+    },
+    "Show details": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıntıları göster"
+          }
+        }
+      }
+    },
+    "Show Details": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıntıları Göster"
+          }
+        }
+      }
+    },
+    "User": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanıcı"
+          }
+        }
+      }
+    },
+    "This process has ended": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu işlem sona erdi"
+          }
+        }
+      }
+    },
+    "It quit or was terminated. Pick another process from the list.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapandı ya da sonlandırıldı. Listeden başka bir işlem seçin."
+          }
+        }
+      }
+    },
+    "Close": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapat"
+          }
+        }
+      }
+    },
+    "Close details": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıntıları kapat"
+          }
+        }
+      }
+    },
+    "Ended": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sona erdi"
+          }
+        }
+      }
+    },
+    "Listening ports": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dinlenen portlar"
+          }
+        }
+      }
+    },
+    "Parent PID": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Üst PID"
+          }
+        }
+      }
+    },
+    "Started": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başlangıç"
+          }
+        }
+      }
+    },
+    "Uptime": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çalışma süresi"
+          }
+        }
+      }
+    },
+    "Executable": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çalıştırılabilir dosya"
+          }
+        }
+      }
+    },
+    "Bundle": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paket"
+          }
+        }
+      }
+    },
+    "Listening on %@ (PID %lld)": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ adresinde dinliyor (PID %lld)"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
