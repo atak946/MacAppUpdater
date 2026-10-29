@@ -204,7 +204,7 @@ struct ProcessesView: View {
         .contextMenu { menu(for: group) }
         if isExpanded, item.members.count > 1 {
             ForEach(item.members) { process in
-                ProcessMemberRow(process: process)
+                ProcessMemberRow(process: process, network: item.memberNetwork[process.pid])
                     .contextMenu { memberMenu(for: process) }
             }
             .transition(.opacity)

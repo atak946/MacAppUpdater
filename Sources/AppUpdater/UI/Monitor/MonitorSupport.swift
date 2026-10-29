@@ -37,3 +37,8 @@ extension ProcessGroup {
         Array(Set(processes.flatMap { (ports[$0.pid] ?? []).map(\.port) })).sorted()
     }
 }
+
+extension NetworkThroughput {
+    /// In plus out, for the combined network column.
+    var bytesPerSecond: Double { bytesInPerSecond + bytesOutPerSecond }
+}

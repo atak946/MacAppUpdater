@@ -213,6 +213,14 @@ public protocol ProcessSampling: Sendable {
     func sample() async -> [ProcessSnapshot]
 }
 
+/// Per-process network rates. A read spawns a tool, far costlier than the other samplers,
+/// so callers read it at a slower cadence and only while the rates are on screen.
+public protocol ProcessNetworkSampling: Sendable {
+    /// Bytes per second in and out per pid since the previous call. Nil when there is no usable
+    /// previous read yet (first call, or the previous read is too old to average over).
+    func sample() async -> [Int32: NetworkThroughput]?
+}
+
 public protocol PortScanning: Sendable {
     func listeningPorts() async -> [ListeningPort]
 }

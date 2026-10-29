@@ -8,6 +8,7 @@ enum ProcessListMetrics {
     static let ports: CGFloat = 104
     static let cpu: CGFloat = 88
     static let memory: CGFloat = 76
+    static let network: CGFloat = 78
     static let threads: CGFloat = 58
     static let kind: CGFloat = 72
     static let pid: CGFloat = 52
@@ -18,7 +19,7 @@ enum ProcessListMetrics {
     static let cpuBarScale: Double = 100
 }
 
-/// One app or standalone process: icon, name, subtitle, ports, CPU meter, memory, kind and hover actions.
+/// One app or standalone process: icon, name, subtitle, ports, CPU meter, memory, network, kind and hover actions.
 /// Clicking the row selects it (opens the inspector); the chevron expands member processes inline.
 struct ProcessGroupRow: View {
     let item: ProcessListItem
@@ -47,6 +48,7 @@ struct ProcessGroupRow: View {
                 .font(.system(size: 12, weight: .medium).monospacedDigit())
                 .foregroundStyle(Theme.Palette.textSecondary)
                 .frame(width: ProcessListMetrics.memory, alignment: .trailing)
+            NetworkCell(rate: item.network, size: 12)
             ThreadCell(count: item.threadCount, size: 12)
             // The pill is empty for user processes; the fixed spacer keeps the column in place.
             Color.clear
@@ -147,6 +149,8 @@ struct ProcessKindPill: View {
 /// A member process inside an expanded group.
 struct ProcessMemberRow: View {
     let process: ProcessSnapshot
+    /// Nil until the process has a network reading.
+    var network: NetworkThroughput?
 
     @State private var isHovered = false
 
@@ -167,6 +171,7 @@ struct ProcessMemberRow: View {
                 .font(.system(size: 11.5).monospacedDigit())
                 .foregroundStyle(Theme.Palette.textTertiary)
                 .frame(width: ProcessListMetrics.memory, alignment: .trailing)
+            NetworkCell(rate: network, size: 11.5)
             ThreadCell(count: process.threadCount, size: 11.5)
             Color.clear.frame(width: ProcessListMetrics.kind + ProcessListMetrics.actions + Theme.Spacing.m, height: 1)
         }
@@ -190,6 +195,27 @@ private struct ThreadCell: View {
             .font(.system(size: size).monospacedDigit())
             .foregroundStyle(Theme.Palette.textTertiary)
             .frame(width: ProcessListMetrics.threads, alignment: .trailing)
+    }
+}
+
+/// Combined in + out rate under the Network column; a dash while idle or not read yet.
+/// The fixed frame keeps the column in place whatever the text.
+private struct NetworkCell: View {
+    let rate: NetworkThroughput?
+    let size: CGFloat
+
+    /// Below this a process counts as idle (a few keep-alive bytes).
+    private static let idleThreshold: Double = 1
+
+    var body: some View {
+        let total = rate?.bytesPerSecond ?? 0
+        let isActive = total >= Self.idleThreshold
+        Text(isActive ? MonitorFormat.rate(total) : "—")
+            .font(.system(size: size).monospacedDigit())
+            .foregroundStyle(isActive ? Theme.Palette.textSecondary : Theme.Palette.textTertiary)
+            .lineLimit(1)
+            .frame(width: ProcessListMetrics.network, alignment: .trailing)
+            .help(rate.map(MonitorFormat.networkHelp) ?? "")
     }
 }
 

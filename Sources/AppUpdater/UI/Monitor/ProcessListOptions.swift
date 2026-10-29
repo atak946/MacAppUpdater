@@ -93,7 +93,7 @@ enum ProcessChip: String, CaseIterable, Identifiable, Sendable {
 
 /// Sortable columns of the Processes list. PID sorts groups by their main process.
 enum ProcessSortKey: String, CaseIterable, Identifiable, Sendable {
-    case name, pid, cpu, memory, threads, ports
+    case name, pid, cpu, memory, threads, ports, network
 
     var id: Self { self }
 
@@ -105,6 +105,7 @@ enum ProcessSortKey: String, CaseIterable, Identifiable, Sendable {
         case .memory: String(localized: "Memory")
         case .threads: String(localized: "Threads")
         case .ports: String(localized: "Ports")
+        case .network: String(localized: "Network")
         }
     }
 

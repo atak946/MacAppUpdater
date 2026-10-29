@@ -12,6 +12,10 @@ struct ProcessListItem: Identifiable, Hashable, Sendable {
     let threadCount: Int
     /// Unique listening ports of all members, ascending.
     let ports: [UInt16]
+    /// Sum over members; zero until the first network read.
+    let network: NetworkThroughput
+    /// Per-member rates, only for members with a reading.
+    let memberNetwork: [Int32: NetworkThroughput]
     /// True when any member runs as the current user.
     let isMine: Bool
     /// Second line under the name (catalog summary, member count, bundle id or PID).
@@ -22,13 +26,21 @@ struct ProcessListItem: Identifiable, Hashable, Sendable {
     var id: String { group.id }
     var mainPID: Int32 { group.processes.first?.pid ?? 0 }
 
-    init(group: ProcessGroup, ports: [Int32: [ListeningPort]], appBundleIDs: Set<String>, currentUserID: UInt32) {
+    init(group: ProcessGroup, ports: [Int32: [ListeningPort]], appBundleIDs: Set<String>, currentUserID: UInt32,
+         network: [Int32: NetworkThroughput] = [:]) {
         self.group = group
         category = ProcessFilter.category(of: group, appBundleIDs: appBundleIDs)
         cpuPercent = group.cpuPercent
         memoryBytes = group.memoryBytes
         threadCount = group.processes.reduce(0) { $0 + $1.threadCount }
         self.ports = group.listeningPorts(in: ports)
+        memberNetwork = group.processes.reduce(into: [:]) { rates, process in
+            if let rate = network[process.pid] { rates[process.pid] = rate }
+        }
+        self.network = NetworkThroughput(
+            bytesInPerSecond: memberNetwork.values.reduce(0) { $0 + $1.bytesInPerSecond },
+            bytesOutPerSecond: memberNetwork.values.reduce(0) { $0 + $1.bytesOutPerSecond }
+        )
         isMine = group.processes.contains { $0.userID == currentUserID }
         subtitle = Self.subtitle(for: group)
         members = group.processes
@@ -38,7 +50,7 @@ struct ProcessListItem: Identifiable, Hashable, Sendable {
     func sortingMembers(_ order: ProcessSortOrder) -> ProcessListItem {
         guard members.count > 1 else { return self }
         var copy = self
-        copy.members = members.sorted { ProcessListQuery.isOrdered($0, $1, by: order) }
+        copy.members = members.sorted { ProcessListQuery.isOrdered($0, $1, by: order, network: memberNetwork) }
         return copy
     }
 
@@ -115,6 +127,7 @@ struct ProcessListQuery: Equatable, Sendable {
         case .memory: compare(lhs.memoryBytes, rhs.memoryBytes)
         case .threads: compare(lhs.threadCount, rhs.threadCount)
         case .ports: compare(lhs.ports.count, rhs.ports.count)
+        case .network: compare(lhs.network.bytesPerSecond, rhs.network.bytesPerSecond)
         }
         if primary != .orderedSame { return (primary == .orderedAscending) == order.ascending }
         let name = compareNames(lhs.group.name, rhs.group.name)
@@ -123,13 +136,16 @@ struct ProcessListQuery: Equatable, Sendable {
     }
 
     /// Member order inside an expanded group; ports have no per-member value, so they sort like name.
-    static func isOrdered(_ lhs: ProcessSnapshot, _ rhs: ProcessSnapshot, by order: ProcessSortOrder) -> Bool {
+    /// `network` holds member rates; members without one count as idle.
+    static func isOrdered(_ lhs: ProcessSnapshot, _ rhs: ProcessSnapshot, by order: ProcessSortOrder,
+                          network: [Int32: NetworkThroughput] = [:]) -> Bool {
         let primary: ComparisonResult = switch order.key {
         case .name, .ports: compareNames(lhs.name, rhs.name)
         case .pid: compare(lhs.pid, rhs.pid)
         case .cpu: compare(lhs.cpuPercent, rhs.cpuPercent)
         case .memory: compare(lhs.memoryBytes, rhs.memoryBytes)
         case .threads: compare(lhs.threadCount, rhs.threadCount)
+        case .network: compare(network[lhs.pid]?.bytesPerSecond ?? 0, network[rhs.pid]?.bytesPerSecond ?? 0)
         }
         if primary != .orderedSame { return (primary == .orderedAscending) == order.ascending }
         let name = compareNames(lhs.name, rhs.name)

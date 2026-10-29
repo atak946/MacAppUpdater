@@ -30,6 +30,14 @@ struct LiveSmokeTests {
         #expect(!ProcessGrouper.group(processes).isEmpty)
     }
 
+    @Test("network sampler baselines, then reports non-negative rates")
+    func network() async {
+        let sampler = NettopNetworkSampler()
+        #expect(await sampler.sample() == nil)
+        let rates = await sampler.sample() ?? [:]
+        #expect(rates.values.allSatisfy { $0.bytesInPerSecond >= 0 && $0.bytesOutPerSecond >= 0 })
+    }
+
     @Test("port scanner completes")
     func ports() async {
         let ports = await LsofPortScanner().listeningPorts()

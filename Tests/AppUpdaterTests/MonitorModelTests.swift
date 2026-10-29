@@ -42,6 +42,24 @@ private final class RecordingPortScanner: PortScanning, @unchecked Sendable {
     }
 }
 
+/// Replays scripted network reads (nil = baseline) and counts calls.
+private final class ScriptedNetworkSampler: ProcessNetworkSampling, @unchecked Sendable {
+    private let lock = NSLock()
+    private var script: [[Int32: NetworkThroughput]?]
+    private var count = 0
+
+    init(_ script: [[Int32: NetworkThroughput]?]) { self.script = script }
+
+    var calls: Int { lock.withLock { count } }
+
+    func sample() async -> [Int32: NetworkThroughput]? {
+        lock.withLock {
+            count += 1
+            return script.isEmpty ? [:] : script.removeFirst()
+        }
+    }
+}
+
 private final class RecordingTerminator: ProcessTerminating, @unchecked Sendable {
     private let lock = NSLock()
     private var log: [(Int32, TerminationMode)] = []
@@ -80,11 +98,11 @@ private func group(
 struct MonitorModelTests {
     private static func model(
         processes: [ProcessSnapshot] = [], ports: RecordingPortScanner = RecordingPortScanner(),
-        terminator: RecordingTerminator = RecordingTerminator()
+        network: ScriptedNetworkSampler? = nil, terminator: RecordingTerminator = RecordingTerminator()
     ) -> MonitorModel {
         MonitorModel(
             system: CountingSystemSampler(), processes: FixedProcessSampler(processes: processes),
-            ports: ports, terminator: terminator, interval: .seconds(3600)
+            ports: ports, network: network, terminator: terminator, interval: .seconds(3600)
         )
     }
 
@@ -129,6 +147,34 @@ struct MonitorModelTests {
 
         #expect(scanner.calls == 2)
         #expect(model.portsByPID[10]?.map(\.port) == [3000])
+    }
+
+    @Test("network is read only on the Processes page, every network interval, retrying after a baseline")
+    func networkCadence() async {
+        let rate = NetworkThroughput(bytesInPerSecond: 300, bytesOutPerSecond: 100)
+        let network = ScriptedNetworkSampler([nil, [10: rate], [:]])
+        let model = Self.model(processes: [process(10, "curl"), process(11, "zsh")], network: network)
+        model.listQuery = ProcessListQuery(filter: .all)
+        let start = Date()
+
+        await model.sampleOnce(including: .processes, now: start)
+        #expect(network.calls == 0)
+
+        await model.sampleOnce(including: .ports, now: start)
+        #expect(network.calls == 1)
+        #expect(model.networkByPID.isEmpty)
+
+        // The baseline read is retried on the next tick, then the cadence slows down.
+        await model.sampleOnce(including: .ports, now: start.addingTimeInterval(2))
+        #expect(network.calls == 2)
+        #expect(model.networkByPID[10] == rate)
+        #expect(model.visibleItems.first { $0.id == "pid:10" }?.network == rate)
+
+        await model.sampleOnce(including: .ports, now: start.addingTimeInterval(4))
+        #expect(network.calls == 2)
+        await model.sampleOnce(including: .ports, now: start.addingTimeInterval(8))
+        #expect(network.calls == 3)
+        #expect(model.networkByPID.isEmpty)
     }
 
     @Test("observation is reference counted and stops when the last observer leaves")

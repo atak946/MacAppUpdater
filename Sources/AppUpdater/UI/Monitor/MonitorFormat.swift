@@ -31,6 +31,13 @@ enum MonitorFormat {
         return String(localized: "\(amount)/s")
     }
 
+    /// Tooltip of a network rate: "In 1.2 MB/s · Out 80 KB/s".
+    static func networkHelp(_ throughput: NetworkThroughput) -> String {
+        let received = rate(throughput.bytesInPerSecond)
+        let sent = rate(throughput.bytesOutPerSecond)
+        return String(localized: "In \(received) · Out \(sent)")
+    }
+
     /// Uptime → "3d 4h".
     static func duration(_ interval: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()

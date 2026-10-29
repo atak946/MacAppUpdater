@@ -17,6 +17,7 @@ struct ProcessColumnHeader: View {
             column(.ports).frame(width: ProcessListMetrics.ports, alignment: .leading)
             column(.cpu).frame(width: ProcessListMetrics.cpu, alignment: .trailing)
             column(.memory).frame(width: ProcessListMetrics.memory, alignment: .trailing)
+            column(.network).frame(width: ProcessListMetrics.network, alignment: .trailing)
             column(.threads).frame(width: ProcessListMetrics.threads, alignment: .trailing)
             Text("Kind")
                 .modifier(ColumnTitleStyle(isActive: false))

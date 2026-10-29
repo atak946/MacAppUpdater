@@ -98,6 +98,7 @@ final class AppEnvironment {
             system: LiveSystemSampler(),
             processes: LiveProcessSampler(),
             ports: LsofPortScanner(),
+            network: NettopNetworkSampler(),
             terminator: SignalProcessTerminator()
         )
 

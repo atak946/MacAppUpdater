@@ -121,7 +121,18 @@ struct ProcessInspector: View {
                 InspectorStatTile(title: String(localized: "Processes"), value: "\(item.members.count)",
                                   symbol: "square.stack.3d.up", tint: Theme.Palette.info)
             }
+            GridRow {
+                InspectorStatTile(title: String(localized: "In"), value: networkValue(\.bytesInPerSecond),
+                                  symbol: "arrow.down", tint: Theme.Palette.brandTertiary)
+                InspectorStatTile(title: String(localized: "Out"), value: networkValue(\.bytesOutPerSecond),
+                                  symbol: "arrow.up", tint: Theme.Palette.brandSecondary)
+            }
         }
+    }
+
+    /// A dash until a member has a network reading.
+    private func networkValue(_ direction: KeyPath<NetworkThroughput, Double>) -> String {
+        item.memberNetwork.isEmpty ? "—" : MonitorFormat.rate(item.network[keyPath: direction])
     }
 
     // MARK: Actions

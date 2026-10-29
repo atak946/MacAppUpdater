@@ -114,6 +114,34 @@ struct ProcessListQueryTests {
         #expect(ids(.pid) == ["b", "c", "a"])
     }
 
+    @Test("network sums members, sorts groups and members, and treats unread pids as idle")
+    func networkSorting() {
+        let rates: [Int32: NetworkThroughput] = [
+            10: NetworkThroughput(bytesInPerSecond: 100, bytesOutPerSecond: 50),
+            11: NetworkThroughput(bytesInPerSecond: 1000, bytesOutPerSecond: 0),
+            20: NetworkThroughput(bytesInPerSecond: 200, bytesOutPerSecond: 300),
+        ]
+        func networkItem(_ id: String, _ name: String, _ members: [ProcessSnapshot]) -> ProcessListItem {
+            let group = ProcessGroup(id: id, name: name, bundleURL: nil, bundleIdentifier: nil, processes: members, kind: .user)
+            return ProcessListItem(group: group, ports: [:], appBundleIDs: [], currentUserID: me, network: rates)
+        }
+        let app = networkItem("app", "App", [process(10, "App"), process(11, "Helper"), process(12, "Idle")])
+        let tool = networkItem("tool", "tool", [process(20, "tool")])
+        let quiet = networkItem("quiet", "quiet", [process(30, "quiet")])
+
+        #expect(app.network == NetworkThroughput(bytesInPerSecond: 1100, bytesOutPerSecond: 50))
+        #expect(app.memberNetwork.keys.sorted() == [10, 11])
+        #expect(quiet.network.bytesPerSecond == 0)
+
+        let query = ProcessListQuery(filter: .all, sort: ProcessSortOrder(key: .network))
+        let sorted = query.apply(to: [quiet, tool, app])
+        #expect(sorted.map(\.id) == ["app", "tool", "quiet"])
+        #expect(sorted.first?.members.map(\.pid) == [11, 10, 12])
+        let ascending = ProcessListQuery(filter: .all, sort: ProcessSortOrder(key: .network, ascending: true))
+        #expect(ascending.apply(to: [quiet, tool, app]).map(\.id) == ["quiet", "tool", "app"])
+        #expect(ProcessSortOrder(rawValue: "network.desc") == ProcessSortOrder(key: .network))
+    }
+
     @Test("members of an expanded group follow the active sort")
     func memberSorting() {
         let app = item("x", name: "App", processes: [process(10, "App", cpu: 1), process(11, "Helper", cpu: 7)])

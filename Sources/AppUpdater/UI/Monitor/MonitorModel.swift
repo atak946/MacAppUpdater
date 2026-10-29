@@ -20,6 +20,8 @@ final class MonitorModel {
     private(set) var processList: [ProcessSnapshot] = []
     private(set) var groups: [ProcessGroup] = []
     private(set) var portsByPID: [Int32: [ListeningPort]] = [:]
+    /// Per-process network rates from the latest network read; empty until two reads exist.
+    private(set) var networkByPID: [Int32: NetworkThroughput] = [:]
     /// Bundle ids of running regular apps, so Finder counts as an app in the "Apps" filter.
     private(set) var regularAppBundleIDs: Set<String> = []
     /// True once the first process sample arrived (distinguishes "loading" from "empty").
@@ -46,33 +48,40 @@ final class MonitorModel {
     private let system: any SystemSampling
     private let processes: any ProcessSampling
     private let ports: any PortScanning
+    private let network: (any ProcessNetworkSampling)?
     private let terminator: any ProcessTerminating
     private let interval: Duration
     private let portInterval: TimeInterval
+    private let networkInterval: TimeInterval
     private let currentUserID: UInt32
     private let logger = Logger(subsystem: "com.macappupdater", category: "MonitorModel")
 
     @ObservationIgnored private var demandCounts: [MonitorDemand: Int] = [:]
     @ObservationIgnored private var loop: Task<Void, Never>?
     @ObservationIgnored private var lastPortScan: Date = .distantPast
+    @ObservationIgnored private var lastNetworkRead: Date = .distantPast
     @ObservationIgnored private var iconCache: [URL: NSImage] = [:]
 
     init(
         system: any SystemSampling,
         processes: any ProcessSampling,
         ports: any PortScanning,
+        network: (any ProcessNetworkSampling)? = nil,
         terminator: any ProcessTerminating,
         interval: Duration = .seconds(2),
         portInterval: TimeInterval = 5,
+        networkInterval: TimeInterval = 6,
         currentUserID: UInt32 = getuid()
     ) {
         self.currentUserID = currentUserID
         self.system = system
         self.processes = processes
         self.ports = ports
+        self.network = network
         self.terminator = terminator
         self.interval = interval
         self.portInterval = portInterval
+        self.networkInterval = networkInterval
     }
 
     // MARK: Observation
@@ -113,12 +122,16 @@ final class MonitorModel {
 
     // MARK: Sampling
 
-    /// One tick: system stats always, processes and ports when `demand` asks for them.
+    /// One tick: system stats always, processes, network and ports when `demand` asks for them.
     func sampleOnce(including demand: MonitorDemand, now: Date = Date()) async {
         let wantsProcesses = demand >= .processes
+        let networkReader = isNetworkReadDue(demand, now: now) ? network : nil
+        if networkReader != nil { lastNetworkRead = now }
         async let systemSample = system.sample()
         async let processSample: [ProcessSnapshot]? = wantsProcesses ? processes.sample() : nil
+        async let networkSample: [Int32: NetworkThroughput]?? = networkReader?.sample()
         record(await systemSample)
+        if case .some(let rates) = await networkSample { recordNetwork(rates) }
         if let list = await processSample { apply(list) }
 
         guard demand >= .ports, now.timeIntervalSince(lastPortScan) >= portInterval else { return }
@@ -126,6 +139,19 @@ final class MonitorModel {
         let listening = await ports.listeningPorts()
         portsByPID = Dictionary(grouping: listening, by: \.pid)
         rebuildListItems()
+    }
+
+    /// Network rates are read only on the Processes page and every `networkInterval`, since each read
+    /// spawns `nettop` (about 15 ms of CPU, roughly 0.75% of a core if it ran every 2 s tick).
+    private func isNetworkReadDue(_ demand: MonitorDemand, now: Date) -> Bool {
+        network != nil && demand >= .ports && now.timeIntervalSince(lastNetworkRead) >= networkInterval
+    }
+
+    /// A nil read is only a baseline (first read, or the page was hidden for a while):
+    /// drop the stale rates and read again on the next tick so the column fills quickly.
+    private func recordNetwork(_ rates: [Int32: NetworkThroughput]?) {
+        networkByPID = rates ?? [:]
+        if rates == nil { lastNetworkRead = .distantPast }
     }
 
     private func record(_ sample: SystemSnapshot) {
@@ -151,7 +177,8 @@ final class MonitorModel {
     /// Precomputes row values once per sample so list rows do no work in `body`.
     private func rebuildListItems(recordsSample: Bool = false) {
         listItems = groups.map {
-            ProcessListItem(group: $0, ports: portsByPID, appBundleIDs: regularAppBundleIDs, currentUserID: currentUserID)
+            ProcessListItem(group: $0, ports: portsByPID, appBundleIDs: regularAppBundleIDs, currentUserID: currentUserID,
+                            network: networkByPID)
         }
         selection?.update(from: listItems, portsByPID: portsByPID, recordsSample: recordsSample)
         refreshVisible(keepingOrder: isOrderFrozen)

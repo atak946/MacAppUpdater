@@ -24,6 +24,19 @@ enum NetworkMath {
         )
     }
 
+    /// Rates for every pid in `current` that also appeared in `previous`; pids that are gone or new
+    /// since the previous read are dropped, so a reused pid never reports a bogus spike.
+    static func throughput(previous: [Int32: NetworkCounters], current: [Int32: NetworkCounters],
+                           elapsed: TimeInterval) -> [Int32: NetworkThroughput] {
+        guard elapsed > 0 else { return [:] }
+        var rates: [Int32: NetworkThroughput] = [:]
+        for (pid, counters) in current {
+            guard let old = previous[pid] else { continue }
+            rates[pid] = throughput(previous: old, current: counters, elapsed: elapsed)
+        }
+        return rates
+    }
+
     private static func rate(_ old: UInt64, _ new: UInt64, _ elapsed: TimeInterval) -> Double {
         guard new >= old else { return 0 }
         return Double(new - old) / elapsed
