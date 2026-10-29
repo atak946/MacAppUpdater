@@ -7,14 +7,15 @@ struct UpdatesListView: View {
     let updates: [AvailableUpdate]
 
     var body: some View {
+        let ordered = Self.securityFirst(updates)
         Group {
-            if updates.isEmpty {
+            if ordered.isEmpty {
                 emptyState
             } else {
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.Spacing.xl) {
-                        UpdatesSummaryHeader(viewModel: viewModel, updates: updates)
-                        rowsCard
+                        UpdatesSummaryHeader(viewModel: viewModel, updates: ordered)
+                        rowsCard(ordered)
                     }
                     .padding(Theme.Spacing.page)
                     .frame(maxWidth: Theme.Spacing.contentWidth)
@@ -25,8 +26,13 @@ struct UpdatesListView: View {
         .pageBackground()
     }
 
+    /// Security updates float to the top; the stable partition keeps the incoming order otherwise.
+    static func securityFirst(_ updates: [AvailableUpdate]) -> [AvailableUpdate] {
+        updates.filter { $0.securityInfo != nil } + updates.filter { $0.securityInfo == nil }
+    }
+
     /// Rows share one raised card, separated by inset hairlines.
-    private var rowsCard: some View {
+    private func rowsCard(_ updates: [AvailableUpdate]) -> some View {
         LazyVStack(spacing: 0) {
             ForEach(Array(updates.enumerated()), id: \.element.id) { index, update in
                 if index > 0 {
@@ -138,6 +144,12 @@ private struct UpdatesSummaryHeader: View {
             parts.append(sizes.count == updates.count
                 ? String(localized: "\(total) to download")
                 : String(localized: "At least \(total) to download"))
+        }
+        let security = updates.filter { $0.securityInfo != nil }.count
+        if security > 0 {
+            parts.append(security == 1
+                ? String(localized: "1 security update")
+                : String(localized: "\(security) security updates"))
         }
         return parts.joined(separator: " · ")
     }

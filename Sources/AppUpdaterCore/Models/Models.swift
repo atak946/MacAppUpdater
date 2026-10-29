@@ -93,6 +93,9 @@ public struct AvailableUpdate: Sendable, Hashable, Identifiable {
     /// Developer Team ID the new release must be signed with, when the source knows it
     /// (vendor feed `expectedTeamID`, curated data). Enforced on install when present.
     public let expectedTeamID: String?
+    /// Set when the inline release notes mention security fixes; derived once here so list
+    /// sorting and row redraws don't rescan the notes.
+    public let securityInfo: SecurityUpdateInfo?
 
     public init(
         app: InstalledApp,
@@ -110,6 +113,7 @@ public struct AvailableUpdate: Sendable, Hashable, Identifiable {
         self.publishedAt = publishedAt
         self.expectedTeamID = expectedTeamID
         self.releaseNotes = releaseNotes
+        self.securityInfo = SecurityUpdateDetector.detect(in: releaseNotes)
         self.minimumSystemVersion = minimumSystemVersion
         self.app = app
         self.newVersion = newVersion

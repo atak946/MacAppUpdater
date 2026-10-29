@@ -51,6 +51,9 @@ struct UpdateRowView: View {
                         .lineLimit(1)
                         .truncationMode(.tail)
                     SourceBadge(source: update.source)
+                    if let securityInfo = update.securityInfo {
+                        SecurityUpdatePill(info: securityInfo)
+                    }
                     if let compatibilityWarning {
                         WarningBadge(warnings: [compatibilityWarning])
                     }
@@ -300,6 +303,23 @@ struct UpdateRowView: View {
         if !isIgnoreLocked {
             Button("Ignore \(update.app.name)", systemImage: "eye.slash", action: actions.ignoreApp)
         }
+    }
+}
+
+/// "Security" capsule for updates whose release notes mention security fixes; the tooltip lists CVEs.
+struct SecurityUpdatePill: View {
+    let info: SecurityUpdateInfo
+
+    var body: some View {
+        StatusPill(title: String(localized: "Security"), symbol: "lock.shield.fill", tint: Theme.Palette.danger)
+            .help(helpText)
+            .accessibilityLabel(helpText)
+    }
+
+    private var helpText: String {
+        info.cveIDs.isEmpty
+            ? String(localized: "The release notes mention security fixes")
+            : String(localized: "Security fixes: \(info.cveIDs.joined(separator: ", "))")
     }
 }
 
