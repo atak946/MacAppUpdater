@@ -88,6 +88,8 @@ struct AppInfoGrid: View {
         switch details.signature {
         case .signed(let team): String(localized: "Team \(team)")
         case .unsigned: String(localized: "Not signed / invalid signature")
+        case .launcher(let target): String(localized: "Launcher for \(target)")
+        case .apple: String(localized: "Apple")
         }
     }
 

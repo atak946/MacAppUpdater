@@ -103,3 +103,55 @@ struct AppDetailsReaderSignatureCostTests {
         #expect(verifier.fullChecks == 0)
     }
 }
+
+@Suite("AppDetailsReader launcher bundles")
+struct AppDetailsReaderLauncherTests {
+    private struct FailingVerifier: SignatureVerifying {
+        func teamIdentifier(of bundleURL: URL) async throws -> String {
+            throw UpdaterError.signatureInvalid("must not be asked")
+        }
+    }
+
+    /// A bundle whose main executable is `target` (a symlink when `symlink` is true).
+    private func makeBundle(symlink: Bool) throws -> (app: URL, root: URL) {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        let app = root.appendingPathComponent("Handler.app")
+        let macOS = app.appendingPathComponent("Contents/MacOS")
+        try FileManager.default.createDirectory(at: macOS, withIntermediateDirectories: true)
+        let plist = try PropertyListSerialization.data(
+            fromPropertyList: ["CFBundleExecutable": "tool"], format: .xml, options: 0
+        )
+        try plist.write(to: app.appendingPathComponent("Contents/Info.plist"))
+        let tool = root.appendingPathComponent("tool")
+        try Data("#!/bin/sh\n".utf8).write(to: tool)
+        if symlink {
+            try FileManager.default.createSymbolicLink(at: macOS.appendingPathComponent("tool"), withDestinationURL: tool)
+        } else {
+            try Data("#!/bin/sh\n".utf8).write(to: macOS.appendingPathComponent("tool"))
+        }
+        return (app, root)
+    }
+
+    private func app(at url: URL) -> InstalledApp {
+        InstalledApp(
+            bundleIdentifier: "com.example.handler", name: "Handler", url: url,
+            shortVersion: "1.0", buildVersion: "1", sparkleFeedURL: nil, isFromAppStore: false
+        )
+    }
+
+    @Test("a main executable symlinked out of the bundle is a launcher, not a broken signature")
+    func symlinkedExecutable() async throws {
+        let (url, root) = try makeBundle(symlink: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let details = await AppDetailsReader(verifier: FailingVerifier()).details(for: app(at: url))
+        #expect(details.signature == .launcher(targetPath: root.appendingPathComponent("tool").standardizedFileURL.path))
+    }
+
+    @Test("a regular main executable still has its signature checked")
+    func regularExecutable() async throws {
+        let (url, root) = try makeBundle(symlink: false)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let details = await AppDetailsReader(verifier: FailingVerifier()).details(for: app(at: url))
+        #expect(details.signature == .unsigned(reason: UpdaterError.signatureInvalid("must not be asked").localizedDescription))
+    }
+}

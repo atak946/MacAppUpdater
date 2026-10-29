@@ -135,6 +135,9 @@ public struct CompatibilityAnalyzer: Sendable {
             return .teamIdentifierChanged(old: previous, new: teamIdentifier)
         case .unsigned(let reason):
             return Self.isMissingSignature(reason) ? .unsigned : .signatureInvalid(reason: reason)
+        case .launcher, .apple:
+            // Not a damaged app: a launcher's tool carries the signature; Apple's code has no team.
+            return nil
         }
     }
 

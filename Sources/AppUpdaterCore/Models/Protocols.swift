@@ -41,12 +41,17 @@ public protocol SignatureVerifying: Sendable {
     /// publisher (for display, or for the team an update must be signed by), but never proves
     /// the bundle's contents are intact, so never use it to trust a bundle you are about to run.
     func signingTeam(of bundleURL: URL) async throws -> String
+    /// Whether the bundle is Apple's own platform code (Safari and other system apps), which is
+    /// signed by Apple without a Team ID. For display only, like `signingTeam(of:)`.
+    func isApplePlatformCode(_ bundleURL: URL) async -> Bool
 }
 
 public extension SignatureVerifying {
     func signingTeam(of bundleURL: URL) async throws -> String {
         try await teamIdentifier(of: bundleURL)
     }
+
+    func isApplePlatformCode(_ bundleURL: URL) async -> Bool { false }
 }
 
 public protocol UpdateInstalling: Sendable {

@@ -8528,6 +8528,16 @@
           }
         }
       }
+    },
+    "Launcher for %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ için başlatıcı"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

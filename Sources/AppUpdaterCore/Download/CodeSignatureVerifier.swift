@@ -66,20 +66,34 @@ public struct CodeSignatureVerifier: TeamPinnedSignatureVerifying, DiskImageSign
         try Self.anchoredTeam(of: bundleURL, flags: Self.inspectFlags)
     }
 
+    public func isApplePlatformCode(_ bundleURL: URL) async -> Bool {
+        guard let code = try? Self.staticCode(at: bundleURL) else { return false }
+        return (try? Self.check(code, requirement: "anchor apple", flags: Self.inspectFlags)) != nil
+    }
+
     private static func anchoredTeam(of bundleURL: URL, flags: SecCSFlags) throws -> String {
         let code = try staticCode(at: bundleURL)
         try check(code, requirement: CodeSigningRequirement.trustedOrigin, flags: flags)
         let teamID = try unverifiedTeamIdentifier(of: code)
-        let pinned = try CodeSigningRequirement.pinned(team: teamID)
-        try check(code, requirement: pinned, flags: flags)
+        try checkPinned(code, team: teamID, flags: flags)
         return teamID
     }
 
+    /// The pinned requirement plus the CodeDirectory team. A Mac App Store leaf is Apple's own
+    /// certificate and carries no developer OU, so for those the team comes from the CodeDirectory
+    /// that Apple signed; for Developer ID both must name `team`.
+    private static func checkPinned(_ code: SecStaticCode, team: String, flags: SecCSFlags) throws {
+        try check(code, requirement: CodeSigningRequirement.pinned(team: team), flags: flags)
+        let actual = try unverifiedTeamIdentifier(of: code)
+        guard actual == team else {
+            throw UpdaterError.teamIdentifierMismatch(expected: team, actual: actual)
+        }
+    }
+
     public func verify(bundleURL: URL, expectedTeam: String) async throws {
-        let requirement = try CodeSigningRequirement.pinned(team: expectedTeam)
         let code = try Self.staticCode(at: bundleURL)
         do {
-            try Self.check(code, requirement: requirement, flags: Self.verifyFlags)
+            try Self.checkPinned(code, team: expectedTeam, flags: Self.verifyFlags)
         } catch {
             // Report a plain team mismatch as such; anything else stays a signature error.
             if let actual = try? Self.unverifiedTeamIdentifier(of: code), actual != expectedTeam {
@@ -91,10 +105,12 @@ public struct CodeSignatureVerifier: TeamPinnedSignatureVerifying, DiskImageSign
 
     public func verifyDiskImage(at imageURL: URL, expectedTeam: String?) async throws -> DiskImageSignatureStatus {
         let code = try Self.staticCode(at: imageURL)
-        let requirement = try expectedTeam.map(CodeSigningRequirement.pinned(team:))
-            ?? CodeSigningRequirement.trustedOrigin
         do {
-            try Self.check(code, requirement: requirement, flags: Self.readFlags)
+            if let expectedTeam {
+                try Self.checkPinned(code, team: expectedTeam, flags: Self.readFlags)
+            } else {
+                try Self.check(code, requirement: CodeSigningRequirement.trustedOrigin, flags: Self.readFlags)
+            }
         } catch UpdaterError.signatureInvalid(let message) where message == Self.unsignedMessage {
             return .unsigned
         }
@@ -167,14 +183,16 @@ public enum CodeSigningRequirement {
     public static let trustedOrigin =
         "anchor apple or (anchor apple generic and (\(macAppStoreLeaf) or (\(developerIDChain))))"
 
-    /// Apple-anchored Developer ID / Mac App Store signature issued to `team`.
-    /// Throws for malformed Team IDs, so the value can never alter the requirement's structure.
+    /// Apple-anchored Mac App Store signature, or Developer ID signature whose leaf OU is `team`.
+    /// The Mac App Store leaf has no developer OU, so callers must also match the CodeDirectory
+    /// team (`CodeSignatureVerifier.checkPinned`). Throws for malformed Team IDs, so the value
+    /// can never alter the requirement's structure.
     public static func pinned(team: String) throws -> String {
         guard isValidTeamIdentifier(team) else {
             throw UpdaterError.signatureInvalid("Malformed Team ID \"\(team.prefix(32))\"")
         }
-        return "anchor apple generic and certificate leaf[subject.OU] = \"\(team)\""
-            + " and (\(macAppStoreLeaf) or (\(developerIDChain)))"
+        return "anchor apple generic and (\(macAppStoreLeaf)"
+            + " or (\(developerIDChain) and certificate leaf[subject.OU] = \"\(team)\"))"
     }
 
     /// Apple Team IDs are 10 upper-case letters or digits.

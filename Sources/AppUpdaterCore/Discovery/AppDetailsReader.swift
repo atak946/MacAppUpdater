@@ -6,6 +6,11 @@ public struct AppDetails: Sendable, Equatable {
     public enum Signature: Sendable, Equatable {
         case signed(teamIdentifier: String)
         case unsigned(reason: String)
+        /// The main executable is a symlink to a tool outside the bundle (a URL handler or launcher
+        /// a command-line tool generated). The bundle has no signature of its own to validate.
+        case launcher(targetPath: String)
+        /// Apple's own platform code (Safari and other system apps): signed by Apple, without a Team ID.
+        case apple
     }
 
     public let sizeInBytes: Int64?
@@ -54,14 +59,18 @@ public struct AppDetailsReader: Sendable {
             copyright: info.plist["NSHumanReadableCopyright"] as? String,
             category: (info.plist["LSApplicationCategoryType"] as? String).map(Self.categoryName),
             executableArchitectures: Self.architectures(appURL: url),
-            signature: await signature(of: url)
+            signature: await signature(of: url, executable: info.plist["CFBundleExecutable"] as? String)
         )
     }
 
-    private func signature(of url: URL) async -> AppDetails.Signature {
+    private func signature(of url: URL, executable: String?) async -> AppDetails.Signature {
+        if let executable, let target = Self.launcherTarget(appURL: url, executable: executable) {
+            return .launcher(targetPath: target)
+        }
         do {
             return .signed(teamIdentifier: try await verifier.signingTeam(of: url))
         } catch {
+            if await verifier.isApplePlatformCode(url) { return .apple }
             logger.info(
                 """
                 No valid signature for \(url.lastPathComponent, privacy: .public) \
@@ -73,6 +82,18 @@ public struct AppDetailsReader: Sendable {
     }
 
     // MARK: Static helpers
+
+    /// Where the main executable points when it is a symlink leaving the bundle, else nil.
+    static func launcherTarget(appURL: URL, executable: String) -> String? {
+        let executableURL = appURL.appendingPathComponent("Contents/MacOS").appendingPathComponent(executable)
+        guard let destination = try? FileManager.default.destinationOfSymbolicLink(atPath: executableURL.path) else {
+            return nil
+        }
+        let target = URL(fileURLWithPath: destination, relativeTo: executableURL.deletingLastPathComponent())
+            .standardizedFileURL.path
+        let bundle = appURL.standardizedFileURL.path
+        return target.hasPrefix(bundle + "/") ? nil : target
+    }
 
     private struct StaticInfo: @unchecked Sendable {
         let plist: [String: Any]

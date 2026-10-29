@@ -8,10 +8,12 @@ import Testing
 
 @Suite("CodeSigningRequirement")
 struct CodeSigningRequirementTests {
-    @Test("the pinned requirement is anchored to Apple and binds the leaf OU to the team")
+    @Test("the pinned requirement is anchored to Apple and binds a Developer ID leaf OU to the team")
     func pinnedRequirement() throws {
         let requirement = try CodeSigningRequirement.pinned(team: "ABCDE12345")
-        #expect(requirement.hasPrefix("anchor apple generic and certificate leaf[subject.OU] = \"ABCDE12345\""))
+        #expect(requirement.hasPrefix("anchor apple generic and ("))
+        // The OU binds the Developer ID branch only: a Mac App Store leaf is Apple's and has no team OU.
+        #expect(requirement.contains("100.6.1.13] /* exists */ and certificate leaf[subject.OU] = \"ABCDE12345\"))"))
         #expect(requirement.contains("certificate 1[field.1.2.840.113635.100.6.2.6]"))
         #expect(requirement.contains("certificate leaf[field.1.2.840.113635.100.6.1.13]"))
         #expect(requirement.contains("certificate leaf[field.1.2.840.113635.100.6.1.9]"))
@@ -715,5 +717,40 @@ struct VendorFeedTeamPinTests {
         let app = TestApps.make(bundleIdentifier: "org.mozilla.firefox", shortVersion: "130.0")
         let update = try #require(try await source.lookup(app).update)
         #expect(update.expectedTeamID == "43AQ936H96")
+    }
+}
+
+@Suite("CodeSignatureVerifier on installed apps")
+struct InstalledAppSignatureTests {
+    /// First Mac App Store app in /Applications (it has a receipt), if any.
+    static let appStoreApp: URL? = {
+        let apps = (try? FileManager.default.contentsOfDirectory(
+            at: URL(fileURLWithPath: "/Applications"), includingPropertiesForKeys: nil
+        )) ?? []
+        return apps.first { app in
+            FileManager.default.fileExists(atPath: app.appendingPathComponent("Contents/_MASReceipt/receipt").path)
+        }
+    }()
+
+    @Test("a Mac App Store app has a trusted team, though its leaf carries no developer OU",
+          .enabled(if: appStoreApp != nil))
+    func appStoreAppTeam() async throws {
+        let app = try #require(Self.appStoreApp)
+        let verifier = CodeSignatureVerifier()
+        let team = try await verifier.signingTeam(of: app)
+        #expect(CodeSigningRequirement.isValidTeamIdentifier(team))
+        await #expect(throws: UpdaterError.self) { try await verifier.verify(bundleURL: app, expectedTeam: "ABCDE12345") }
+    }
+
+    static let safari = URL(fileURLWithPath: "/Applications/Safari.app")
+
+    @Test("Safari is Apple platform code; an App Store app is not",
+          .enabled(if: FileManager.default.fileExists(atPath: safari.path)))
+    func applePlatformCode() async throws {
+        let verifier = CodeSignatureVerifier()
+        #expect(await verifier.isApplePlatformCode(Self.safari))
+        if let app = Self.appStoreApp, !app.lastPathComponent.hasPrefix("Xcode") {
+            #expect(await !verifier.isApplePlatformCode(app))
+        }
     }
 }
