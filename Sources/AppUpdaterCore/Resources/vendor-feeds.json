@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "feeds": [
+    {
+      "bundleIdentifier": "org.mozilla.firefox",
+      "name": "Firefox",
+      "feedURL": "https://product-details.mozilla.org/1.0/firefox_versions.json",
+      "format": "json",
+      "versionPath": "LATEST_FIREFOX_VERSION",
+      "downloadURLTemplate": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/{version}/mac/en-US/Firefox%20{version}.dmg",
+      "releaseNotesURLTemplate": "https://www.mozilla.org/firefox/{version}/releasenotes/",
+      "expectedTeamID": "43AQ936H96",
+      "installStrategy": "inPlace"
+    },
+    {
+      "bundleIdentifier": "com.google.Chrome",
+      "name": "Google Chrome",
+      "feedURL": "https://versionhistory.googleapis.com/v1/chrome/platforms/mac/channels/stable/versions/all/releases?filter=endtime=none",
+      "format": "json",
+      "versionPath": "version",
+      "releasesPath": "releases",
+      "rolloutFractionKey": "fraction",
+      "minimumRolloutFraction": 0.5,
+      "downloadURLTemplate": "https://www.google.com/chrome/",
+      "expectedTeamID": "EQHXZ8M8AV",
+      "installStrategy": "openVendorUpdater"
+    },
+    {
+      "bundleIdentifier": "com.jetbrains.intellij",
+      "name": "IntelliJ IDEA",
+      "feedURL": "https://data.services.jetbrains.com/products/releases?code=IIU&latest=true&type=release",
+      "format": "json",
+      "versionPath": "IIU.0.version",
+      "downloadURLPath": "IIU.0.downloads.mac.link",
+      "downloadURLPathArm64": "IIU.0.downloads.macM1.link",
+      "publishedAtPath": "IIU.0.date",
+      "expectedTeamID": "2ZEFAR8TH3",
+      "installStrategy": "inPlace"
+    },
+    {
+      "bundleIdentifier": "com.jetbrains.pycharm",
+      "name": "PyCharm",
+      "feedURL": "https://data.services.jetbrains.com/products/releases?code=PCP&latest=true&type=release",
+      "format": "json",
+      "versionPath": "PCP.0.version",
+      "downloadURLPath": "PCP.0.downloads.mac.link",
+      "downloadURLPathArm64": "PCP.0.downloads.macM1.link",
+      "publishedAtPath": "PCP.0.date",
+      "expectedTeamID": "2ZEFAR8TH3",
+      "installStrategy": "inPlace"
+    },
+    {
+      "bundleIdentifier": "com.jetbrains.WebStorm",
+      "name": "WebStorm",
+      "feedURL": "https://data.services.jetbrains.com/products/releases?code=WS&latest=true&type=release",
+      "format": "json",
+      "versionPath": "WS.0.version",
+      "downloadURLPath": "WS.0.downloads.mac.link",
+      "downloadURLPathArm64": "WS.0.downloads.macM1.link",
+      "publishedAtPath": "WS.0.date",
+      "expectedTeamID": "2ZEFAR8TH3",
+      "installStrategy": "inPlace"
+    },
+    {
+      "bundleIdentifier": "com.jetbrains.goland",
+      "name": "GoLand",
+      "feedURL": "https://data.services.jetbrains.com/products/releases?code=GO&latest=true&type=release",
+      "format": "json",
+      "versionPath": "GO.0.version",
+      "downloadURLPath": "GO.0.downloads.mac.link",
+      "downloadURLPathArm64": "GO.0.downloads.macM1.link",
+      "publishedAtPath": "GO.0.date",
+      "expectedTeamID": "2ZEFAR8TH3",
+      "installStrategy": "inPlace"
+    },
+    {
+      "bundleIdentifier": "com.jetbrains.CLion",
+      "name": "CLion",
+      "feedURL": "https://data.services.jetbrains.com/products/releases?code=CL&latest=true&type=release",
+      "format": "json",
+      "versionPath": "CL.0.version",
+      "downloadURLPath": "CL.0.downloads.mac.link",
+      "downloadURLPathArm64": "CL.0.downloads.macM1.link",
+      "publishedAtPath": "CL.0.date",
+      "expectedTeamID": "2ZEFAR8TH3",
+      "installStrategy": "inPlace"
+    }
+  ]
+}

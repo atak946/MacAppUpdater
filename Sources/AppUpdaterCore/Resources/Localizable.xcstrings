@@ -1,0 +1,1206 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "\"%@\" is not a valid owner/repo.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\"%@\" geçerli bir sahip/depo değil."
+          }
+        }
+      }
+    },
+    "%@ and %lld more": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ and %2$lld more"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ve %2$lld tane daha"
+          }
+        }
+      }
+    },
+    "%@ cannot uninstall itself.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kendini kaldıramaz."
+          }
+        }
+      }
+    },
+    "%@ exited with %d: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ exited with %2$d: %3$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$d koduyla sonlandı: %3$@"
+          }
+        }
+      }
+    },
+    "%@ installs updates for this app; updating it here could break licensing or conflict.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulamanın güncellemelerini %@ yüklüyor; burada güncellemek lisansı bozabilir veya çakışmaya yol açabilir."
+          }
+        }
+      }
+    },
+    "%@ is a symbolic link and was skipped.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sembolik bağlantı olduğu için atlandı."
+          }
+        }
+      }
+    },
+    "%@ is outside the allowed folders.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ izin verilen klasörlerin dışında."
+          }
+        }
+      }
+    },
+    "%@ is part of macOS and cannot be uninstalled.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ macOS'in bir parçası olduğundan kaldırılamaz."
+          }
+        }
+      }
+    },
+    "%@ is pinned; unpin it with `brew unpin %@` to upgrade": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ is pinned; unpin it with `brew unpin %2$@` to upgrade"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ sabitlenmiş; yükseltmek için `brew unpin %2$@` ile sabitlemeyi kaldırın"
+          }
+        }
+      }
+    },
+    "%@ is running": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ çalışıyor"
+          }
+        }
+      }
+    },
+    "%@ is running. Quit it before uninstalling.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ çalışıyor. Kaldırmadan önce uygulamadan çıkın."
+          }
+        }
+      }
+    },
+    "%@ no longer contains the scanned app.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ artık taranan uygulamayı içermiyor."
+          }
+        }
+      }
+    },
+    "%@ no longer exists.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ artık mevcut değil."
+          }
+        }
+      }
+    },
+    "%@ was kept because the app could not be moved to the Trash.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama Çöp Sepeti'ne taşınamadığı için %@ korundu."
+          }
+        }
+      }
+    },
+    "%@ was not part of the scan.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ taramanın parçası değildi."
+          }
+        }
+      }
+    },
+    "%lld updates available": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld güncelleme mevcut"
+          }
+        }
+      }
+    },
+    "1 update available": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 güncelleme mevcut"
+          }
+        }
+      }
+    },
+    "App Store updates are installed by the App Store": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Store güncellemelerini App Store yükler"
+          }
+        }
+      }
+    },
+    "Application": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama"
+          }
+        }
+      }
+    },
+    "Application Support": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Application Support"
+          }
+        }
+      }
+    },
+    "Auto-installs in %lld days": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld gün içinde otomatik yüklenecek"
+          }
+        }
+      }
+    },
+    "Auto-installs within a day": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir gün içinde otomatik yüklenecek"
+          }
+        }
+      }
+    },
+    "Automatic installs are off for this app": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulama için otomatik yükleme kapalı"
+          }
+        }
+      }
+    },
+    "Caches": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önbellekler"
+          }
+        }
+      }
+    },
+    "Check whether the developer offers an Apple Silicon or Universal build.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geliştiricinin Apple Silicon veya Universal sürüm sunup sunmadığını kontrol edin."
+          }
+        }
+      }
+    },
+    "Choose an app first.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önce bir uygulama seçin."
+          }
+        }
+      }
+    },
+    "Code signature invalid: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kod imzası geçersiz: %@"
+          }
+        }
+      }
+    },
+    "Common for older or hobby apps. Prefer a notarized release when one exists.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eski veya hobi uygulamalarında yaygındır. Varsa noter onaylı bir sürümü tercih edin."
+          }
+        }
+      }
+    },
+    "Confirm the developer legitimately changed before trusting this build.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu sürüme güvenmeden önce geliştiricinin gerçekten değiştiğini doğrulayın."
+          }
+        }
+      }
+    },
+    "Connection to privileged helper was interrupted": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıcalıklı yardımcıyla bağlantı kesildi"
+          }
+        }
+      }
+    },
+    "Connection to privileged helper was invalidated": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıcalıklı yardımcıyla bağlantı geçersiz kılındı"
+          }
+        }
+      }
+    },
+    "Consider removing it to free disk space and reduce update work.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disk alanı açmak ve güncelleme yükünü azaltmak için kaldırmayı düşünün."
+          }
+        }
+      }
+    },
+    "Cookies": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çerezler"
+          }
+        }
+      }
+    },
+    "Could not move %@ to the Trash: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not move %1$@ to the Trash: %2$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ Çöp Sepeti'ne taşınamadı: %2$@"
+          }
+        }
+      }
+    },
+    "Could not register privileged helper: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıcalıklı yardımcı kaydedilemedi: %@"
+          }
+        }
+      }
+    },
+    "Could not unregister privileged helper: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıcalıklı yardımcının kaydı silinemedi: %@"
+          }
+        }
+      }
+    },
+    "Critical": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kritik"
+          }
+        }
+      }
+    },
+    "Developer ID signed, but Apple has not notarized it.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Developer ID ile imzalanmış ancak Apple tarafından noter onayı verilmemiş."
+          }
+        }
+      }
+    },
+    "Developer changed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geliştirici değişti"
+          }
+        }
+      }
+    },
+    "Do not install it unless you trust the source; check the developer's site for a notarized build.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaynağa güvenmiyorsanız yüklemeyin; noter onaylı bir sürüm için geliştiricinin sitesine bakın."
+          }
+        }
+      }
+    },
+    "Download host changed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirme sunucusu değişti"
+          }
+        }
+      }
+    },
+    "Downloaded file checksum does not match": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirilen dosyanın sağlama toplamı eşleşmiyor"
+          }
+        }
+      }
+    },
+    "Gatekeeper does not accept this app: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gatekeeper bu uygulamayı kabul etmiyor: %@"
+          }
+        }
+      }
+    },
+    "Gatekeeper rejected the downloaded update: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gatekeeper indirilen güncellemeyi reddetti: %@"
+          }
+        }
+      }
+    },
+    "Group Container": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grup Kapsayıcısı"
+          }
+        }
+      }
+    },
+    "HTTP Storage": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HTTP Depolama"
+          }
+        }
+      }
+    },
+    "Homebrew is not installed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Homebrew yüklü değil"
+          }
+        }
+      }
+    },
+    "Info": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilgi"
+          }
+        }
+      }
+    },
+    "Install failed: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükleme başarısız: %@"
+          }
+        }
+      }
+    },
+    "Installer packages need your approval": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükleyici paketleri onayınızı gerektirir"
+          }
+        }
+      }
+    },
+    "Intel-only app": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca Intel uygulaması"
+          }
+        }
+      }
+    },
+    "Invalid application bundle at %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ konumunda geçersiz uygulama paketi"
+          }
+        }
+      }
+    },
+    "Invalid bundle identifier: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçersiz paket tanımlayıcısı: %@"
+          }
+        }
+      }
+    },
+    "Invalid formula name: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçersiz formül adı: %@"
+          }
+        }
+      }
+    },
+    "Invalid signature": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçersiz imza"
+          }
+        }
+      }
+    },
+    "Keychain error %lld: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keychain error %1$lld: %2$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anahtar Zinciri hatası %1$lld: %2$@"
+          }
+        }
+      }
+    },
+    "Launch Agent": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başlatma Aracısı"
+          }
+        }
+      }
+    },
+    "Logs": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Günlükler"
+          }
+        }
+      }
+    },
+    "Low Data Mode is on": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düşük Veri Modu açık"
+          }
+        }
+      }
+    },
+    "Managed by %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tarafından yönetiliyor"
+          }
+        }
+      }
+    },
+    "Needs Rosetta 2; Apple is phasing out Rosetta.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rosetta 2 gerektirir; Apple, Rosetta desteğini aşamalı olarak sonlandırıyor."
+          }
+        }
+      }
+    },
+    "Network error: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ağ hatası: %@"
+          }
+        }
+      }
+    },
+    "Network status unknown": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ağ durumu bilinmiyor"
+          }
+        }
+      }
+    },
+    "Not compatible with this Mac": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu Mac ile uyumlu değil"
+          }
+        }
+      }
+    },
+    "Not notarized": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noter onaylı değil"
+          }
+        }
+      }
+    },
+    "Not signed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İmzasız"
+          }
+        }
+      }
+    },
+    "Nothing is selected.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiçbir şey seçilmedi."
+          }
+        }
+      }
+    },
+    "On an expensive network": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pahalı bir ağa bağlı"
+          }
+        }
+      }
+    },
+    "Only keep it if you trust where it came from; prefer an official signed download.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca kaynağına güveniyorsanız tutun; resmi ve imzalı bir indirmeyi tercih edin."
+          }
+        }
+      }
+    },
+    "Open %@ to update this app.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulamayı güncellemek için %@ uygulamasını açın."
+          }
+        }
+      }
+    },
+    "Package installation failed: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paket yüklemesi başarısız: %@"
+          }
+        }
+      }
+    },
+    "Parsing error: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıştırma hatası: %@"
+          }
+        }
+      }
+    },
+    "Preferences": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tercihler"
+          }
+        }
+      }
+    },
+    "Preferences (ByHost)": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tercihler (ByHost)"
+          }
+        }
+      }
+    },
+    "Privileged helper did not respond in time": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıcalıklı yardımcı zamanında yanıt vermedi"
+          }
+        }
+      }
+    },
+    "Privileged helper error: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıcalıklı yardımcı hatası: %@"
+          }
+        }
+      }
+    },
+    "Privileged helper is not enabled (%@)": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayrıcalıklı yardımcı etkin değil (%@)"
+          }
+        }
+      }
+    },
+    "Quiet hours": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessiz saatler"
+          }
+        }
+      }
+    },
+    "Release notes are not valid UTF-8 text": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm notları geçerli UTF-8 metni değil"
+          }
+        }
+      }
+    },
+    "Release notes are too large (%lld bytes, limit %lld)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Release notes are too large (%1$lld bytes, limit %2$lld)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm notları çok büyük (%1$lld bayt, sınır %2$lld)"
+          }
+        }
+      }
+    },
+    "Release notes must be served over HTTPS (%@)": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm notları HTTPS üzerinden sunulmalıdır (%@)"
+          }
+        }
+      }
+    },
+    "Requires macOS %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS %@ gerektirir"
+          }
+        }
+      }
+    },
+    "Sandbox Container": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sanal Alan Kapsayıcısı"
+          }
+        }
+      }
+    },
+    "Saved Window State": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kayıtlı Pencere Durumu"
+          }
+        }
+      }
+    },
+    "Signed by team %@, but was previously signed by %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signed by team %1$@, but was previously signed by %2$@."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ekibi tarafından imzalanmış, ancak daha önce %2$@ tarafından imzalanmıştı."
+          }
+        }
+      }
+    },
+    "Team identifier mismatch (expected %@, got %@)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Team identifier mismatch (expected %1$@, got %2$@)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekip tanımlayıcısı uyuşmuyor (beklenen %1$@, gelen %2$@)"
+          }
+        }
+      }
+    },
+    "The app has no developer signature, so its origin cannot be verified.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamanın geliştirici imzası yok, bu nedenle kaynağı doğrulanamıyor."
+          }
+        }
+      }
+    },
+    "The bundle may be damaged or modified. Reinstall it from the developer's site.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paket hasarlı veya değiştirilmiş olabilir. Geliştiricinin sitesinden yeniden yükleyin."
+          }
+        }
+      }
+    },
+    "The code signature failed validation: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kod imzası doğrulanamadı: %@"
+          }
+        }
+      }
+    },
+    "The new version will not launch on the macOS version you are running.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni sürüm, kullandığınız macOS sürümünde açılmayacak."
+          }
+        }
+      }
+    },
+    "The token is empty or contains invalid characters.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belirteç boş veya geçersiz karakterler içeriyor."
+          }
+        }
+      }
+    },
+    "This app declares a newer minimum macOS than the one running and may fail to launch.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulama, çalışan sürümden daha yeni bir macOS gerektiriyor ve açılmayabilir."
+          }
+        }
+      }
+    },
+    "This build is not signed with a Developer ID; the privileged helper cannot be used": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu sürüm Developer ID ile imzalanmamış; ayrıcalıklı yardımcı kullanılamaz"
+          }
+        }
+      }
+    },
+    "This download format must be installed manually": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu indirme biçimi elle yüklenmelidir"
+          }
+        }
+      }
+    },
+    "This update downloads from %@; earlier updates came from %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This update downloads from %1$@; earlier updates came from %2$@."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu güncelleme %1$@ adresinden indiriliyor; önceki güncellemeler %2$@ adresinden gelmişti."
+          }
+        }
+      }
+    },
+    "Unsupported package format: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desteklenmeyen paket biçimi: %@"
+          }
+        }
+      }
+    },
+    "Unused for %lld days": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld gündür kullanılmıyor"
+          }
+        }
+      }
+    },
+    "Update not notarized": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme noter onaylı değil"
+          }
+        }
+      }
+    },
+    "Update requires macOS %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme macOS %@ gerektiriyor"
+          }
+        }
+      }
+    },
+    "Updates for this app are ignored": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulamanın güncellemeleri yoksayılıyor"
+          }
+        }
+      }
+    },
+    "Upgrade macOS before installing, or keep the current version.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüklemeden önce macOS'i yükseltin veya mevcut sürümü koruyun."
+          }
+        }
+      }
+    },
+    "Upgrade macOS or install an older release of the app.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS'i yükseltin veya uygulamanın daha eski bir sürümünü yükleyin."
+          }
+        }
+      }
+    },
+    "Usually a CDN move. If the host looks unfamiliar, verify the release on the developer's site.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genellikle CDN değişikliğidir. Sunucu tanıdık gelmiyorsa sürümü geliştiricinin sitesinden doğrulayın."
+          }
+        }
+      }
+    },
+    "Version %@ is above the %@.x ceiling": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %1$@ is above the %2$@.x ceiling"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ sürümü %2$@.x sınırının üzerinde"
+          }
+        }
+      }
+    },
+    "Version %@ is skipped": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sürümü atlandı"
+          }
+        }
+      }
+    },
+    "Waiting %lld more days after it was first seen": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk görüldükten sonra %lld gün daha bekleniyor"
+          }
+        }
+      }
+    },
+    "Waiting %lld more days after release": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yayınlandıktan sonra %lld gün daha bekleniyor"
+          }
+        }
+      }
+    },
+    "Waiting 1 more day after it was first seen": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk görüldükten sonra 1 gün daha bekleniyor"
+          }
+        }
+      }
+    },
+    "Waiting 1 more day after release": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yayınlandıktan sonra 1 gün daha bekleniyor"
+          }
+        }
+      }
+    },
+    "Waiting for AC power": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güç adaptörü bekleniyor"
+          }
+        }
+      }
+    },
+    "Warning": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uyarı"
+          }
+        }
+      }
+    },
+    "WebKit Data": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WebKit Verileri"
+          }
+        }
+      }
+    },
+    "You have not opened this app in %lld days.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu uygulamayı %lld gündür açmadınız."
+          }
+        }
+      }
+    },
+    "Your organization has disabled the uninstaller.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuruluşunuz kaldırıcıyı devre dışı bıraktı."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
