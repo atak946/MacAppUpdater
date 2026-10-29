@@ -1,164 +1,178 @@
-# MacAppUpdater
+<p align="center">
+  <img src="docs/images/icon.png" width="128" height="128" alt="App Updater app icon">
+</p>
 
-A macOS menu bar app that discovers installed applications and keeps them up to date.
+<h1 align="center">App Updater</h1>
 
-## Update sources
+<p align="center">
+  <b>Every app on your Mac, up to date and checked before it installs.</b><br>
+  Updates from six sources, plus cleanup, a system monitor and security checks, in one menu bar app.
+</p>
 
-| Source | Detection | Install |
+<p align="center">
+  <a href="https://github.com/atak946/MacAppUpdater/releases/latest"><img src="https://img.shields.io/github/v/release/atak946/MacAppUpdater?style=flat-square&label=release&color=8b5cf6" alt="Latest release"></a>
+  <img src="https://img.shields.io/badge/macOS-14%2B-111111?style=flat-square&logo=apple&logoColor=white" alt="macOS 14 or later">
+  <img src="https://img.shields.io/badge/Swift-6-F05138?style=flat-square&logo=swift&logoColor=white" alt="Swift 6">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/atak946/MacAppUpdater?style=flat-square&color=0ea5e9" alt="MIT license"></a>
+  <a href="https://github.com/atak946/MacAppUpdater/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/atak946/MacAppUpdater/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status"></a>
+  <a href="https://github.com/atak946/MacAppUpdater/releases"><img src="https://img.shields.io/github/downloads/atak946/MacAppUpdater/total?style=flat-square&color=ec4899" alt="Downloads"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/atak946/MacAppUpdater/releases/latest">
+    <img src="https://img.shields.io/badge/Download_for_macOS-AppUpdater.dmg-8b5cf6?style=for-the-badge&logo=apple&logoColor=white" alt="Download App Updater for macOS" height="44">
+  </a>
+</p>
+
+<p align="center">
+  <img src="docs/images/en/hero.png" alt="The App Updater window on the Overview page, with pending updates and system status" width="900">
+</p>
+
+<p align="center">
+  <b>English</b> · <a href="README.tr.md">Türkçe</a>
+</p>
+
+---
+
+## ✨ At a glance
+
+App Updater finds every app you have installed and works out where its updates come from. It checks them in
+the background and installs them only after the download passes signature, team and notarization checks.
+It lives in the menu bar, and the main window adds cleanup, a system monitor and a security overview.
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/en/updates.png" alt="Updates page with several pending updates, one tagged Security">
+      <h3>🔄 Updates</h3>
+      One list for App Store, Sparkle, Homebrew, GitHub, Electron and vendor updates, with release notes,
+      progress and one-click revert. Updates whose notes mention security fixes or CVEs come first.
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/en/menubar.png" alt="Menu bar panel with live CPU, memory and network and pending updates">
+      <h3>📍 From the menu bar</h3>
+      Pending updates, live CPU, memory and network, and Update All, one click away. Scheduled checks
+      can install updates for you, within the rules you set.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/en/system.png" alt="System monitor with CPU, memory, disk and network gauges and charts">
+      <h3>📈 System monitor</h3>
+      CPU per core, memory pressure, disk, network and battery, plus a 24-hour history of the heaviest
+      apps that warns when one keeps the CPU busy.
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/en/processes.png" alt="Processes grouped by app with CPU, memory, network and thread columns">
+      <h3>⚙️ Processes</h3>
+      Processes grouped by app, with CPU, memory, network and threads. Sort, filter, inspect open ports
+      and quit or force quit.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/en/cleanup.png" alt="Cleanup page with caches, developer files and leftovers of removed apps">
+      <h3>🧹 Cleanup</h3>
+      Caches, logs, Xcode and simulator data, package manager caches, old installers, large files and
+      leftovers of apps you already deleted. Everything goes to the Trash.
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/en/insights.png" alt="Insights page with compatibility and notarization warnings">
+      <h3>🔍 Insights</h3>
+      The largest, unused and Intel-only apps, plus warnings for broken signatures, missing
+      notarization, a changed developer or download host, and updates your macOS can't run.
+    </td>
+  </tr>
+</table>
+
+### 🔄 Where updates come from
+
+| Source | How an app is matched | How it is installed |
 |---|---|---|
-| Mac App Store | `Contents/_MASReceipt` | Opens App Store |
-| Sparkle | `SUFeedURL` in `Info.plist` | Download + verify + replace |
-| Homebrew Cask API | Matching `.app` artifact in `formulae.brew.sh` | Download + SHA-256 + replace |
-| GitHub Releases | Configured `bundleId → owner/repo` mapping | Download + verify + replace |
-| Electron (electron-builder) | `Contents/Resources/app-update.yml` | Download + SHA-512 + replace |
-| Vendor feeds | Bundled `vendor-feeds.json` (Firefox, JetBrains IDEs, Chrome, …) | Replace, or open the vendor's updater (Chrome) |
+| Mac App Store | `Contents/_MASReceipt` | Opens the App Store |
+| Sparkle | `SUFeedURL` in `Info.plist` | Download, verify, replace |
+| Homebrew Cask | Matching `.app` in the [cask index](https://formulae.brew.sh) | Download, SHA-256, replace |
+| GitHub Releases | A `bundle id → owner/repo` mapping | Download, verify, replace |
+| Electron | `Contents/Resources/app-update.yml` | Download, SHA-512, replace |
+| Vendor feeds | Built-in feeds for Firefox, Chrome, JetBrains IDEs and more | Replace, or open the vendor's updater |
 
-Apps owned by a vendor updater (Setapp, Adobe Creative Cloud, Microsoft AutoUpdate, Google Keystone,
-JetBrains Toolbox) are detected and routed to that updater instead of being installed.
+Apps that a vendor updater owns (Setapp, Adobe Creative Cloud, Microsoft AutoUpdate, Google Keystone,
+JetBrains Toolbox) are left to that updater.
 
-## Features
+### 🛡️ Safe by design
 
-- **Updates**: precise source per app (App Store, Sparkle incl. opt-in beta channel, GitHub Releases mappings, Homebrew Cask), release notes, download progress with cancel.
-- **Safe installs**: signature + Team ID checks, a backup before each in-place update with one-click revert, and a history of every install, failure and rollback.
-- **Policies**: per-app automatic installs after scheduled checks, planned by `AutoInstallPlanner`: soak period ("Auto-installs in N days", release / first-seen dates), quiet hours, AC power, network and running-app conditions, and version ceilings ("Stay on 5.x").
-- **Managed (MDM)**: configuration-profile keys force check interval, policies, ignored apps, allowed sources and more; locked settings show a lock badge (`docs/mdm/`).
-- **Coverage**: which apps a source tracks, which none does, and failed checks — with Map GitHub Repo, Search Homebrew, Report Missing App and Ignore actions.
-- **Command Line Tools**: outdated Homebrew formulae with upgrade.
-- **Insights**: largest, unused and Intel-only apps plus compatibility, signature, notarization, download-host-change and vendor-managed warnings.
-- **Uninstall**: moves an app and its matching leftovers to the Trash.
-- **Self-update** of App Updater via Sparkle.
+- **Same developer only.** An update must be signed by the same Developer ID team as the app you have.
+- **Notarized.** Gatekeeper must accept the download. A revoked certificate always blocks the install.
+- **Verified downloads.** HTTPS only, published checksums and Sparkle EdDSA signatures are checked, and
+  every file is quarantined.
+- **Reversible.** Each in-place update keeps a backup you can restore with one click, and every install,
+  failure and rollback is kept in History.
+- **Least privilege.** `.pkg` updates go through a small helper that only accepts notarized installers
+  from the expected team.
 
-## Architecture
+The full threat model is in [docs/SECURITY-MODEL.md](docs/SECURITY-MODEL.md).
 
-```
-Sources/
-├── AppUpdaterCore/          # Testable library, no UI
-│   ├── Models/              # Shared types + protocols (contract)
-│   ├── Discovery/           # AppScanner, BundleInfoReader, AppDetailsReader
-│   ├── Versioning/          # VersionComparator
-│   ├── Sources/             # App Store, Sparkle, Electron, vendor feeds, GitHub, Homebrew, UpdateChecker
-│   ├── Resources/           # vendor-feeds.json (MacAppUpdater_AppUpdaterCore.bundle)
-│   ├── Download/            # ProgressDownloader, DownloadVerifier (checksums, EdDSA, quarantine), CodeSignatureVerifier
-│   ├── Install/             # AppInstaller (dmg/zip), backups, process runner
-│   ├── Helper/              # Privileged helper client + .pkg validation
-│   ├── Security/            # Gatekeeper/notarization gate, download host tracking
-│   ├── Preferences/         # Policies, exclusions, version ceilings, install conditions, first-seen dates
-│   ├── AutoInstall/         # AutoInstallPlanner, system conditions (power, network, running apps)
-│   ├── Managed/             # MDM configuration, managed store decorators, policy gate
-│   ├── Coverage/            # Coverage report, missing-app report, vendor-management detection
-│   ├── Insights/            # CompatibilityAnalyzer, InsightsCollector, warnings
-│   ├── History/             # Install history
-│   ├── Uninstall/           # Uninstaller + leftover rules
-│   ├── Homebrew/            # brew CLI (formulae)
-│   ├── ReleaseNotes/        # Release notes loader
-│   └── Scheduler/           # Background checks, notifications
-├── AppUpdater/              # SwiftUI app (composition root in AppEnvironment.swift)
-│   └── UI/                  # Main window, menu bar, Settings, Coverage, Insights, Managed, History, …
-└── PrivilegedHelper/        # launchd daemon that installs .pkg updates
-```
+### 🧰 And more
 
-## Security model
+- **Policies:** per-app automatic installs with a waiting period, quiet hours, power and network rules,
+  and version ceilings such as "stay on 5.x".
+- **Startup items:** every launch agent and daemon with its owner and signature, which you can turn off.
+- **Security check:** FileVault, firewall, Gatekeeper and SIP, plus which apps hold camera, microphone,
+  screen and accessibility permissions.
+- **Uninstall:** moves an app and its leftover files to the Trash.
+- **New Mac:** export your app list as a Brewfile or JSON and see what is missing on the next Mac.
+- **Shortcuts and Spotlight:** Check for Updates, Update All Apps and Clean Caches actions.
+- **Coverage:** which apps are tracked by which source, and which aren't tracked at all.
+- **Command-line tools:** outdated Homebrew formulae with upgrade.
+- **Managed Macs:** configuration-profile keys for IT, see [docs/mdm](docs/mdm/README.md).
 
-Threats considered: a compromised update feed or host, same-user local malware, and other local
-users. The full review and the status of each finding are in
-[`docs/review/review-report.md`](docs/review/review-report.md).
+## 📦 Install
 
-**Download**
-- Only `https` downloads and https-only redirects are accepted; feed and API bodies are size-capped
-  (8 MB feeds, 64 MB Homebrew index) and `Authorization` is dropped on cross-host redirects.
-- Formats are allowlisted: `dmg`/`zip` install in place, `pkg`/`mpkg` go through the helper or
-  Installer.app. Anything else (or an extension-less URL) only opens the vendor's page — the file is
-  never downloaded or opened.
-- SHA-256 (Homebrew) and SHA-512 (electron-builder) are verified when published. A Sparkle update for
-  an app that ships `SUPublicEDKey` **must** carry a valid EdDSA signature.
-- Every download gets a `com.apple.quarantine` attribute in a private (0700) folder.
-- A changed download host (registrable domain) is shown as a warning. GitHub's release CDNs
-  (`release-assets.` / `objects.githubusercontent.com`) count as github.com; user-content hosts
-  (`raw.githubusercontent.com`, `*.github.io`, …) do not.
+1. Download the latest **AppUpdater.dmg** from [Releases](https://github.com/atak946/MacAppUpdater/releases/latest).
+2. Open it and drag **App Updater** to **Applications**.
+3. Launch it and allow **App Management** when macOS asks, so it can update other apps.
 
-**In-place install (dmg/zip)**
-- The update is pinned to one Developer ID team: the installed app's Apple-anchored team, and/or the
-  source's curated `expectedTeamID`. They must agree; with neither (an unsigned or ad-hoc installed
-  app and no pin) the update is refused and must be installed manually.
-- The staged bundle must satisfy an Apple-anchored requirement for that team (Developer ID or Mac App
-  Store chain, nested code), be newer than the installed version, and match the advertised version.
-- Gatekeeper: `.notarized` passes; a rejection (e.g. revoked certificate) always blocks; "not
-  notarized" or "could not confirm" (often offline) blocks unless Settings › General › "Allow updates
-  that aren't notarized (warn)" is on. MDM `RequireNotarization` forces it off, and a toggle changed
-  outside the app counts as off until confirmed in Settings. Non-notarized installs keep quarantine.
-- Signed DMGs are verified before mounting; zips are size-checked before extraction.
-- Staging is private (0700); the signature is re-checked right before the atomic swap and the
-  installed bundle is verified afterwards, with automatic rollback.
-- Rollback ("Revert") treats backups as untrusted and applies the same team, Gatekeeper and
-  post-swap checks.
+Releases are signed and notarized by Apple. App Updater updates itself with
+[Sparkle](https://sparkle-project.org), and every update is verified with an EdDSA signature.
 
-**Privileged helper (.pkg)**
-- The app passes an open, read-only file descriptor plus the expected team over XPC; the helper copies
-  it into a root-only folder and accepts only a **notarized Developer ID Installer** package from that
-  team (never Apple-signed, never "any Developer ID"). Notarization is always required for packages.
-- Both ends pin each other by team ID, and the helper rejects debuggable app builds; a release build without a team
-  (ad-hoc) refuses every connection. Installs are serialized and the helper exits when idle.
+**Requirements:** macOS 14 or later, on Apple Silicon or Intel. The app is available in English and Turkish.
 
-**Known limits:** same-user malware can still substitute an *older* notarized package or backup from
-the same vendor, there is a microsecond race window around the swap, zip declared sizes are not a
-hard limit, the "allow unnotarized" audit is tamper evidence (not a boundary), and the helper has no
-launchd `SpawnConstraint` yet.
+## 🔐 Permissions
 
-## Requirements
+macOS asks for each permission the first time a feature needs it. If you decline one, only that feature
+stays off.
 
-- macOS 14+, Xcode 16+ (Swift 6)
-- Not sandboxed — distribute with Developer ID + notarization (not via the App Store).
-- Users must grant **Privacy & Security → App Management** to modify other apps.
-- `.pkg` installs run through a privileged helper (`SMAppService` launch daemon). Enable it in Settings → General; it requires a Developer ID–signed build and admin approval in Login Items. Without it, packages open in Installer.app.
+| Permission | Why App Updater asks |
+|---|---|
+| **App Management** | Replacing other apps when it installs their updates |
+| **Notifications** | Telling you about new updates, finished installs and CPU hogs |
+| **Full Disk Access** (optional) | Reading the permission database for the Security check, and cleaning protected folders |
+| **Administrator** (optional) | Enabling the helper for `.pkg` updates, and changing system launch daemons |
+| **Login item** | "Launch at login" |
 
-## Build & run
+## 🕵️ Privacy
+
+- **No telemetry.** No analytics, no tracking, no account.
+- **Local data.** History, policies, the usage history and settings stay on your Mac.
+- **Network calls are update checks:** the apps' own feeds (Sparkle, Electron, vendors), the Homebrew cask
+  index, the GitHub API for mapped repositories, the App Store lookup, and Apple's notarization check that
+  Gatekeeper runs. App Updater's own update check fetches only this project's appcast from GitHub Releases.
+
+## 🛠️ Build from source
 
 ```bash
-make build      # swift build
-make test       # swift test --parallel
-make run        # swift run AppUpdater (Sparkle self-update stays inactive outside an .app)
-make app        # scripts/build-app.sh -> build/AppUpdater.app (universal, ad-hoc signed)
+make test   # swift test
+make app    # build/AppUpdater.app, ad-hoc signed
 open build/AppUpdater.app
 ```
 
-`scripts/build-app.sh` builds a universal (arm64 + x86_64) release, falling back to the native
-architecture if that fails (`ARCHS=native` forces it). It assembles:
+Requirements, the app bundle, releases, the architecture and how the screenshots are made are covered in
+[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 
-```
-AppUpdater.app/Contents/
-├── Info.plist                      # Packaging/Info.plist with VERSION / BUILD substituted
-├── MacOS/AppUpdater, PrivilegedHelper
-├── Library/LaunchDaemons/com.macappupdater.helper.plist
-├── Frameworks/Sparkle.framework
-└── Resources/                      # SwiftPM resource bundle (+ AppIcon.icns if Packaging/AppIcon.icns exists)
-```
+## 🤝 Contributing
 
-Without `SIGN_IDENTITY` the bundle is ad-hoc signed so it runs locally. The privileged helper
-cannot be used by an ad-hoc release build (it rejects every connection, and the app reports that
-this build isn't signed with a Developer ID), so test `.pkg` updates with a Developer ID build.
+Issues and pull requests are welcome. To report a security issue, see [SECURITY.md](SECURITY.md).
 
-## Release
+## 📄 License
 
-One-time setup:
-
-```bash
-# Developer ID Application certificate in the login keychain, then:
-xcrun notarytool store-credentials <profile> --apple-id <id> --team-id <team>
-# Sparkle EdDSA keys (private key stays in the keychain); paste the public key
-# into Packaging/Info.plist -> SUPublicEDKey, and set SUFeedURL to your appcast.
-.build/artifacts/sparkle/Sparkle/bin/generate_keys
-```
-
-Each release:
-
-```bash
-export SIGN_IDENTITY="Developer ID Application: <NAME> (<TEAMID>)"
-export NOTARY_PROFILE=<profile>
-export VERSION=1.2.0            # BUILD defaults to the git commit count
-make release                    # MAKE_DMG=1 make release also produces a notarized DMG
-```
-
-`scripts/release.sh` signs inside-out with hardened runtime + secure timestamp (Sparkle XPC
-services, Autoupdate, Updater.app, Sparkle.framework, PrivilegedHelper, app), zips with
-`ditto`, notarizes with `notarytool --wait`, staples, and prints the `generate_appcast` command
-for publishing the Sparkle appcast. Identities and profiles are only read from the environment.
+[MIT](LICENSE)
