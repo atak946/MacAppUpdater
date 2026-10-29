@@ -32,6 +32,25 @@ struct UpdateRowView: View {
     @State private var isConfirmingInstall = false
     @State private var isConfirmingRevert = false
 
+    private func titleLine(showsSource: Bool, showsPills: Bool) -> some View {
+        HStack(spacing: 6) {
+            Text(update.app.name)
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundStyle(Theme.Palette.textPrimary)
+                .lineLimit(1)
+                .truncationMode(.tail)
+            if showsSource {
+                SourceBadge(source: update.source)
+            }
+            if showsPills, let securityInfo = update.securityInfo {
+                SecurityUpdatePill(info: securityInfo)
+            }
+            if showsPills, let compatibilityWarning {
+                WarningBadge(warnings: [compatibilityWarning])
+            }
+        }
+    }
+
     var body: some View {
         HStack(spacing: Theme.Spacing.m) {
             Image(nsImage: icon)
@@ -44,19 +63,12 @@ struct UpdateRowView: View {
                 .saturation(installState == .installed ? 0.6 : 1)
 
             VStack(alignment: .leading, spacing: Theme.Spacing.xs) {
-                HStack(spacing: 6) {
-                    Text(update.app.name)
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(Theme.Palette.textPrimary)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                    SourceBadge(source: update.source)
-                    if let securityInfo = update.securityInfo {
-                        SecurityUpdatePill(info: securityInfo)
-                    }
-                    if let compatibilityWarning {
-                        WarningBadge(warnings: [compatibilityWarning])
-                    }
+                // In the narrow menu bar panel the badges don't all fit: the source badge goes first,
+                // then the rest, so the fixed-size badges never push the row out of its card.
+                ViewThatFits(in: .horizontal) {
+                    titleLine(showsSource: true, showsPills: true)
+                    titleLine(showsSource: false, showsPills: true)
+                    titleLine(showsSource: false, showsPills: false)
                 }
                 versionLine
                 statusLine
@@ -98,14 +110,26 @@ struct UpdateRowView: View {
     }
 
     /// Old version muted, new version in a glowing brand-gradient capsule (green once installed).
+    /// Where the row is narrow (menu bar panel) the size, then the old version, are left out
+    /// rather than both versions being clipped to "1…3 → …".
     private var versionLine: some View {
+        ViewThatFits(in: .horizontal) {
+            versionRow(showsOldVersion: true, showsSize: true)
+            versionRow(showsOldVersion: true, showsSize: false)
+            versionRow(showsOldVersion: false, showsSize: false)
+        }
+    }
+
+    private func versionRow(showsOldVersion: Bool, showsSize: Bool) -> some View {
         HStack(spacing: 5) {
-            Text(update.app.shortVersion)
-                .foregroundStyle(Theme.Palette.textSecondary)
-                .truncationMode(.middle)
-            Image(systemName: "arrow.right")
-                .font(.system(size: 8, weight: .heavy))
-                .foregroundStyle(Theme.Palette.textTertiary)
+            if showsOldVersion {
+                Text(update.app.shortVersion)
+                    .foregroundStyle(Theme.Palette.textSecondary)
+                    .truncationMode(.middle)
+                Image(systemName: "arrow.right")
+                    .font(.system(size: 8, weight: .heavy))
+                    .foregroundStyle(Theme.Palette.textTertiary)
+            }
             Text(update.newVersion)
                 .fontWeight(.bold)
                 .foregroundStyle(.white)
@@ -115,15 +139,13 @@ struct UpdateRowView: View {
                 .background(Capsule().fill(newVersionFill))
                 .overlay(Capsule().strokeBorder(.white.opacity(0.25), lineWidth: 0.5))
                 .glow(newVersionTint, radius: 5, opacity: 0.4)
-            if let downloadSize, installState == .pending {
-                // Whole or not at all: a clipped size ("3" of "378,8 MB") reads as a wrong number.
-                ViewThatFits(in: .horizontal) {
-                    Text(downloadSize)
-                        .foregroundStyle(Theme.Palette.textTertiary)
-                        .help("Download size")
-                    Color.clear.frame(width: 0, height: 0)
-                }
-                .layoutPriority(-1)
+                // The new version is the point of the row: never clipped, the old one gives way.
+                .fixedSize()
+            // Whole or not at all: a clipped size ("3" of "378,8 MB") reads as a wrong number.
+            if showsSize, let downloadSize, installState == .pending {
+                Text(downloadSize)
+                    .foregroundStyle(Theme.Palette.textTertiary)
+                    .help("Download size")
             }
         }
         .font(.system(size: 11, design: .rounded))
