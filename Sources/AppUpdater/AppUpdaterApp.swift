@@ -1,7 +1,17 @@
 import AppKit
 import SwiftUI
 
+/// Entry point. Screenshot mode branches off before `AppDelegate` builds the live environment,
+/// so no scan, update check, Sparkle updater, helper or usage recorder is ever created for it.
 @main
+enum AppMain {
+    @MainActor
+    static func main() {
+        if ScreenshotRenderer.runIfRequested() { return }
+        AppUpdaterApp.main()
+    }
+}
+
 struct AppUpdaterApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 

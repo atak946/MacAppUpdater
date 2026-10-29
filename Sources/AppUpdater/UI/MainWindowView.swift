@@ -15,10 +15,33 @@ struct MainWindowView: View {
     /// Export/import of the app list on All Apps.
     var migrationModel: MigrationModel?
 
-    @State private var selection: SidebarItem? = SidebarItem.launchArgument ?? .overview
+    @State private var selection: SidebarItem?
     @State private var searchText = ""
     @State private var detailApp: InstalledApp?
     @State private var mappingApp: InstalledApp?
+
+    /// `initialSelection` opens a page other than Overview (README screenshots); nil honours `-UIInitialPage`.
+    init(
+        viewModel: UpdatesViewModel,
+        formulaeModel: FormulaeModel,
+        cleanupModel: CleanupModel,
+        startupModel: StartupModel,
+        securityModel: SecurityModel,
+        monitorModel: MonitorModel,
+        githubMappings: GitHubMappingDependencies? = nil,
+        migrationModel: MigrationModel? = nil,
+        initialSelection: SidebarItem? = nil
+    ) {
+        self.viewModel = viewModel
+        self.formulaeModel = formulaeModel
+        self.cleanupModel = cleanupModel
+        self.startupModel = startupModel
+        self.securityModel = securityModel
+        self.monitorModel = monitorModel
+        self.githubMappings = githubMappings
+        self.migrationModel = migrationModel
+        _selection = State(initialValue: initialSelection ?? SidebarItem.launchArgument ?? .overview)
+    }
 
     var body: some View {
         // GeometryReader takes the proposed size without measuring its content, so AppKit's
