@@ -20,7 +20,7 @@ struct CleanupGroupCard: View {
             if isExpanded {
                 GlassDivider()
                     .padding(.horizontal, Theme.Spacing.l)
-                items
+                expandedContent
                     .padding(.horizontal, Theme.Spacing.s)
                     .padding(.vertical, Theme.Spacing.s)
                     // A move transition inside the card drew rows over the hero above; fade only.
@@ -100,6 +100,16 @@ struct CleanupGroupCard: View {
         showsAll ? group.items[...] : group.items.prefix(Self.collapsedLimit)
     }
 
+    /// Removed-app leftovers are grouped by bundle identifier; every other category is a flat list.
+    @ViewBuilder
+    private var expandedContent: some View {
+        if group.category == .removedAppLeftovers {
+            CleanupOwnerSectionList(group: group, model: model)
+        } else {
+            items
+        }
+    }
+
     private var items: some View {
         // Plain VStack: a LazyVStack nested in a card mis-measured its height, leaving a gap.
         VStack(spacing: 0) {
@@ -159,7 +169,13 @@ struct CleanupItemRow: View {
                 .help(Text("Show in Finder"))
                 .transition(.opacity)
             }
-            if let lastAccessed = item.lastAccessed {
+            if let lastModified = item.lastModified {
+                Text("Modified \(Text(lastModified, format: .relative(presentation: .named)))")
+                    .font(.system(size: 11))
+                    .foregroundStyle(Theme.Palette.textTertiary)
+                    .lineLimit(1)
+                    .frame(minWidth: 80, alignment: .trailing)
+            } else if let lastAccessed = item.lastAccessed {
                 Text(lastAccessed, format: .relative(presentation: .named))
                     .font(.system(size: 11))
                     .foregroundStyle(Theme.Palette.textTertiary)

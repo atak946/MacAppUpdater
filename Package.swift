@@ -18,7 +18,8 @@ let package = Package(
     targets: [
         .target(name: "AppUpdaterCore", resources: [.process("Resources")]),
         /// Disk cleanup: caches, developer junk, old installers and large forgotten files.
-        .target(name: "MaintenanceCore"),
+        /// Depends on AppUpdaterCore only to reuse its leftover rules and app discovery.
+        .target(name: "MaintenanceCore", dependencies: ["AppUpdaterCore"]),
         /// System monitor and task manager: CPU, memory, disk, network, battery, processes, ports.
         .target(name: "MonitorCore"),
         .executableTarget(
@@ -37,7 +38,7 @@ let package = Package(
         ),
         .executableTarget(name: "PrivilegedHelper", dependencies: ["AppUpdaterCore"]),
         .testTarget(name: "AppUpdaterCoreTests", dependencies: ["AppUpdaterCore"]),
-        .testTarget(name: "MaintenanceCoreTests", dependencies: ["MaintenanceCore"]),
+        .testTarget(name: "MaintenanceCoreTests", dependencies: ["MaintenanceCore", "AppUpdaterCore"]),
         .testTarget(name: "MonitorCoreTests", dependencies: ["MonitorCore"]),
         .testTarget(name: "AppUpdaterTests", dependencies: ["AppUpdater"]),
     ]

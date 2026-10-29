@@ -11,18 +11,23 @@ public struct FileSystemCleanupScanner: CleanupScanning, @unchecked Sendable {
     private let fileManager: FileManager
     private let configuration: CleanupScanConfiguration
     private let now: @Sendable () -> Date
+    private let installedApps: (any InstalledAppCataloging)?
 
     /// Creates a scanner. Defaults scan the current user's real home with production thresholds.
+    /// Without `installedApps`, `.removedAppLeftovers` finds nothing: an unknown app list must never
+    /// make everything look orphaned.
     public init(
         homeDirectory: URL = FileManager.default.homeDirectoryForCurrentUser,
         fileManager: FileManager = .default,
         configuration: CleanupScanConfiguration = CleanupScanConfiguration(),
-        now: @escaping @Sendable () -> Date = { Date() }
+        now: @escaping @Sendable () -> Date = { Date() },
+        installedApps: (any InstalledAppCataloging)? = nil
     ) {
         self.homeDirectory = homeDirectory
         self.fileManager = fileManager
         self.configuration = configuration
         self.now = now
+        self.installedApps = installedApps
     }
 
     // MARK: CleanupScanning
@@ -33,7 +38,10 @@ public struct FileSystemCleanupScanner: CleanupScanning, @unchecked Sendable {
         progress: @escaping @Sendable (CleanupScanProgress) -> Void
     ) async throws -> CleanupScanReport {
         let ordered = CleanupCategory.allCases.filter(categories.contains)
-        let scanner = makeCategoryScanner()
+        var scanner = makeCategoryScanner()
+        if categories.contains(.removedAppLeftovers) {
+            scanner.removedApps = try await makeRemovedAppFinder(inspector: scanner.inspector)
+        }
         var groups: [CleanupGroup] = []
         var seenPaths = Set<String>()
         for (index, category) in ordered.enumerated() {
@@ -56,6 +64,25 @@ public struct FileSystemCleanupScanner: CleanupScanning, @unchecked Sendable {
             configuration: configuration,
             now: now()
         )
+    }
+
+    /// Nil (category skipped) when there is no catalog, it fails, or it lists no installed app at all.
+    private func makeRemovedAppFinder(inspector: CleanupFileInspector) async throws -> RemovedAppLeftoverFinder? {
+        guard let installedApps else { return nil }
+        let snapshot: InstalledAppSnapshot
+        do {
+            snapshot = try await installedApps.snapshot()
+        } catch is CancellationError {
+            throw CancellationError()
+        } catch {
+            Self.logger.error("Skipping removed-app leftovers: \(error.localizedDescription, privacy: .public)")
+            return nil
+        }
+        guard !snapshot.installedBundleIdentifiers.isEmpty else {
+            Self.logger.notice("Skipping removed-app leftovers: no installed apps found")
+            return nil
+        }
+        return RemovedAppLeftoverFinder(home: homeDirectory, snapshot: snapshot, catalog: installedApps, inspector: inspector)
     }
 
     /// Runs the blocking file work on the concurrent executor, never on the caller's actor.

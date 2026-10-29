@@ -112,7 +112,7 @@ public struct LeftoverScanner: Sendable {
         return direct + listed
     }
 
-    private func listing(of folder: URL) -> [URL] {
+    func listing(of folder: URL) -> [URL] {
         do {
             return try FileManager.default.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil)
         } catch {

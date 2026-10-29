@@ -18,6 +18,7 @@ extension CleanupCategory {
         case .trash: String(localized: "Trash")
         case .oldInstallers: String(localized: "Old Installers")
         case .largeOldFiles: String(localized: "Large Old Files")
+        case .removedAppLeftovers: String(localized: "Leftovers of Removed Apps")
         }
     }
 
@@ -34,6 +35,7 @@ extension CleanupCategory {
         case .trash: String(localized: "Items already in the Trash; removed permanently.")
         case .oldInstallers: String(localized: "Disk images and installers in Downloads.")
         case .largeOldFiles: String(localized: "Big files you haven't opened in a long time.")
+        case .removedAppLeftovers: String(localized: "Settings and data of apps that are no longer installed.")
         }
     }
 
@@ -49,6 +51,7 @@ extension CleanupCategory {
         case .trash: "trash.fill"
         case .oldInstallers: "arrow.down.circle.fill"
         case .largeOldFiles: "tray.full.fill"
+        case .removedAppLeftovers: "app.dashed"
         }
     }
 
@@ -64,6 +67,7 @@ extension CleanupCategory {
         case .trash: Theme.Palette.danger
         case .oldInstallers: Theme.Palette.warning
         case .largeOldFiles: Theme.Palette.brandSecondary
+        case .removedAppLeftovers: Color(red: 0.95, green: 0.42, blue: 0.68)
         }
     }
 

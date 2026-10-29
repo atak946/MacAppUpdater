@@ -22,6 +22,17 @@ enum CleanupSample {
                 lastAccessed: now.addingTimeInterval(-daysAgo * day)
             )
         }
+        func leftover(_ path: String, _ owner: String, _ megabytes: Double, daysAgo: Double) -> CleanupItem {
+            let url = home.appendingPathComponent(path)
+            return CleanupItem(
+                url: url,
+                category: .removedAppLeftovers,
+                displayName: url.lastPathComponent,
+                sizeInBytes: Int64(megabytes * 1_000_000),
+                ownerBundleIdentifier: owner,
+                lastModified: now.addingTimeInterval(-daysAgo * day)
+            )
+        }
         let groups: [CleanupGroup] = [
             CleanupGroup(category: .xcodeDerivedData, items: [
                 item("Library/Developer/Xcode/DerivedData/MacAppUpdater-abc", .xcodeDerivedData, "MacAppUpdater", 6_240, daysAgo: 1),
@@ -50,6 +61,11 @@ enum CleanupSample {
             ]),
             CleanupGroup(category: .trash, items: [
                 item(".Trash/Old Project", .trash, "Old Project", 240, daysAgo: 20),
+            ]),
+            CleanupGroup(category: .removedAppLeftovers, items: [
+                leftover("Library/Application Support/com.example.Editor", "com.example.Editor", 320, daysAgo: 90),
+                leftover("Library/Preferences/com.example.Editor.plist", "com.example.Editor", 0.02, daysAgo: 90),
+                leftover("Library/Containers/org.sample.Notes", "org.sample.Notes", 140, daysAgo: 400),
             ]),
         ]
         return CleanupScanReport(groups: groups.sorted { $0.totalSize > $1.totalSize }, scannedAt: now)

@@ -89,7 +89,9 @@ final class AppEnvironment {
             caskSource: homebrewSource, appStoreSource: AppStoreSource(http: http, comparator: comparator)
         ))
         self.formulaeModel = FormulaeModel(homebrew: HomebrewCLI())
-        self.cleanupModel = CleanupModel(scanner: FileSystemCleanupScanner(), cleaner: TrashCleaner())
+        self.cleanupModel = CleanupModel(
+            scanner: FileSystemCleanupScanner(installedApps: LiveInstalledAppCatalog()), cleaner: TrashCleaner()
+        )
         self.startupModel = StartupModel(scanner: LiveStartupScanner(), controller: LaunchctlStartupController())
         self.securityModel = SecurityModel(checker: SystemSecurityChecker(), auditor: TCCPermissionAuditor())
         self.monitorModel = MonitorModel(

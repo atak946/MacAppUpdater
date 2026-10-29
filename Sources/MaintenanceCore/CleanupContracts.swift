@@ -25,12 +25,14 @@ public enum CleanupCategory: String, CaseIterable, Sendable, Codable, Hashable {
     case oldInstallers
     /// Files above the size threshold not opened for a long time (home folder, outside Library).
     case largeOldFiles
+    /// `~/Library` data named after a bundle identifier no installed app has (only listed, never auto-selected).
+    case removedAppLeftovers
 
     /// Whether the category's items start out selected after a scan. Risky ones are opt-in.
     public var isSelectedByDefault: Bool {
         switch self {
         case .userCaches, .logs, .xcodeDerivedData, .simulatorCaches, .packageManagerCaches, .trash: true
-        case .xcodeArchives, .deviceSupport, .oldInstallers, .largeOldFiles: false
+        case .xcodeArchives, .deviceSupport, .oldInstallers, .largeOldFiles, .removedAppLeftovers: false
         }
     }
 }
@@ -45,6 +47,8 @@ public struct CleanupItem: Identifiable, Sendable, Hashable {
     /// Allocated size on disk, including folder contents.
     public let sizeInBytes: Int64
     public let lastAccessed: Date?
+    /// Last modification, shown as evidence where the access date says little (removed-app leftovers).
+    public let lastModified: Date?
     /// Bundle identifier of the app owning a cache, when known (used for icons).
     public let ownerBundleIdentifier: String?
 
@@ -54,7 +58,8 @@ public struct CleanupItem: Identifiable, Sendable, Hashable {
         displayName: String,
         sizeInBytes: Int64,
         lastAccessed: Date? = nil,
-        ownerBundleIdentifier: String? = nil
+        ownerBundleIdentifier: String? = nil,
+        lastModified: Date? = nil
     ) {
         self.url = url
         self.category = category
@@ -62,6 +67,7 @@ public struct CleanupItem: Identifiable, Sendable, Hashable {
         self.sizeInBytes = sizeInBytes
         self.lastAccessed = lastAccessed
         self.ownerBundleIdentifier = ownerBundleIdentifier
+        self.lastModified = lastModified
     }
 }
 

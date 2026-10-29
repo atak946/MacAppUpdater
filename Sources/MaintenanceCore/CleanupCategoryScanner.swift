@@ -13,6 +13,8 @@ struct CleanupCategoryScanner: Sendable {
     let inspector: CleanupFileInspector
     let configuration: CleanupScanConfiguration
     let now: Date
+    /// Nil when no app catalog is available; `.removedAppLeftovers` then finds nothing.
+    var removedApps: RemovedAppLeftoverFinder?
 
     // MARK: Dispatch
 
@@ -30,6 +32,7 @@ struct CleanupCategoryScanner: Sendable {
         case .trash: return try childItems(of: locations.trash, category: .trash)
         case .oldInstallers: return try oldInstallers()
         case .largeOldFiles: return try largeOldFiles()
+        case .removedAppLeftovers: return try removedApps?.items() ?? []
         }
     }
 

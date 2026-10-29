@@ -63,9 +63,14 @@ final class CleanupModel {
     func isSelected(_ item: CleanupItem) -> Bool { selection.contains(item.id) }
 
     func selectionState(of group: CleanupGroup) -> GroupSelection {
-        let count = group.items.lazy.filter { self.selection.contains($0.id) }.count
+        selectionState(of: group.items)
+    }
+
+    /// Selection of any subset of items, e.g. one removed app's leftovers.
+    func selectionState(of items: [CleanupItem]) -> GroupSelection {
+        let count = items.lazy.filter { self.selection.contains($0.id) }.count
         if count == 0 { return .none }
-        return count == group.items.count ? .all : .some
+        return count == items.count ? .all : .some
     }
 
     func selectedSize(of group: CleanupGroup) -> Int64 {
@@ -84,8 +89,13 @@ final class CleanupModel {
 
     /// Selects every item of the group, or clears it when everything is already selected.
     func toggleGroup(_ group: CleanupGroup) {
-        let ids = Set(group.items.map(\.id))
-        selection = selectionState(of: group) == .all ? selection.subtracting(ids) : selection.union(ids)
+        toggleItems(group.items)
+    }
+
+    /// Selects every one of `items`, or clears them when all are already selected.
+    func toggleItems(_ items: [CleanupItem]) {
+        let ids = Set(items.map(\.id))
+        selection = selectionState(of: items) == .all ? selection.subtracting(ids) : selection.union(ids)
     }
 
     // MARK: Scanning
