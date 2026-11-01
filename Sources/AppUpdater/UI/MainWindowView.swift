@@ -66,27 +66,27 @@ struct MainWindowView: View {
     }
 
     private var windowContent: some View {
-        HStack(spacing: 0) {
+        // Sidebar, top bar and page are placed by `MainWindowLayout`, never measured: an HStack/VStack
+        // asks each child for its minimum and maximum size to share space, and for a page that is a
+        // ScrollView that meant laying out its whole content (all rows and text) at zero and infinite
+        // sizes on every model update, ~1 s of main-thread layout while a check was running.
+        // The top bar sits outside the transitioning page so it never doubles during a switch
+        // (not `safeAreaInset` either: the inset re-measures the whole page on every update).
+        MainWindowLayout(sidebarWidth: 236) {
             GlassSidebar(
                 viewModel: viewModel,
                 formulaeModel: formulaeModel,
                 selection: $selection,
                 searchText: $searchText
             )
-            .frame(width: 236)
-            // The top bar sits outside the transitioning page so it never doubles during a switch.
-            // A plain stack, not `safeAreaInset`: the inset re-measures the whole page on every
-            // update, which made each Monitor sample cost ~0.7 s of main-thread layout.
-            VStack(spacing: 0) {
-                topBar
-                ZStack {
-                    detail
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .id(selection)
-                        .transition(.opacity)
-                }
-                .animation(.easeOut(duration: 0.16), value: selection)
+            topBar
+            ZStack {
+                detail
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .id(selection)
+                    .transition(.opacity)
             }
+            .animation(.easeOut(duration: 0.16), value: selection)
         }
         .scrollContentBackground(.hidden)
         // Static: an animated backdrop forces every glass surface to re-blur each frame.
@@ -390,5 +390,36 @@ extension UpdateSourceKind {
         case .electron: .cyan
         case .vendor: .indigo
         }
+    }
+}
+
+/// Places the sidebar (fixed width, full height), the top bar (its own height) and the page (the rest)
+/// without asking the page for its size, so a scrolling page is laid out once, at its final size.
+private struct MainWindowLayout: Layout {
+    let sidebarWidth: CGFloat
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        // Takes whatever the window offers; the window's minimum size comes from the outer frame.
+        proposal.replacingUnspecifiedDimensions(by: CGSize(width: sidebarWidth, height: 0))
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        guard subviews.count == 3 else { return }
+        let (sidebar, topBar, page) = (subviews[0], subviews[1], subviews[2])
+        let pageX = bounds.minX + sidebarWidth
+        let pageWidth = max(0, bounds.width - sidebarWidth)
+        sidebar.place(
+            at: bounds.origin, anchor: .topLeading,
+            proposal: ProposedViewSize(width: sidebarWidth, height: bounds.height)
+        )
+        let barHeight = topBar.sizeThatFits(ProposedViewSize(width: pageWidth, height: nil)).height
+        topBar.place(
+            at: CGPoint(x: pageX, y: bounds.minY), anchor: .topLeading,
+            proposal: ProposedViewSize(width: pageWidth, height: barHeight)
+        )
+        page.place(
+            at: CGPoint(x: pageX, y: bounds.minY + barHeight), anchor: .topLeading,
+            proposal: ProposedViewSize(width: pageWidth, height: max(0, bounds.height - barHeight))
+        )
     }
 }
