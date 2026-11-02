@@ -59,7 +59,7 @@ main() {
     sips -s format png -z 256 256 "$ICON" --out "$IMAGES/icon.png" >/dev/null
 
     log "Screenshots:"
-    ls -lh "$IMAGES"/icon.png "$IMAGES"/*/*.png | awk '{ print $5, $9 }'
+    find "$IMAGES" -name '*.png' -exec du -h {} + | sort -k2
 }
 
 main "$@"
