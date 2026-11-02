@@ -89,7 +89,9 @@ struct SettingsView: View {
             "Allow updates that aren't notarized (warn)",
             isOn: Binding(
                 get: { gate.effectiveAllowUnnotarized(userValue: allowUnnotarized) },
-                set: setAllowUnnotarized
+                // A closure, not the method itself: passing `setAllowUnnotarized` directly makes
+                // Swift 6.1-6.3 crash in IRGen on the @isolated(any) setter thunk.
+                set: { setAllowUnnotarized($0) }
             )
         )
         toggle.managedLock(gate.isNotarizationLocked)
