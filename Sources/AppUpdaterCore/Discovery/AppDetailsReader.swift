@@ -2,8 +2,8 @@ import Foundation
 import os
 
 /// Extra information about an installed app, shown in the detail window.
-public struct AppDetails: Sendable, Equatable {
-    public enum Signature: Sendable, Equatable {
+public struct AppDetails: Sendable, Equatable, Codable {
+    public enum Signature: Sendable, Equatable, Codable {
         case signed(teamIdentifier: String)
         case unsigned(reason: String)
         /// The main executable is a symlink to a tool outside the bundle (a URL handler or launcher

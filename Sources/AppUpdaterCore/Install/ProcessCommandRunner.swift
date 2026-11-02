@@ -9,7 +9,12 @@ import os
 public struct ProcessCommandRunner: CommandRunner {
     private static let logger = Logger(subsystem: "com.macappupdater", category: "CommandRunner")
 
-    public init() {}
+    private let qualityOfService: QualityOfService
+
+    /// `.background` suits bulk scans (e.g. `spctl` over every installed app) that must not slow down the Mac.
+    public init(qualityOfService: QualityOfService = .default) {
+        self.qualityOfService = qualityOfService
+    }
 
     @discardableResult
     public func run(_ executable: String, arguments: [String]) async throws -> String {
@@ -29,6 +34,7 @@ public struct ProcessCommandRunner: CommandRunner {
         process.executableURL = URL(fileURLWithPath: executable)
         process.arguments = arguments
         process.standardInput = FileHandle.nullDevice
+        process.qualityOfService = qualityOfService
 
         let pipe = Pipe()
         process.standardOutput = pipe

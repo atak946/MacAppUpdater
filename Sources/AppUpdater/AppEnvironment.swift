@@ -122,9 +122,11 @@ final class AppEnvironment {
             uninstaller: AppUninstaller(),
             insights: InsightsCollector(
                 teamStore: UserDefaultsTeamIdentifierStore(defaults: defaults),
-                gatekeeper: gatekeeper,
+                // Bulk assessment of every installed app: background QoS so `spctl` never competes with the user.
+                gatekeeper: SpctlGatekeeperAssessor(commandRunner: ProcessCommandRunner(qualityOfService: .background)),
                 downloadHostStore: downloadHosts,
-                verdictCache: GatekeeperVerdictCache(storage: .standardDefaults)
+                verdictCache: GatekeeperVerdictCache(storage: .standardDefaults),
+                detailsCache: AppDetailsCache(storage: .standardDefaults)
             ),
             compatibility: CompatibilityAnalyzer(),
             runningApps: WorkspaceRunningAppChecker(),

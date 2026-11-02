@@ -4,7 +4,9 @@ import os
 /// Gathers `AppInsight`s for every app with bounded concurrency, then builds the report.
 /// Runs off the main actor; safe to `await` from a `@MainActor` view model.
 public struct InsightsCollector: Sendable {
-    public static let maxConcurrentReads = 3
+    /// Two bundles at a time: each read walks the bundle and `spctl` hashes it, so more parallel
+    /// reads only saturate the disk and make the whole Mac stutter on the first (uncached) run.
+    public static let maxConcurrentReads = 2
 
     private let detailsReader: AppDetailsReader
     private let usageReader: any AppUsageReading
@@ -14,6 +16,7 @@ public struct InsightsCollector: Sendable {
     /// Assesses installed bundles (one `spctl` each); nil skips notarization warnings.
     private let gatekeeper: (any GatekeeperAssessing)?
     private let verdictCache: GatekeeperVerdictCache
+    private let detailsCache: AppDetailsCache
     private let downloadHostStore: (any DownloadHostStoring)?
     private let maxConcurrency: Int
     private let logger = Logger(subsystem: "com.macappupdater", category: "InsightsCollector")
@@ -27,9 +30,11 @@ public struct InsightsCollector: Sendable {
         gatekeeper: (any GatekeeperAssessing)? = nil,
         downloadHostStore: (any DownloadHostStoring)? = nil,
         verdictCache: GatekeeperVerdictCache = GatekeeperVerdictCache(),
+        detailsCache: AppDetailsCache = AppDetailsCache(),
         maxConcurrency: Int = InsightsCollector.maxConcurrentReads
     ) {
         self.verdictCache = verdictCache
+        self.detailsCache = detailsCache
         self.gatekeeper = gatekeeper
         self.downloadHostStore = downloadHostStore
         self.detailsReader = detailsReader
@@ -47,10 +52,11 @@ public struct InsightsCollector: Sendable {
         vendorManagement: [String: VendorManagement] = [:]
     ) async -> InsightsReport {
         let updatesByID = Dictionary(updates.map { ($0.app.bundleIdentifier, $0) }) { first, _ in first }
-        // Background work: it reads every bundle on disk and must not compete with the UI.
-        let insights = await Task.detached(priority: .utility) { [self] in
+        // Background work: it reads every bundle on disk and must not compete with the UI or other apps.
+        let insights = await Task.detached(priority: .background) { [self] in
             await gather(apps: apps, updatesByID: updatesByID, vendorManagement: vendorManagement)
         }.value
+        await detailsCache.retain(only: apps)
         logger.info("Collected insights for \(insights.count, privacy: .public) apps")
         return builder.build(from: insights)
     }
@@ -62,7 +68,8 @@ public struct InsightsCollector: Sendable {
         update: AvailableUpdate?,
         vendorManagement: VendorManagement? = nil
     ) async -> AppInsight {
-        let details = await detailsReader.details(for: app)
+        let reader = detailsReader
+        let details = await detailsCache.details(for: app) { await reader.details(for: app) }
         let lastUsed = await readLastUsed(app.url)
         let previous = teamStore.lastKnownTeamIdentifier(for: app.bundleIdentifier)
         if previous == nil, case .signed(let team) = details.signature {
@@ -93,7 +100,7 @@ public struct InsightsCollector: Sendable {
 
     private func readLastUsed(_ url: URL) async -> Date? {
         let reader = usageReader
-        return await Task.detached(priority: .utility) { reader.lastUsedDate(of: url) }.value
+        return await Task.detached(priority: .background) { reader.lastUsedDate(of: url) }.value
     }
 
     private func gather(
