@@ -60,6 +60,7 @@ final class AppEnvironment {
         let notarizationPolicy = Self.liveNotarizationPolicy(audit: notarizationAudit, gate: gate)
         // Restore is gated like an install (H-2): same assessor, same live user/MDM policy.
         let backupStore = BackupStore(
+            retention: BackupSettings.retention(in: .standard),
             gatekeeperAssessor: gatekeeper, notarizationPolicy: notarizationPolicy()
         )
         let policyStore = ManagedUpdatePoliciesStore(
@@ -150,6 +151,7 @@ final class AppEnvironment {
             downloader: ProgressDownloader(publicEDKey: Self.sparklePublicKey, checksum: checksumStore.lookup),
             installer: AppInstaller(
                 backupStore: backupStore,
+                backsUpApps: BackupSettings.isEnabled(in: .standard),
                 gatekeeperAssessor: gatekeeper,
                 notarizationPolicy: notarizationPolicy(),
                 downloadHostStore: downloadHosts
@@ -159,6 +161,11 @@ final class AppEnvironment {
         )
         let notifier = UpdateNotifier()
         self.viewModel = viewModel
+        // Update backups removed under Cleanup (or Disk Usage) must stop offering "Undo".
+        cleanupModel.onCleaned = { [weak viewModel] result in
+            guard result.removed.contains(where: { $0.category == .updateBackups }) else { return }
+            await viewModel?.refreshBackups()
+        }
         self.notifier = notifier
         let interval = gate.effectiveCheckInterval(userValue: Self.storedIntervalHours(defaults))
         self.scheduler = UpdateScheduler(interval: interval * 3600) {
@@ -185,6 +192,21 @@ final class AppEnvironment {
         Task { await viewModel.loadHistory() }
         monitorModel.usageHistory?.start()
         Task { await refreshHelperRegistration() }
+    }
+
+    /// A shorter retention period applies right away instead of at the next launch.
+    func backupSettingsChanged() {
+        let backupStore = self.backupStore
+        let viewModel = self.viewModel
+        let logger = self.logger
+        Task {
+            do {
+                try await backupStore.pruneAll()
+            } catch {
+                logger.error("Pruning backups failed: \(error.localizedDescription, privacy: .public)")
+            }
+            await viewModel.refreshBackups()
+        }
     }
 
     func stop() {

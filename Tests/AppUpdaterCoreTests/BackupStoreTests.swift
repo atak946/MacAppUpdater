@@ -1,4 +1,5 @@
 import Foundation
+import os
 import Testing
 @testable import AppUpdaterCore
 
@@ -85,6 +86,43 @@ struct BackupStoreTests {
         try await store.pruneAll()
         #expect(try await store.backups(for: Self.bundleID).isEmpty)
         #expect(!FileManager.default.fileExists(atPath: backupsDirectory.appendingPathComponent(Self.bundleID).path))
+    }
+
+    @Test("a shorter retention set after a backup applies at the next prune")
+    func retentionIsReadLive() async throws {
+        defer { cleanUp() }
+        let clock = BackupTestClock()
+        let days = OSAllocatedUnfairLock(initialState: 14.0)
+        let store = BackupStore(
+            baseDirectory: backupsDirectory,
+            retention: BackupRetentionPolicy(maxAge: days.withLock { $0 } * Self.day),
+            signatureVerifier: PathTeamVerifier(team: "TEAM123"), terminator: RecordingTerminator(),
+            relauncher: RecordingRelauncher(), now: { clock.now }
+        )
+        try await store.backUp(try installApp(version: "1.0"))
+        clock.advance(by: 5 * Self.day)
+
+        try await store.pruneAll()
+        #expect(try await store.backups(for: Self.bundleID).count == 1)
+
+        days.withLock { $0 = 3 }
+        try await store.pruneAll()
+        #expect(try await store.backups(for: Self.bundleID).isEmpty)
+    }
+
+    @Test("backup settings fall back to on and 14 days, and convert days to a retention policy")
+    func backupSettingsDefaults() throws {
+        let suite = "BackupSettingsTests-\(UUID().uuidString)"
+        let defaults = try #require(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+
+        #expect(BackupSettings.isEnabled(in: defaults))
+        #expect(BackupSettings.retention(in: defaults).maxAge == 14 * Self.day)
+
+        defaults.set(false, forKey: BackupSettings.enabledKey)
+        defaults.set(3, forKey: BackupSettings.retentionDaysKey)
+        #expect(!BackupSettings.isEnabled(in: defaults))
+        #expect(BackupSettings.retention(in: defaults).maxAge == 3 * Self.day)
     }
 
     @Test("restore swaps the backup in, relaunches a running app and consumes the backup")

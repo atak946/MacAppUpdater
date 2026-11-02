@@ -28,7 +28,8 @@ public actor BackupStore: AppBackupStoring {
     }
 
     public nonisolated let baseDirectory: URL
-    private let retention: BackupRetentionPolicy
+    /// Read on every prune, so a changed setting applies without rebuilding the store.
+    private let retention: @Sendable () -> BackupRetentionPolicy
     private let commandRunner: any CommandRunner
     private let signatureVerifier: any SignatureVerifying
     private let terminator: any RunningAppTerminating
@@ -47,7 +48,7 @@ public actor BackupStore: AppBackupStoring {
 
     public init(
         baseDirectory: URL = BackupStore.defaultBaseDirectory,
-        retention: BackupRetentionPolicy = .default,
+        retention: @escaping @autoclosure @Sendable () -> BackupRetentionPolicy = .default,
         commandRunner: any CommandRunner = ProcessCommandRunner(),
         signatureVerifier: any SignatureVerifying = CodeSignatureVerifier(),
         terminator: any RunningAppTerminating = RunningAppTerminator(),
@@ -191,6 +192,7 @@ public actor BackupStore: AppBackupStoring {
     /// Keeps the newest `maxBackupsPerApp` backups, drops expired ones and incomplete leftovers.
     /// `kept` (the backup just made) is never removed.
     private func prune(directory: URL, keeping kept: AppBackup?) {
+        let retention = self.retention()
         let cutoff = now().addingTimeInterval(-retention.maxAge)
         let backups = listBackups(in: directory)
         let doomed = backups.enumerated().filter { index, backup in

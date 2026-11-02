@@ -18,6 +18,8 @@ struct SettingsView: View {
     var notarizationAudit: NotarizationSettingAudit?
     /// Launch-time result of `NotarizationSettingAudit.wasChangedOutsideApp`.
     var notarizationChangedExternally = false
+    /// A backup setting changed; the environment prunes with the new period.
+    var onBackupSettingsChange: () -> Void = {}
 
     @AppStorage(SettingsKeys.checkIntervalHours)
     private var intervalHours: Double = SettingsKeys.defaultCheckIntervalHours
@@ -66,6 +68,8 @@ struct SettingsView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
+
+            BackupSettingsSection(onChange: onBackupSettingsChange)
 
             HelperSettingsSection(helper: helper, onStatusChange: onHelperStatusChange)
         }

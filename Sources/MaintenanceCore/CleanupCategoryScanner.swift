@@ -33,6 +33,42 @@ struct CleanupCategoryScanner: Sendable {
         case .oldInstallers: return try oldInstallers()
         case .largeOldFiles: return try largeOldFiles()
         case .removedAppLeftovers: return try removedApps?.items() ?? []
+        case .updateBackups: return try updateBackups()
+        case .claudeLeftovers: return try claudeLeftovers()
+        }
+    }
+
+    // MARK: Claude
+
+    private func claudeLeftovers() throws -> [CleanupItem] {
+        let scanner = self
+        return try ClaudeLeftoverFinder(locations: locations, inspector: inspector) { url, name in
+            try scanner.makeItem(url, category: .claudeLeftovers, displayName: name)
+        }.items()
+    }
+
+    // MARK: Update backups
+
+    /// The app and version a backup holds, from `BackupStore`'s metadata file.
+    private struct BackupMetadata: Decodable {
+        let appName: String
+        let version: String
+    }
+
+    /// One item per kept version: `Backups/<bundle id>/<version>/`.
+    private func updateBackups() throws -> [CleanupItem] {
+        try inspector.children(of: locations.updateBackups).filter(inspector.isDirectory).flatMap { appFolder in
+            let bundleID = appFolder.lastPathComponent
+            return try inspector.children(of: appFolder).filter(inspector.isDirectory).compactMap { versionFolder in
+                let metadata = (try? Data(contentsOf: versionFolder.appendingPathComponent("backup.json")))
+                    .flatMap { try? JSONDecoder().decode(BackupMetadata.self, from: $0) }
+                let name = metadata.map { "\($0.appName) \($0.version)" }
+                    ?? "\(bundleID) \(versionFolder.lastPathComponent)"
+                return try makeItem(
+                    versionFolder, category: .updateBackups, displayName: name,
+                    owner: Self.looksLikeBundleIdentifier(bundleID) ? bundleID : nil
+                )
+            }
         }
     }
 

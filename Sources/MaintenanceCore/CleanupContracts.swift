@@ -27,12 +27,16 @@ public enum CleanupCategory: String, CaseIterable, Sendable, Codable, Hashable {
     case largeOldFiles
     /// `~/Library` data named after a bundle identifier no installed app has (only listed, never auto-selected).
     case removedAppLeftovers
+    /// Copies of previous app versions App Updater keeps to undo an update (only listed, never auto-selected).
+    case updateBackups
+    /// Old Claude Code builds, the Cowork VM image and Claude desktop caches (only listed, never auto-selected).
+    case claudeLeftovers
 
     /// Whether the category's items start out selected after a scan. Risky ones are opt-in.
     public var isSelectedByDefault: Bool {
         switch self {
         case .userCaches, .logs, .xcodeDerivedData, .simulatorCaches, .packageManagerCaches, .trash: true
-        case .xcodeArchives, .deviceSupport, .oldInstallers, .largeOldFiles, .removedAppLeftovers: false
+        case .xcodeArchives, .deviceSupport, .oldInstallers, .largeOldFiles, .removedAppLeftovers, .updateBackups, .claudeLeftovers: false
         }
     }
 }

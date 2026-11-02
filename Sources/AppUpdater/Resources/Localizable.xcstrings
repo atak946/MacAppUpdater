@@ -8538,6 +8538,386 @@
           }
         }
       }
+    },
+    "Disk Usage": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disk Kullanımı"
+          }
+        }
+      }
+    },
+    "See which folders and files take up the most space on your Mac.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'inizde en çok yer kaplayan klasör ve dosyaları görün."
+          }
+        }
+      }
+    },
+    "Choose Folder…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klasör Seç…"
+          }
+        }
+      }
+    },
+    "Stop": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durdur"
+          }
+        }
+      }
+    },
+    "Size on disk": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diskteki boyut"
+          }
+        }
+      }
+    },
+    "Files": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dosyalar"
+          }
+        }
+      }
+    },
+    "Folders": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klasörler"
+          }
+        }
+      }
+    },
+    "Find what fills your disk": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diskinizi neyin doldurduğunu bulun"
+          }
+        }
+      }
+    },
+    "Scan your home folder, or choose any folder, to see its size broken down by subfolder.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ana klasörünüzü ya da istediğiniz bir klasörü tarayın, boyutunu alt klasörlere göre görün."
+          }
+        }
+      }
+    },
+    "Scan Home Folder": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ana Klasörü Tara"
+          }
+        }
+      }
+    },
+    "The scan failed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarama başarısız oldu"
+          }
+        }
+      }
+    },
+    "Measuring %@…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ölçülüyor…"
+          }
+        }
+      }
+    },
+    "Nothing to show": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gösterilecek bir şey yok"
+          }
+        }
+      }
+    },
+    "This folder is empty or could not be read.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu klasör boş ya da okunamadı."
+          }
+        }
+      }
+    },
+    "Copy Path": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yolu Kopyala"
+          }
+        }
+      }
+    },
+    "Reveal Folder in Finder": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klasörü Finder'da Göster"
+          }
+        }
+      }
+    },
+    "Move “%@” (%@) to the Trash?": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%1$@” (%2$@) Çöp Sepetine taşınsın mı?"
+          }
+        }
+      }
+    },
+    "Opens the folder": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klasörü açar"
+          }
+        }
+      }
+    },
+    "Partial": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kısmi"
+          }
+        }
+      }
+    },
+    "Some folders inside could not be read, so the real size may be larger.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İçindeki bazı klasörler okunamadı; gerçek boyut daha büyük olabilir."
+          }
+        }
+      }
+    },
+    "%lld smaller files": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld küçük dosya"
+          }
+        }
+      }
+    },
+    "%@ files": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ dosya"
+          }
+        }
+      }
+    },
+    "Up one level": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir üst düzey"
+          }
+        }
+      }
+    },
+    "DISK USAGE": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DİSK KULLANIMI"
+          }
+        }
+      }
+    },
+    "LARGEST SO FAR": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ŞU ANA KADAR EN BÜYÜKLER"
+          }
+        }
+      }
+    },
+    "items": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "öğe"
+          }
+        }
+      }
+    },
+    "found": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bulundu"
+          }
+        }
+      }
+    },
+    "folders": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "klasör"
+          }
+        }
+      }
+    },
+    "Rescan This Folder": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu Klasörü Yeniden Tara"
+          }
+        }
+      }
+    },
+    "Update Backups": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme Yedekleri"
+          }
+        }
+      }
+    },
+    "Previous app versions kept to undo an update. Removing one turns off its undo.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir güncellemeyi geri almak için saklanan önceki uygulama sürümleri. Silinen yedeğin geri alma seçeneği kalmaz."
+          }
+        }
+      }
+    },
+    "Backups": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yedekler"
+          }
+        }
+      }
+    },
+    "Back up apps before updating": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeden önce uygulamaları yedekle"
+          }
+        }
+      }
+    },
+    "Keep backups for": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yedekleri sakla"
+          }
+        }
+      }
+    },
+    "The previous version of each updated app is kept so the update can be undone. Remove backups any time under Cleanup.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellenen her uygulamanın önceki sürümü, güncelleme geri alınabilsin diye saklanır. Yedekleri istediğin zaman Temizlik'ten silebilirsin."
+          }
+        }
+      }
+    },
+    "Updates can't be undone while backups are off. Existing backups are kept until they expire.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yedekler kapalıyken güncellemeler geri alınamaz. Mevcut yedekler süreleri dolana kadar saklanır."
+          }
+        }
+      }
+    },
+    "Claude": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude"
+          }
+        }
+      }
+    },
+    "Old Claude Code versions, the Cowork VM image and Claude desktop caches. Quit Claude first; Cowork downloads its VM again when used.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eski Claude Code sürümleri, Cowork VM imajı ve Claude masaüstü önbellekleri. Önce Claude'dan çık; Cowork'ü kullanınca VM yeniden iner."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -14,7 +14,8 @@ struct SettingsTabs: View {
                 onHelperStatusChange: { Task { await environment.viewModel.refreshHelperStatus() } },
                 managed: environment.managed,
                 notarizationAudit: environment.notarizationAudit,
-                notarizationChangedExternally: environment.notarizationSettingChangedExternally
+                notarizationChangedExternally: environment.notarizationSettingChangedExternally,
+                onBackupSettingsChange: environment.backupSettingsChanged
             )
             .tabItem { Label("General", systemImage: "gearshape") }
 

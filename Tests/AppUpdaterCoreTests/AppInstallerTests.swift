@@ -117,6 +117,25 @@ struct AppInstallerTests {
         #expect(try Self.version(of: installedURL) == "2.0")
     }
 
+    @Test("with backups turned off the store is never asked, so the install goes ahead")
+    func backupsOffSkipsStore() async throws {
+        defer { cleanUp() }
+        let installer = AppInstaller(
+            commandRunner: ProcessCommandRunner(),
+            signatureVerifier: StubSignatureVerifier(installedURL: installedURL, oldTeam: "T", newTeam: "T"),
+            terminator: NoopTerminator(),
+            // Would fail the install if it were asked to back up.
+            backupStore: FailingBackupStore(),
+            backsUpApps: false,
+            relauncher: RecordingRelauncher(),
+            gatekeeperAssessor: FixedGatekeeperAssessor(.notarized)
+        )
+
+        try await installer.install(makeUpdate(), from: packageURL)
+
+        #expect(try Self.version(of: installedURL) == "2.0")
+    }
+
     @Test("a failing backup aborts the install before quitting the app")
     func backupFailureAborts() async throws {
         defer { cleanUp() }

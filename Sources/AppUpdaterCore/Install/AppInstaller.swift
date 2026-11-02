@@ -31,6 +31,8 @@ public struct AppInstaller: UpdateInstalling {
     private let terminator: any RunningAppTerminating
     /// `nil` disables backups (and therefore rollback).
     private let backupStore: (any AppBackupStoring)?
+    /// Read before every install: the user can turn backups off in Settings.
+    private let backsUpApps: @Sendable () -> Bool
     private let relauncher: any AppRelaunching
     private let relaunchAfterInstall: Bool
     private let replacer: BundleReplacer
@@ -49,6 +51,7 @@ public struct AppInstaller: UpdateInstalling {
         terminator: any RunningAppTerminating = RunningAppTerminator(),
         fileManager: FileManager = .default,
         backupStore: (any AppBackupStoring)? = BackupStore(),
+        backsUpApps: @escaping @autoclosure @Sendable () -> Bool = true,
         relauncher: any AppRelaunching = WorkspaceAppRelauncher(),
         relaunchAfterInstall: Bool = true,
         gatekeeperAssessor: any GatekeeperAssessing = SpctlGatekeeperAssessor(),
@@ -61,6 +64,7 @@ public struct AppInstaller: UpdateInstalling {
         self.terminator = terminator
         self.fileManager = fileManager
         self.backupStore = backupStore
+        self.backsUpApps = backsUpApps
         self.relauncher = relauncher
         self.relaunchAfterInstall = relaunchAfterInstall
         self.replacer = BundleReplacer(fileManager: fileManager)
@@ -148,7 +152,7 @@ public struct AppInstaller: UpdateInstalling {
     }
 
     private func backUp(_ app: InstalledApp) async throws {
-        guard let backupStore else { return }
+        guard let backupStore, backsUpApps() else { return }
         do {
             try await backupStore.backUp(app)
         } catch let error as UpdaterError {

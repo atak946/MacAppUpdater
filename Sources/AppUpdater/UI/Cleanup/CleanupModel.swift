@@ -35,6 +35,8 @@ final class CleanupModel {
     /// Bumped on every scan or cancel so stale progress callbacks and results are ignored.
     private var generation = 0
     private var scanTask: Task<CleanupScanReport, any Error>?
+    /// Called after every clean, e.g. so removed update backups stop offering "Undo".
+    @ObservationIgnored var onCleaned: (@MainActor (CleanupResult) async -> Void)?
 
     init(scanner: any CleanupScanning, cleaner: any CleanupPerforming) {
         self.scanner = scanner
@@ -200,6 +202,7 @@ final class CleanupModel {
         for failure in result.failed {
             logger.error("Cleanup failed for \(failure.item.url.path, privacy: .public): \(failure.reason, privacy: .public)")
         }
+        await onCleaned?(result)
         await rescanQuietly()
         return result
     }

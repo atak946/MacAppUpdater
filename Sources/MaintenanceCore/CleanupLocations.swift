@@ -56,6 +56,8 @@ struct CleanupLocations: Sendable {
     var simulatorCaches: URL { url("Library/Developer/CoreSimulator/Caches") }
     var trash: URL { url(".Trash") }
     var downloads: URL { url("Downloads") }
+    /// App Updater's own rollback copies; matches `BackupStore.defaultBaseDirectory`.
+    var updateBackups: URL { url("Library/Application Support/MacAppUpdater/Backups") }
 
     /// Names of `~/Library/Caches` children that belong to `.packageManagerCaches`.
     var packageManagerCacheNamesInCaches: Set<String> {

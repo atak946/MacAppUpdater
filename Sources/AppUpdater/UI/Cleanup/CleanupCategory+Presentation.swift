@@ -19,6 +19,8 @@ extension CleanupCategory {
         case .oldInstallers: String(localized: "Old Installers")
         case .largeOldFiles: String(localized: "Large Old Files")
         case .removedAppLeftovers: String(localized: "Leftovers of Removed Apps")
+        case .updateBackups: String(localized: "Update Backups")
+        case .claudeLeftovers: String(localized: "Claude")
         }
     }
 
@@ -36,6 +38,8 @@ extension CleanupCategory {
         case .oldInstallers: String(localized: "Disk images and installers in Downloads.")
         case .largeOldFiles: String(localized: "Big files you haven't opened in a long time.")
         case .removedAppLeftovers: String(localized: "Settings and data of apps that are no longer installed.")
+        case .updateBackups: String(localized: "Previous app versions kept to undo an update. Removing one turns off its undo.")
+        case .claudeLeftovers: String(localized: "Old Claude Code versions, the Cowork VM image and Claude desktop caches. Quit Claude first; Cowork downloads its VM again when used.")
         }
     }
 
@@ -52,6 +56,8 @@ extension CleanupCategory {
         case .oldInstallers: "arrow.down.circle.fill"
         case .largeOldFiles: "tray.full.fill"
         case .removedAppLeftovers: "app.dashed"
+        case .updateBackups: "arrow.uturn.backward.circle.fill"
+        case .claudeLeftovers: "brain"
         }
     }
 
@@ -68,6 +74,8 @@ extension CleanupCategory {
         case .oldInstallers: Theme.Palette.warning
         case .largeOldFiles: Theme.Palette.brandSecondary
         case .removedAppLeftovers: Color(red: 0.95, green: 0.42, blue: 0.68)
+        case .updateBackups: Color(red: 0.55, green: 0.6, blue: 1.0)
+        case .claudeLeftovers: Color(red: 0.85, green: 0.47, blue: 0.34)
         }
     }
 
