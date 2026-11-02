@@ -22,6 +22,7 @@ struct AppUpdaterApp: App {
                 formulaeModel: appDelegate.environment.formulaeModel,
                 cleanupModel: appDelegate.environment.cleanupModel,
                 startupModel: appDelegate.environment.startupModel,
+                diskUsageModel: appDelegate.environment.diskUsageModel,
                 securityModel: appDelegate.environment.securityModel,
                 monitorModel: appDelegate.environment.monitorModel,
                 githubMappings: appDelegate.environment.githubMappingDependencies,

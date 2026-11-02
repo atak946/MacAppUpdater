@@ -8,6 +8,7 @@ struct MainWindowView: View {
     let formulaeModel: FormulaeModel
     let cleanupModel: CleanupModel
     let startupModel: StartupModel
+    let diskUsageModel: DiskUsageModel
     let securityModel: SecurityModel
     let monitorModel: MonitorModel
     /// Lets Coverage map an app to a GitHub repository in place.
@@ -26,6 +27,7 @@ struct MainWindowView: View {
         formulaeModel: FormulaeModel,
         cleanupModel: CleanupModel,
         startupModel: StartupModel,
+        diskUsageModel: DiskUsageModel,
         securityModel: SecurityModel,
         monitorModel: MonitorModel,
         githubMappings: GitHubMappingDependencies? = nil,
@@ -36,6 +38,7 @@ struct MainWindowView: View {
         self.formulaeModel = formulaeModel
         self.cleanupModel = cleanupModel
         self.startupModel = startupModel
+        self.diskUsageModel = diskUsageModel
         self.securityModel = securityModel
         self.monitorModel = monitorModel
         self.githubMappings = githubMappings
@@ -142,6 +145,8 @@ struct MainWindowView: View {
             ExcludedView(viewModel: viewModel)
         case .cleanup:
             CleanupView(model: cleanupModel)
+        case .diskUsage:
+            DiskUsageView(model: diskUsageModel, searchText: searchText)
         case .system:
             SystemMonitorView(model: monitorModel)
         case .processes:
@@ -254,7 +259,7 @@ struct MainWindowView: View {
         switch selection ?? .overview {
         case .overview, .updates, .source: true
         // Maintenance and monitor pages are unrelated to app updates.
-        case .cleanup, .system, .processes, .startup, .security: true
+        case .cleanup, .diskUsage, .system, .processes, .startup, .security: true
         default: false
         }
     }
@@ -273,6 +278,7 @@ enum SidebarItem: Hashable {
     case source(UpdateSourceKind)
     case excluded
     case cleanup
+    case diskUsage
     case system
     case processes
     case startup
@@ -290,6 +296,7 @@ enum SidebarItem: Hashable {
         case .source(let kind): kind.displayName
         case .excluded: String(localized: "Excluded")
         case .cleanup: String(localized: "Cleanup")
+        case .diskUsage: String(localized: "Disk Usage")
         case .system: String(localized: "System")
         case .processes: String(localized: "Processes")
         case .startup: String(localized: "Startup Items")
@@ -308,6 +315,7 @@ enum SidebarItem: Hashable {
         case "history": .history
         case "excluded": .excluded
         case "cleanup": .cleanup
+        case "diskUsage": .diskUsage
         case "system": .system
         case "processes": .processes
         case "startup": .startup
@@ -329,6 +337,7 @@ enum SidebarItem: Hashable {
         case .source(let kind): kind.symbol
         case .excluded: "eye.slash.fill"
         case .cleanup: "sparkles"
+        case .diskUsage: "chart.bar.doc.horizontal.fill"
         case .system: "gauge.with.dots.needle.67percent"
         case .processes: "list.bullet.rectangle.portrait.fill"
         case .startup: "power.circle.fill"
@@ -349,6 +358,7 @@ enum SidebarItem: Hashable {
         case .source(let kind): kind.tint
         case .excluded: Color(white: 0.5)
         case .cleanup: Theme.Palette.brandSecondary
+        case .diskUsage: DiskUsageStyle.tint
         case .system: Theme.Palette.brandTertiary
         case .processes: Theme.Palette.success
         case .startup: Theme.Palette.warning

@@ -26,6 +26,7 @@ enum ScreenshotPlan {
             page("system", .system, size: CGSize(width: 1280, height: 860), scrollOffset: 350),
             page("processes", .processes),
             page("cleanup", .cleanup),
+            page("diskusage", .diskUsage),
             page("insights", .insights, scrollOffset: .greatestFiniteMagnitude),
         ]
     }
@@ -39,6 +40,7 @@ enum ScreenshotPlan {
                 formulaeModel: stage.formulaeModel,
                 cleanupModel: stage.cleanupModel,
                 startupModel: stage.startupModel,
+                diskUsageModel: stage.diskUsageModel,
                 securityModel: stage.securityModel,
                 monitorModel: stage.monitorModel,
                 initialSelection: item

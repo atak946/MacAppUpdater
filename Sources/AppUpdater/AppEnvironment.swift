@@ -18,6 +18,7 @@ final class AppEnvironment {
     let formulaeModel: FormulaeModel
     let cleanupModel: CleanupModel
     let startupModel: StartupModel
+    let diskUsageModel: DiskUsageModel
     let securityModel: SecurityModel
     let monitorModel: MonitorModel
     let migrationModel: MigrationModel
@@ -96,6 +97,7 @@ final class AppEnvironment {
             scanner: FileSystemCleanupScanner(installedApps: LiveInstalledAppCatalog()), cleaner: TrashCleaner()
         )
         self.startupModel = StartupModel(scanner: LiveStartupScanner(), controller: LaunchctlStartupController())
+        self.diskUsageModel = DiskUsageModel(scanner: FileSystemDiskUsageScanner(), cleaner: TrashCleaner())
         self.securityModel = SecurityModel(checker: SystemSecurityChecker(), auditor: TCCPermissionAuditor())
         self.monitorModel = MonitorModel(
             system: LiveSystemSampler(),

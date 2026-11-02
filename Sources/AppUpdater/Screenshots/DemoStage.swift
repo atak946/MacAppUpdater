@@ -13,6 +13,7 @@ final class DemoStage {
     let formulaeModel: FormulaeModel
     let cleanupModel: CleanupModel
     let startupModel: StartupModel
+    let diskUsageModel: DiskUsageModel
     let securityModel: SecurityModel
     let monitorModel: MonitorModel
     private let apps: [InstalledApp]
@@ -52,6 +53,10 @@ final class DemoStage {
             cleaner: DemoCleaner()
         )
         startupModel = StartupModel(scanner: DemoStartupScanner(), controller: DemoStartupScanner())
+        diskUsageModel = DiskUsageModel(
+            scanner: DemoDiskUsageScanner(), cleaner: DemoCleaner(),
+            scanRoot: URL(fileURLWithPath: "/Users/demo", isDirectory: true)
+        )
         securityModel = SecurityModel(checker: DemoSecurityChecker(), auditor: DemoSecurityChecker())
         monitorModel = MonitorModel(
             system: DemoSystemSampler(),
@@ -75,6 +80,7 @@ final class DemoStage {
         viewModel.insights = DemoFixtures.insightsReport(apps: apps, now: now)
         await formulaeModel.refresh()
         await cleanupModel.scan()
+        await diskUsageModel.scanAndWait()
         // Fill the charts: one tick per two seconds, the network column reads every third tick.
         let start = now.addingTimeInterval(-Double(DemoMonitorFixtures.warmUpTicks) * 2)
         for tick in 0..<DemoMonitorFixtures.warmUpTicks {

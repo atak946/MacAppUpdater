@@ -35,6 +35,7 @@ struct GlassSidebar: View {
                     row(.history, count: 0)
                     section(String(localized: "Maintenance"))
                     row(.cleanup, count: 0)
+                    row(.diskUsage, count: 0)
                     row(.startup, count: 0)
                     row(.security, count: 0)
                     section(String(localized: "Monitor"))
