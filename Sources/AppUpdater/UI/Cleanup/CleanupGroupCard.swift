@@ -6,6 +6,8 @@ import SwiftUI
 struct CleanupGroupCard: View {
     let group: CleanupGroup
     let model: CleanupModel
+    /// A search is narrowing the items: show them without requiring a click to expand.
+    var isFiltered = false
 
     @State private var isExpanded = false
     @State private var showsAll = false
@@ -17,7 +19,7 @@ struct CleanupGroupCard: View {
     var body: some View {
         VStack(spacing: 0) {
             header
-            if isExpanded {
+            if isExpanded || isFiltered {
                 GlassDivider()
                     .padding(.horizontal, Theme.Spacing.l)
                 expandedContent
@@ -76,7 +78,7 @@ struct CleanupGroupCard: View {
             Image(systemName: "chevron.right")
                 .font(.system(size: 11, weight: .bold))
                 .foregroundStyle(Theme.Palette.textSecondary)
-                .rotationEffect(.degrees(isExpanded ? 90 : 0))
+                .rotationEffect(.degrees(isExpanded || isFiltered ? 90 : 0))
                 .frame(width: 16)
         }
         .padding(.horizontal, Theme.Spacing.l)

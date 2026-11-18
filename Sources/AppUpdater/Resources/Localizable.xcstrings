@@ -8918,6 +8918,306 @@
           }
         }
       }
+    },
+    "Downloads and checks the file; installs it if it is a disk image, zip or installer package, otherwise opens the vendor's page": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dosyayı indirip inceler; disk görüntüsü, zip veya yükleme paketiyse yükler, değilse üreticinin sayfasını açar"
+          }
+        }
+      }
+    },
+    "Search apps, bundle IDs or versions": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama, paket kimliği veya sürüm ara"
+          }
+        }
+      }
+    },
+    "Search updates": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemelerde ara"
+          }
+        }
+      }
+    },
+    "Search command line tools": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komut satırı araçlarında ara"
+          }
+        }
+      }
+    },
+    "Search apps in insights": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İçgörülerde uygulama ara"
+          }
+        }
+      }
+    },
+    "Search apps in coverage": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapsamda uygulama ara"
+          }
+        }
+      }
+    },
+    "Search excluded apps": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hariç tutulan uygulamalarda ara"
+          }
+        }
+      }
+    },
+    "Search cleanup items": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temizlik öğelerinde ara"
+          }
+        }
+      }
+    },
+    "Search files and folders": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dosya ve klasörlerde ara"
+          }
+        }
+      }
+    },
+    "Search startup items": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başlangıç öğelerinde ara"
+          }
+        }
+      }
+    },
+    "Search apps and permissions": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama ve izinlerde ara"
+          }
+        }
+      }
+    },
+    "No tools match": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşleşen araç yok"
+          }
+        }
+      }
+    },
+    "Upgradable": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükseltilebilir"
+          }
+        }
+      }
+    },
+    "No items match": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşleşen öğe yok"
+          }
+        }
+      }
+    },
+    "No updates match": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşleşen güncelleme yok"
+          }
+        }
+      }
+    },
+    "Automatic": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otomatik"
+          }
+        }
+      }
+    },
+    "Needs you": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onayınız gerekli"
+          }
+        }
+      }
+    },
+    "Succeeded": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başarılı"
+          }
+        }
+      }
+    },
+    "All time": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm zamanlar"
+          }
+        }
+      }
+    },
+    "Last 7 days": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son 7 gün"
+          }
+        }
+      }
+    },
+    "Last 30 days": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son 30 gün"
+          }
+        }
+      }
+    },
+    "Last 12 months": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son 12 ay"
+          }
+        }
+      }
+    },
+    "Period": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dönem"
+          }
+        }
+      }
+    },
+    "No matching events": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşleşen kayıt yok"
+          }
+        }
+      }
+    },
+    "Try an app name, bundle identifier or version, or another filter.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir uygulama adı, paket kimliği veya sürüm deneyin ya da başka bir filtre seçin."
+          }
+        }
+      }
+    },
+    "Any source": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm kaynaklar"
+          }
+        }
+      }
+    },
+    "Filter by update source or architecture": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme kaynağına veya mimariye göre filtrele"
+          }
+        }
+      }
+    },
+    "No source": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaynak yok"
+          }
+        }
+      }
+    },
+    "Intel-only": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca Intel"
+          }
+        }
+      }
+    },
+    "Filters": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtreler"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

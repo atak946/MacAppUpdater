@@ -4,9 +4,10 @@ import SwiftUI
 /// Disk Usage: a TreeSize-style size tree of a folder, largest first, with drill-down.
 struct DiskUsageView: View {
     let model: DiskUsageModel
-    /// The sidebar search field; filters the folder on screen by name.
-    let searchText: String
 
+    /// Filters the folder on screen by name.
+    @State private var searchText = ""
+    @AppStorage("diskUsage.kindFilter") private var kindFilter: DiskUsageKindFilter = .all
     @State private var trashCandidate: DiskUsageNode?
 
     var body: some View {
@@ -19,6 +20,13 @@ struct DiskUsageView: View {
             }
             if let current = model.current, !model.isScanning {
                 statsRow(current)
+                PageToolbar(
+                    prompt: String(localized: "Search files and folders"),
+                    search: $searchText,
+                    shownCount: filtered(current.children).count
+                ) {
+                    FilterCapsule(options: DiskUsageKindFilter.allCases, selection: $kindFilter, title: \.title)
+                }
             }
             if let message = model.actionError {
                 errorBanner(message).transition(.opacity)
@@ -146,7 +154,7 @@ struct DiskUsageView: View {
                 EmptyStateView(
                     symbol: "line.3.horizontal.decrease.circle",
                     title: String(localized: "Nothing to show"),
-                    message: searchText.isEmpty
+                    message: searchText.isEmpty && kindFilter == .all
                         ? String(localized: "This folder is empty or could not be read.")
                         : String(localized: "Try another search term.")
                 )
@@ -207,9 +215,10 @@ struct DiskUsageView: View {
     // MARK: Data
 
     private func filtered(_ nodes: [DiskUsageNode]) -> [DiskUsageNode] {
-        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !query.isEmpty else { return nodes }
-        return nodes.filter { $0.kind != .smallFiles && $0.name.localizedCaseInsensitiveContains(query) }
+        let query = SearchQuery(searchText)
+        let byKind = nodes.filter(kindFilter.includes)
+        guard !query.isEmpty else { return byKind }
+        return byKind.filter { $0.kind != .smallFiles && query.matches($0.name) }
     }
 
     private var isFailed: Bool {
@@ -224,5 +233,26 @@ struct DiskUsageView: View {
     private var trashTitle: String {
         guard let node = trashCandidate else { return "" }
         return String(localized: "Move “\(node.name)” (\(node.sizeInBytes.formatted(.byteCount(style: .file)))) to the Trash?")
+    }
+}
+
+/// Folders only, files only, or both.
+enum DiskUsageKindFilter: String, CaseIterable, Hashable {
+    case all, folders, files
+
+    var title: String {
+        switch self {
+        case .all: String(localized: "All")
+        case .folders: String(localized: "Folders")
+        case .files: String(localized: "Files")
+        }
+    }
+
+    func includes(_ node: DiskUsageNode) -> Bool {
+        switch self {
+        case .all: true
+        case .folders: node.kind == .folder
+        case .files: node.kind == .file || node.kind == .smallFiles
+        }
     }
 }

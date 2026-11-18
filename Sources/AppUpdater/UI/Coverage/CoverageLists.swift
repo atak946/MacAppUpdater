@@ -6,10 +6,17 @@ struct CoverageUntrackedList: View {
     let apps: [InstalledApp]
     let ignoredCount: Int
     let actions: CoverageActions
+    /// True while a search narrows the list, so an empty list means "no match", not "all clear".
+    var isFiltered = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
-            if apps.isEmpty {
+            if apps.isEmpty, isFiltered {
+                Text("No apps match")
+                    .font(.system(size: 12.5, weight: .medium))
+                    .foregroundStyle(Theme.Palette.textSecondary)
+                    .padding(Theme.Spacing.s)
+            } else if apps.isEmpty {
                 InsightsAllClear(message: String(localized: "Every app has an update source."))
                     .padding(.horizontal, Theme.Spacing.s)
             } else {

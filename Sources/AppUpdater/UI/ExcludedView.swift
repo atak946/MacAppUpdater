@@ -5,6 +5,8 @@ import SwiftUI
 /// Ignored apps and skipped versions, each with a way to bring updates back.
 struct ExcludedView: View {
     let viewModel: UpdatesViewModel
+    /// Matches the app name or bundle id.
+    @State private var searchText = ""
 
     var body: some View {
         Group {
@@ -18,6 +20,20 @@ struct ExcludedView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.Spacing.xl) {
                         PageHeader(title: String(localized: "Excluded"), subtitle: summary) { EmptyView() }
+                        PageToolbar(
+                            prompt: String(localized: "Search excluded apps"),
+                            search: $searchText,
+                            shownCount: ignoredIDs.count + skipped.count + ceilings.count
+                        )
+                        if ignoredIDs.isEmpty, skipped.isEmpty, ceilings.isEmpty {
+                            EmptyStateView(
+                                symbol: "line.3.horizontal.decrease.circle",
+                                title: String(localized: "No apps match"),
+                                message: String(localized: "Try another search term.")
+                            )
+                            .frame(minHeight: 220)
+                            .surface(.raised)
+                        }
                         if !ignoredIDs.isEmpty {
                             section(
                                 eyebrow: String(localized: "Never updated"),
@@ -120,18 +136,28 @@ struct ExcludedView: View {
 
     // MARK: Data
 
-    private var isEmpty: Bool { ignoredIDs.isEmpty && skipped.isEmpty && ceilings.isEmpty }
+    /// Nothing excluded at all (search aside).
+    private var isEmpty: Bool {
+        viewModel.exclusions.ignoredBundleIdentifiers.isEmpty && viewModel.exclusions.skippedVersions.isEmpty
+            && viewModel.versionCeilings.isEmpty
+    }
 
     private var ceilings: [(bundleID: String, ceiling: String)] {
-        viewModel.versionCeilings.sorted { name(for: $0.bundleID) < name(for: $1.bundleID) }
+        viewModel.versionCeilings.filter { matchesSearch($0.bundleID) }
+            .sorted { name(for: $0.bundleID) < name(for: $1.bundleID) }
     }
 
     private var ignoredIDs: [String] {
-        viewModel.exclusions.ignoredBundleIdentifiers.sorted { name(for: $0) < name(for: $1) }
+        viewModel.exclusions.ignoredBundleIdentifiers.filter(matchesSearch).sorted { name(for: $0) < name(for: $1) }
     }
 
     private var skipped: [(key: String, value: String)] {
-        viewModel.exclusions.skippedVersions.sorted { name(for: $0.key) < name(for: $1.key) }
+        viewModel.exclusions.skippedVersions.filter { matchesSearch($0.key) }
+            .sorted { name(for: $0.key) < name(for: $1.key) }
+    }
+
+    private func matchesSearch(_ bundleID: String) -> Bool {
+        SearchQuery(searchText).matches(name(for: bundleID), bundleID)
     }
 
     private func app(for bundleID: String) -> InstalledApp? {

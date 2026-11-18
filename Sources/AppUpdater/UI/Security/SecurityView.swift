@@ -2,10 +2,9 @@ import MaintenanceCore
 import SwiftUI
 
 /// Security & privacy screen: a weighted score of the macOS protections, a card per check and
-/// the apps holding privacy permissions. The sidebar search filters permissions by app name.
+/// the apps holding privacy permissions, with their own search.
 struct SecurityView: View {
     let model: SecurityModel
-    let searchText: String
 
     var body: some View {
         ScrollView {
@@ -15,7 +14,7 @@ struct SecurityView: View {
                 if let report = model.report {
                     SecurityChecksGrid(results: report.results)
                         .transition(.opacity)
-                    SecurityPermissionsSection(model: model, searchText: searchText)
+                    SecurityPermissionsSection(model: model)
                         .transition(.opacity)
                 }
             }

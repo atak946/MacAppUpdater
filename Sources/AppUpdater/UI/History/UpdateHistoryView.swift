@@ -8,29 +8,19 @@ struct UpdateHistoryView: View {
     let onClear: () -> Void
     /// Optional: reveal or open the app an entry refers to.
     var onSelect: ((UpdateHistoryEntry) -> Void)?
-    /// When the host window already has a search field (MainWindowView), pass its text here;
-    /// the view then skips its own `.searchable` to avoid two toolbar search fields.
-    var externalSearchText: String?
 
     @State private var searchText = ""
+    @AppStorage("history.outcomeFilter") private var outcome: HistoryOutcomeFilter = .all
+    @AppStorage("history.period") private var period: HistoryPeriod = .allTime
     @State private var isConfirmingClear = false
 
     var body: some View {
-        searchableContent
+        content
             .confirmationDialog("Clear the update history?", isPresented: $isConfirmingClear) {
                 Button("Clear History", role: .destructive, action: onClear)
             } message: {
                 Text("Backups are not affected.")
             }
-    }
-
-    @ViewBuilder
-    private var searchableContent: some View {
-        if externalSearchText == nil {
-            content.searchable(text: $searchText, placement: .toolbar, prompt: "Search history")
-        } else {
-            content
-        }
     }
 
     @ViewBuilder
@@ -51,12 +41,18 @@ struct UpdateHistoryView: View {
                         }
                         .buttonStyle(.secondary(tint: Theme.Palette.danger))
                     }
+                    PageToolbar(prompt: String(localized: "Search history"), search: $searchText, shownCount: filtered.count) {
+                        FilterCapsule(options: HistoryOutcomeFilter.allCases, selection: $outcome, title: \.title) { option in
+                            entries.count { option.includes($0) }
+                        }
+                        periodMenu
+                    }
                     if sections.isEmpty {
                         EmptyStateView(
                             symbol: "magnifyingglass",
                             tint: Theme.Palette.textSecondary,
-                            title: String(localized: "No results for \u{201C}\(query)\u{201D}"),
-                            message: String(localized: "Try an app name, bundle identifier or version.")
+                            title: String(localized: "No matching events"),
+                            message: String(localized: "Try an app name, bundle identifier or version, or another filter.")
                         )
                         .surface(.inset)
                     } else {
@@ -119,16 +115,30 @@ struct UpdateHistoryView: View {
         return failures == 0 ? total : String(localized: "\(total) · \(failures) failed")
     }
 
-    private var filtered: [UpdateHistoryEntry] {
-        guard !query.isEmpty else { return entries }
-        return entries.filter { entry in
-            [entry.appName, entry.bundleID, entry.fromVersion, entry.toVersion]
-                .contains { $0.localizedCaseInsensitiveContains(query) }
+    private var periodMenu: some View {
+        Menu {
+            Picker("Period", selection: $period) {
+                ForEach(HistoryPeriod.allCases, id: \.self) { Text($0.title).tag($0) }
+            }
+            .pickerStyle(.inline)
+        } label: {
+            Label(period.title, systemImage: "calendar")
         }
+        .menuStyle(.button)
+        .buttonStyle(.secondary)
+        .menuIndicator(.hidden)
+        .fixedSize()
+        .help("Period")
     }
 
-    private var query: String {
-        (externalSearchText ?? searchText).trimmingCharacters(in: .whitespaces)
+    private var filtered: [UpdateHistoryEntry] {
+        let cutoff = period.cutoff(from: .now)
+        let narrowed = entries.filter { entry in
+            outcome.includes(entry) && cutoff.map { entry.date >= $0 } ?? true
+        }
+        return SearchQuery(searchText).filter(narrowed) { entry in
+            [entry.appName, entry.bundleID, entry.fromVersion, entry.toVersion, entry.source?.displayName]
+        }
     }
 
     private var sections: [(day: Date, entries: [UpdateHistoryEntry])] {
@@ -137,6 +147,51 @@ struct UpdateHistoryView: View {
         return grouped
             .map { (day: $0.key, entries: $0.value.sorted { $0.date > $1.date }) }
             .sorted { $0.day > $1.day }
+    }
+}
+
+/// Narrows the history by what happened.
+enum HistoryOutcomeFilter: String, CaseIterable, Hashable {
+    case all, succeeded, failed, rolledBack
+
+    var title: String {
+        switch self {
+        case .all: String(localized: "All")
+        case .succeeded: String(localized: "Succeeded")
+        case .failed: String(localized: "Failed")
+        case .rolledBack: String(localized: "Rolled back")
+        }
+    }
+
+    func includes(_ entry: UpdateHistoryEntry) -> Bool {
+        switch (self, entry.outcome) {
+        case (.all, _), (.succeeded, .succeeded), (.failed, .failed), (.rolledBack, .rolledBack): true
+        default: false
+        }
+    }
+}
+
+/// Narrows the history to recent events.
+enum HistoryPeriod: String, CaseIterable, Hashable {
+    case allTime, lastWeek, lastMonth, lastYear
+
+    var title: String {
+        switch self {
+        case .allTime: String(localized: "All time")
+        case .lastWeek: String(localized: "Last 7 days")
+        case .lastMonth: String(localized: "Last 30 days")
+        case .lastYear: String(localized: "Last 12 months")
+        }
+    }
+
+    /// Oldest date still shown, or nil for no limit.
+    func cutoff(from now: Date, calendar: Calendar = .current) -> Date? {
+        switch self {
+        case .allTime: nil
+        case .lastWeek: calendar.date(byAdding: .day, value: -7, to: now)
+        case .lastMonth: calendar.date(byAdding: .day, value: -30, to: now)
+        case .lastYear: calendar.date(byAdding: .month, value: -12, to: now)
+        }
     }
 }
 

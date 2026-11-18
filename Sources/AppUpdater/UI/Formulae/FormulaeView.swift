@@ -4,6 +4,10 @@ import SwiftUI
 /// Outdated Homebrew formulae (command-line tools) with per-row and bulk upgrades.
 struct FormulaeView: View {
     let model: FormulaeModel
+    /// Matches the formula name and its versions.
+    @State private var searchText = ""
+
+    @AppStorage("formulae.filter") private var filter: FormulaFilter = .all
 
     /// Homebrew's amber, used for every terminal-tool tile on this page.
     static let accent = Theme.Palette.warning
@@ -70,7 +74,26 @@ struct FormulaeView: View {
                     .frame(minHeight: 280)
                     .surface(.raised)
                 } else {
-                    list
+                    PageToolbar(
+                        prompt: String(localized: "Search command line tools"),
+                        search: $searchText,
+                        shownCount: visibleFormulae.count
+                    ) {
+                        FilterCapsule(options: FormulaFilter.allCases, selection: $filter, title: \.title) { option in
+                            model.formulae.count { option.includes($0) }
+                        }
+                    }
+                    if visibleFormulae.isEmpty {
+                        EmptyStateView(
+                            symbol: "line.3.horizontal.decrease.circle",
+                            title: String(localized: "No tools match"),
+                            message: String(localized: "Try another filter or search term.")
+                        )
+                        .frame(minHeight: 220)
+                        .surface(.raised)
+                    } else {
+                        list
+                    }
                 }
             }
             .padding(Theme.Spacing.page)
@@ -87,7 +110,7 @@ struct FormulaeView: View {
 
     private var list: some View {
         VStack(spacing: 0) {
-            ForEach(Array(model.formulae.enumerated()), id: \.element.id) { index, formula in
+            ForEach(Array(visibleFormulae.enumerated()), id: \.element.id) { index, formula in
                 if index > 0 {
                     GlassDivider(leadingInset: 58)
                 }
@@ -100,6 +123,12 @@ struct FormulaeView: View {
         }
         .padding(Theme.Spacing.xs)
         .surface(.raised)
+    }
+
+    private var visibleFormulae: [OutdatedFormula] {
+        SearchQuery(searchText).filter(model.formulae.filter(filter.includes)) { formula in
+            [formula.name, formula.currentVersion] + formula.installedVersions
+        }
     }
 
     private var headerActions: some View {
@@ -206,5 +235,26 @@ private struct PinnedBadge: View {
             .background(Capsule().fill(Color.white.opacity(0.08)))
             .overlay(Capsule().strokeBorder(Theme.Palette.hairline, lineWidth: 0.5))
             .fixedSize()
+    }
+}
+
+/// Narrows the outdated formulae list.
+enum FormulaFilter: String, CaseIterable, Hashable {
+    case all, upgradable, pinned
+
+    var title: String {
+        switch self {
+        case .all: String(localized: "All")
+        case .upgradable: String(localized: "Upgradable")
+        case .pinned: String(localized: "Pinned")
+        }
+    }
+
+    func includes(_ formula: OutdatedFormula) -> Bool {
+        switch self {
+        case .all: true
+        case .upgradable: !formula.pinned
+        case .pinned: formula.pinned
+        }
     }
 }

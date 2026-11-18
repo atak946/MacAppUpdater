@@ -6,8 +6,16 @@ struct UpdatesListView: View {
     let viewModel: UpdatesViewModel
     let updates: [AvailableUpdate]
 
+    @AppStorage("updates.filter") private var filter: UpdateFilter = .all
+    @State private var searchText = ""
+
     var body: some View {
         let ordered = Self.securityFirst(updates)
+        let searched = SearchQuery(searchText).filter(ordered) { update in
+            [update.app.name, update.app.bundleIdentifier, update.app.shortVersion, update.newVersion,
+             update.source.displayName]
+        }
+        let visible = searched.filter { filter.includes($0, viewModel: viewModel) }
         Group {
             if ordered.isEmpty {
                 emptyState
@@ -15,7 +23,24 @@ struct UpdatesListView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.Spacing.xl) {
                         UpdatesSummaryHeader(viewModel: viewModel, updates: ordered)
-                        rowsCard(ordered)
+                        PageToolbar(
+                            prompt: String(localized: "Search updates"), search: $searchText, shownCount: visible.count
+                        ) {
+                            FilterCapsule(options: UpdateFilter.allCases, selection: $filter, title: \.title) { option in
+                                searched.count { option.includes($0, viewModel: viewModel) }
+                            }
+                        }
+                        if visible.isEmpty {
+                            EmptyStateView(
+                                symbol: "line.3.horizontal.decrease.circle",
+                                title: String(localized: "No updates match"),
+                                message: String(localized: "Try another filter or search term.")
+                            )
+                            .frame(minHeight: 220)
+                            .surface(.raised)
+                        } else {
+                            rowsCard(visible)
+                        }
                     }
                     .padding(Theme.Spacing.page)
                     .frame(maxWidth: Theme.Spacing.contentWidth)
@@ -167,6 +192,31 @@ private struct UpdatesSummaryHeader: View {
         Task {
             for update in queue { await viewModel.install(update) }
             isInstallingAll = false
+        }
+    }
+}
+
+/// Narrows the updates list: security fixes, updates "Update All" installs on its own, and
+/// the ones that need the user (App Store, installers, vendor pages).
+enum UpdateFilter: String, CaseIterable, Hashable {
+    case all, security, automatic, needsYou
+
+    var title: String {
+        switch self {
+        case .all: String(localized: "All")
+        case .security: String(localized: "Security")
+        case .automatic: String(localized: "Automatic")
+        case .needsYou: String(localized: "Needs you")
+        }
+    }
+
+    @MainActor
+    func includes(_ update: AvailableUpdate, viewModel: UpdatesViewModel) -> Bool {
+        switch self {
+        case .all: true
+        case .security: update.securityInfo != nil
+        case .automatic: viewModel.installableUpdates.contains { $0.id == update.id }
+        case .needsYou: !viewModel.installableUpdates.contains { $0.id == update.id }
         }
     }
 }

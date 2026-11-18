@@ -9,8 +9,12 @@ struct InstalledAppsTable: View {
     /// Export/import of the app list for a new Mac; the menu is hidden when nil.
     var migrationModel: MigrationModel?
 
-    @State private var filter: AppFilter = .all
-    @State private var sort: AppSort = .name
+    @AppStorage("allApps.filter") private var filter: AppFilter = .all
+    @State private var searchText = ""
+    @AppStorage("allApps.sort") private var sort: AppSort = .name
+    /// `""` any source, `"none"` no update source, else an `UpdateSourceKind` raw value.
+    @AppStorage("allApps.source") private var sourceFilter = ""
+    @AppStorage("allApps.intelOnly") private var intelOnly = false
     @State private var detailApp: InstalledApp?
     @State private var uninstallApp: InstalledApp?
     @State private var revertApp: InstalledApp?
@@ -25,8 +29,19 @@ struct InstalledAppsTable: View {
                     sortMenu
                 }
             }
-            FilterCapsule(selection: $filter, count: { count(for: $0) })
+            PageToolbar(
+                prompt: String(localized: "Search apps, bundle IDs or versions"),
+                search: $searchText,
+                shownCount: visibleApps.count
+            ) {
+                FilterCapsule(options: AppFilter.allCases, selection: $filter, title: \.title, count: { count(for: $0) })
+                moreFiltersMenu
+            }
             listCard
+        }
+        // Architecture comes from Insights; analyze on demand when the filter needs it.
+        .task(id: intelOnly) {
+            if intelOnly, viewModel.insights == nil, !viewModel.isLoadingInsights { await viewModel.refreshInsights() }
         }
         .padding(Theme.Spacing.page)
         .frame(maxWidth: Theme.Spacing.contentWidth)
@@ -132,11 +147,67 @@ struct InstalledAppsTable: View {
     // MARK: Data
 
     private var visibleApps: [InstalledApp] {
-        apps.filter { matches($0, filter) }.sorted(by: areInIncreasingOrder)
+        searchedApps.filter { matches($0, filter) }.sorted(by: areInIncreasingOrder)
+    }
+
+    /// Apps matching the page search (name, bundle id, version, folder), the source menu and
+    /// the Intel-only toggle; the capsule counts are taken over this set.
+    private var searchedApps: [InstalledApp] {
+        let intelOnlyIDs = intelOnly ? Set(viewModel.insights?.intelOnlyApps.map(\.app.bundleIdentifier) ?? []) : []
+        return SearchQuery(searchText).filter(apps) { app in
+            [app.name, app.bundleIdentifier, app.shortVersion, app.url.deletingLastPathComponent().path]
+        }
+        .filter { app in
+            matchesSource(app) && (!intelOnly || intelOnlyIDs.contains(app.bundleIdentifier))
+        }
+    }
+
+    private func source(of app: InstalledApp) -> UpdateSourceKind? {
+        viewModel.update(for: app)?.source ?? viewModel.checkResult(for: app)?.matchedSource
+    }
+
+    private func matchesSource(_ app: InstalledApp) -> Bool {
+        switch sourceFilter {
+        case "": true
+        case "none": source(of: app) == nil
+        default: source(of: app)?.rawValue == sourceFilter
+        }
+    }
+
+    private var moreFiltersMenu: some View {
+        Menu {
+            Picker("Update source", selection: $sourceFilter) {
+                Text("Any source").tag("")
+                ForEach(UpdateSourceKind.allCases, id: \.self) { kind in
+                    Text(kind.displayName).tag(kind.rawValue)
+                }
+                Text("No update source").tag("none")
+            }
+            .pickerStyle(.inline)
+            Toggle("Intel-only apps", isOn: $intelOnly)
+        } label: {
+            Label(moreFiltersTitle, systemImage: "line.3.horizontal.decrease.circle")
+        }
+        .menuStyle(.button)
+        .buttonStyle(.secondary)
+        .menuIndicator(.hidden)
+        .fixedSize()
+        .help("Filter by update source or architecture")
+    }
+
+    private var moreFiltersTitle: String {
+        let source = UpdateSourceKind(rawValue: sourceFilter)?.displayName
+            ?? (sourceFilter == "none" ? String(localized: "No source") : nil)
+        switch (source, intelOnly) {
+        case (nil, false): return String(localized: "Filters")
+        case (let source?, false): return source
+        case (nil, true): return String(localized: "Intel-only")
+        case (let source?, true): return "\(source) · " + String(localized: "Intel-only")
+        }
     }
 
     private func count(for filter: AppFilter) -> Int {
-        apps.reduce(0) { $0 + (matches($1, filter) ? 1 : 0) }
+        searchedApps.reduce(0) { $0 + (matches($1, filter) ? 1 : 0) }
     }
 
     private func matches(_ app: InstalledApp, _ filter: AppFilter) -> Bool {
@@ -254,7 +325,7 @@ struct InstalledAppsTable: View {
 // MARK: - Filter & sort
 
 /// Local status filter of the All Apps list.
-private enum AppFilter: CaseIterable, Identifiable {
+private enum AppFilter: String, CaseIterable, Identifiable, Hashable {
     case all, updates, upToDate, issues
 
     var id: Self { self }
@@ -269,7 +340,7 @@ private enum AppFilter: CaseIterable, Identifiable {
     }
 }
 
-private enum AppSort: CaseIterable, Identifiable {
+private enum AppSort: String, CaseIterable, Identifiable {
     case name, status, source
 
     var id: Self { self }
@@ -292,63 +363,6 @@ private enum AppListMetrics {
     static let rowHorizontal: CGFloat = Theme.Spacing.l
     /// Hairlines start under the name, past the icon.
     static let dividerInset: CGFloat = rowHorizontal + icon + Theme.Spacing.m
-}
-
-/// Segmented glass capsule; the selected segment gets a lit brand fill that slides between options.
-private struct FilterCapsule: View {
-    @Binding var selection: AppFilter
-    let count: (AppFilter) -> Int
-
-    @Namespace private var namespace
-
-    var body: some View {
-        HStack(spacing: 2) {
-            ForEach(AppFilter.allCases) { option in
-                segment(option)
-            }
-        }
-        .padding(3)
-        .background(Capsule().fill(Theme.Palette.glass))
-        .background(Capsule().fill(Color.white.opacity(0.04)))
-        .overlay(Capsule().strokeBorder(Theme.Palette.hairline, lineWidth: 1))
-        .fixedSize()
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel(Text("Filter"))
-    }
-
-    private func segment(_ option: AppFilter) -> some View {
-        let isSelected = selection == option
-        return Button {
-            withAnimation(Theme.Motion.content) { selection = option }
-        } label: {
-            HStack(spacing: 6) {
-                Text(option.title)
-                Text("\(count(option))")
-                    .font(.system(size: 10.5, weight: .bold, design: .rounded).monospacedDigit())
-                    .foregroundStyle(isSelected ? Theme.Palette.textPrimary : Theme.Palette.textTertiary)
-                    .padding(.horizontal, 5)
-                    .padding(.vertical, 1)
-                    .background(Capsule().fill(Color.white.opacity(isSelected ? 0.18 : 0.06)))
-                    .contentTransition(.numericText())
-            }
-            .font(.system(size: 12, weight: .semibold))
-            .foregroundStyle(isSelected ? Theme.Palette.textPrimary : Theme.Palette.textSecondary)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
-            .background {
-                if isSelected {
-                    Capsule()
-                        .fill(Theme.brandGradient)
-                        .overlay(Capsule().strokeBorder(Color.white.opacity(0.3), lineWidth: 0.5))
-                        .glow(Theme.Palette.brand, radius: 8, opacity: 0.45)
-                        .matchedGeometryEffect(id: "selection", in: namespace)
-                }
-            }
-            .contentShape(Capsule())
-        }
-        .buttonStyle(.plain)
-        .accessibilityAddTraits(isSelected ? .isSelected : [])
-    }
 }
 
 /// Eyebrow-style column titles aligned with `InstalledAppRow`.

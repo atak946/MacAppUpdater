@@ -4,6 +4,8 @@ import SwiftUI
 /// Cleanup screen: scan for reclaimable space, review it per category and move the selection to the Trash.
 struct CleanupView: View {
     let model: CleanupModel
+    /// Matches item names, paths, owning apps and category titles.
+    @State private var searchText = ""
 
     @State private var isConfirmingClean = false
 
@@ -82,9 +84,25 @@ struct CleanupView: View {
     private func ready(_ report: CleanupScanReport) -> some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.xl) {
             CleanupSummaryHero(report: report, model: model) { isConfirmingClean = true }
+            PageToolbar(
+                prompt: String(localized: "Search cleanup items"),
+                search: $searchText,
+                shownCount: Self.groups(of: report, matching: SearchQuery(searchText)).reduce(0) { $0 + $1.items.count }
+            )
             VStack(spacing: Theme.Spacing.m) {
-                ForEach(report.groups) { group in
-                    CleanupGroupCard(group: group, model: model)
+                let query = SearchQuery(searchText)
+                let groups = Self.groups(of: report, matching: query)
+                if groups.isEmpty {
+                    EmptyStateView(
+                        symbol: "line.3.horizontal.decrease.circle",
+                        title: String(localized: "No items match"),
+                        message: String(localized: "Try another search term.")
+                    )
+                    .frame(minHeight: 220)
+                    .surface(.raised)
+                }
+                ForEach(groups) { group in
+                    CleanupGroupCard(group: group, model: model, isFiltered: !query.isEmpty)
                 }
             }
             Text("Scanned \(report.scannedAt.formatted(.relative(presentation: .named)))")
@@ -93,6 +111,18 @@ struct CleanupView: View {
                 .frame(maxWidth: .infinity)
         }
         .transition(.opacity)
+    }
+
+    /// Groups limited to matching items (a category title match keeps the whole group).
+    nonisolated static func groups(of report: CleanupScanReport, matching query: SearchQuery) -> [CleanupGroup] {
+        guard !query.isEmpty else { return report.groups }
+        return report.groups.compactMap { group in
+            if query.matches(group.category.title) { return group }
+            let items = query.filter(group.items) { item in
+                [item.displayName, item.url.path, item.ownerBundleIdentifier]
+            }
+            return items.isEmpty ? nil : CleanupGroup(category: group.category, items: items)
+        }
     }
 
     /// Changes whenever the screen switches between states, to animate the swap.

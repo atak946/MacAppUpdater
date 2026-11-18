@@ -87,7 +87,7 @@ struct StartupSignerPill: View {
 
 // MARK: - Filter & sort
 
-enum StartupFilter: CaseIterable, Identifiable {
+enum StartupFilter: String, CaseIterable, Identifiable {
     case all, agents, daemons, disabled, unsigned
 
     var id: Self { self }
@@ -113,7 +113,7 @@ enum StartupFilter: CaseIterable, Identifiable {
     }
 }
 
-enum StartupSort: CaseIterable, Identifiable {
+enum StartupSort: String, CaseIterable, Identifiable {
     case name, app, kind
 
     var id: Self { self }

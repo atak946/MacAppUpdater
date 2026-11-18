@@ -53,12 +53,3 @@ struct ProcessSelection: Equatable, Sendable {
         return unique.values.sorted { ($0.port, $0.transport) < ($1.port, $1.transport) }
     }
 }
-
-// MARK: - Search
-
-extension ProcessListQuery {
-    /// The Processes page field wins while it has text; otherwise the sidebar search applies.
-    static func effectiveSearch(page: String, sidebar: String) -> String {
-        page.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? sidebar : page
-    }
-}

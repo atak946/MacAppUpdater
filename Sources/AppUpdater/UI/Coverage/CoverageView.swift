@@ -17,6 +17,8 @@ struct CoverageView: View {
     let isLoading: Bool
     let actions: CoverageActions
     let onRefresh: () -> Void
+    /// Narrows the untracked and failed lists by app name or bundle id.
+    @State private var searchText = ""
 
     var body: some View {
         Group {
@@ -42,7 +44,10 @@ struct CoverageView: View {
     }
 
     private func content(_ report: CoverageReport) -> some View {
-        ScrollView {
+        let query = SearchQuery(searchText)
+        let untracked = query.filter(report.untracked) { [$0.name, $0.bundleIdentifier] }
+        let failed = query.filter(report.failed) { [$0.app.name, $0.app.bundleIdentifier] }
+        return ScrollView {
             VStack(alignment: .leading, spacing: InsightsStyle.sectionSpacing) {
                 PageHeader(
                     title: String(localized: "Update coverage"),
@@ -51,21 +56,28 @@ struct CoverageView: View {
                     refreshButton
                 }
                 CoverageHeadline(report: report)
+                PageToolbar(
+                    prompt: String(localized: "Search apps in coverage"),
+                    search: $searchText,
+                    shownCount: untracked.count + failed.count
+                )
                 InsightsCard(
                     eyebrow: String(localized: "Blind spots"),
                     title: String(localized: "No update source"),
-                    trailing: "\(report.untracked.count)",
+                    trailing: "\(untracked.count)",
                     contentPadding: Theme.Spacing.s
                 ) {
-                    CoverageUntrackedList(apps: report.untracked, ignoredCount: report.ignoredCount, actions: actions)
+                    CoverageUntrackedList(
+                        apps: untracked, ignoredCount: report.ignoredCount, actions: actions, isFiltered: !query.isEmpty
+                    )
                 }
-                if !report.failed.isEmpty {
+                if !failed.isEmpty {
                     InsightsCard(
                         eyebrow: String(localized: "Errors"),
                         title: String(localized: "Checks that failed"),
-                        trailing: "\(report.failed.count)"
+                        trailing: "\(failed.count)"
                     ) {
-                        CoverageFailedList(checks: report.failed, onSelectApp: actions.selectApp)
+                        CoverageFailedList(checks: failed, onSelectApp: actions.selectApp)
                     }
                 }
             }

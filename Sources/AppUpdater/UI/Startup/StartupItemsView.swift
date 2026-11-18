@@ -4,11 +4,10 @@ import SwiftUI
 /// Startup Items: launchd agents and daemons with their owner, signature and enabled state.
 struct StartupItemsView: View {
     let model: StartupModel
-    /// The sidebar search field.
-    let searchText: String
 
-    @State private var filter: StartupFilter = .all
-    @State private var sort: StartupSort = .name
+    @State private var searchText = ""
+    @AppStorage("startup.filter") private var filter: StartupFilter = .all
+    @AppStorage("startup.sort") private var sort: StartupSort = .name
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.xl) {
@@ -16,7 +15,11 @@ struct StartupItemsView: View {
                 headerActions
             }
             statsRow
-            StartupFilterCapsule(selection: $filter, count: { count(for: $0) })
+            PageToolbar(
+                prompt: String(localized: "Search startup items"), search: $searchText, shownCount: visibleItems.count
+            ) {
+                StartupFilterCapsule(selection: $filter, count: { count(for: $0) })
+            }
             if let message = model.actionError {
                 errorBanner(message)
                     .transition(.opacity)
@@ -181,18 +184,15 @@ struct StartupItemsView: View {
     // MARK: Data
 
     private var visibleItems: [StartupItem] {
-        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        return model.visibleItems
-            .filter { filter.matches($0) && matchesSearch($0, query) }
-            .sorted(by: sort.areInIncreasingOrder)
+        searchedItems.filter { filter.matches($0) }.sorted(by: sort.areInIncreasingOrder)
+    }
+
+    private var searchedItems: [StartupItem] {
+        SearchQuery(searchText).filter(model.visibleItems) { $0.matchesSearchFields }
     }
 
     private func count(for filter: StartupFilter) -> Int {
-        model.visibleItems.reduce(0) { $0 + (filter.matches($1) ? 1 : 0) }
-    }
-
-    private func matchesSearch(_ item: StartupItem, _ query: String) -> Bool {
-        query.isEmpty || item.matchesSearchFields.contains { $0.localizedCaseInsensitiveContains(query) }
+        searchedItems.reduce(0) { $0 + (filter.matches($1) ? 1 : 0) }
     }
 }
 

@@ -5,11 +5,16 @@ import SwiftUI
 /// Privacy permissions grouped by service, or a Full Disk Access notice when TCC is unreadable.
 struct SecurityPermissionsSection: View {
     let model: SecurityModel
-    let searchText: String
+
+    @State private var searchText = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.m) {
-            SectionHeader(eyebrow: String(localized: "PRIVACY"), title: String(localized: "App permissions"))
+            SectionHeader(eyebrow: String(localized: "PRIVACY"), title: String(localized: "App permissions")) {
+                if model.permissions != nil, !model.needsFullDiskAccess {
+                    GlassSearchField(prompt: String(localized: "Search apps and permissions"), text: $searchText)
+                }
+            }
             if model.needsFullDiskAccess {
                 SecurityAccessNotice(onReturn: model.refreshPermissions)
             } else if model.permissions != nil {

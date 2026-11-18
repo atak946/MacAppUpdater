@@ -163,11 +163,4 @@ struct ProcessSelectionTests {
 
         #expect(selection.ports.map { "\($0.port)/\($0.transport)" } == ["3000/TCP", "3000/UDP", "8080/TCP"])
     }
-
-    @Test("page search wins while it has text, otherwise the sidebar search applies")
-    func searchPrecedence() {
-        #expect(ProcessListQuery.effectiveSearch(page: "node", sidebar: "zsh") == "node")
-        #expect(ProcessListQuery.effectiveSearch(page: "  ", sidebar: "zsh") == "zsh")
-        #expect(ProcessListQuery.effectiveSearch(page: "", sidebar: "") == "")
-    }
 }

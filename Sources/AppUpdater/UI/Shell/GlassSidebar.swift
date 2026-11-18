@@ -1,13 +1,12 @@
 import AppUpdaterCore
 import SwiftUI
 
-/// Custom glass sidebar: brand mark, search, navigation with an animated selection pill
+/// Custom glass sidebar: brand mark, navigation with an animated selection pill
 /// and a settings footer. Replaces the system source list for a fully designed look.
 struct GlassSidebar: View {
     let viewModel: UpdatesViewModel
     let formulaeModel: FormulaeModel
     @Binding var selection: SidebarItem?
-    @Binding var searchText: String
 
     @Namespace private var selectionNamespace
 
@@ -20,9 +19,6 @@ struct GlassSidebar: View {
             brand
                 .padding(.horizontal, Theme.Spacing.l)
                 .padding(.bottom, Theme.Spacing.l)
-            SidebarSearchField(text: $searchText)
-                .padding(.horizontal, Theme.Spacing.m)
-                .padding(.bottom, Theme.Spacing.m)
             ScrollView {
                 VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
                     row(.overview, count: 0)
@@ -245,46 +241,3 @@ private struct SidebarRow: View {
     }
 }
 
-/// Glass search field; ⌘F focuses it.
-private struct SidebarSearchField: View {
-    @Binding var text: String
-    @FocusState private var isFocused: Bool
-
-    var body: some View {
-        HStack(spacing: Theme.Spacing.s) {
-            Image(systemName: "magnifyingglass")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(Theme.Palette.textTertiary)
-            TextField("Search apps", text: $text)
-                .textFieldStyle(.plain)
-                .font(.system(size: 13))
-                .focused($isFocused)
-            if !text.isEmpty {
-                Button { text = "" } label: {
-                    Image(systemName: "xmark.circle.fill").foregroundStyle(Theme.Palette.textTertiary)
-                }
-                .buttonStyle(.plain)
-                .help("Clear search")
-            }
-        }
-        .padding(.horizontal, Theme.Spacing.m - 2)
-        .padding(.vertical, 7)
-        .background(
-            RoundedRectangle(cornerRadius: Theme.Radius.m, style: .continuous)
-                .fill(Color.white.opacity(isFocused ? 0.09 : 0.05))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: Theme.Radius.m, style: .continuous)
-                .strokeBorder(isFocused ? AnyShapeStyle(Theme.brandGradient) : AnyShapeStyle(Theme.Palette.hairline), lineWidth: 1)
-        )
-        .animation(Theme.Motion.hover, value: isFocused)
-        // AppKit makes the first text field key on launch; start unfocused instead.
-        .task { isFocused = false }
-        .background(
-            Button("Search") { isFocused = true }
-                .keyboardShortcut("f")
-                .hidden()
-                .accessibilityHidden(true)
-        )
-    }
-}

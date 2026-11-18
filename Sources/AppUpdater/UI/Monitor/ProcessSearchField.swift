@@ -2,9 +2,21 @@ import AppKit
 import SwiftUI
 
 /// Inline glass search field of the Processes page. While the page is on screen ⌘F focuses this
-/// field instead of the sidebar search: a local key monitor consumes the event before menu and
-/// `.keyboardShortcut` handling, and is removed again when the field leaves the screen.
+/// field instead of the top bar search (see `GlassSearchField`).
 struct ProcessSearchField: View {
+    @Binding var text: String
+
+    var body: some View {
+        GlassSearchField(prompt: String(localized: "Search processes, PID or port"), text: $text)
+    }
+}
+
+/// Glass search field used by the top bar and the Processes page. While it is on screen ⌘F
+/// focuses it: a local key monitor consumes the event before menu and `.keyboardShortcut`
+/// handling, and is removed again when the field leaves the screen.
+struct GlassSearchField: View {
+    /// Already localized.
+    let prompt: String
     @Binding var text: String
 
     @FocusState private var isFocused: Bool
@@ -15,7 +27,7 @@ struct ProcessSearchField: View {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 12, weight: .semibold))
                 .foregroundStyle(isFocused ? Theme.Palette.brandTertiary : Theme.Palette.textTertiary)
-            TextField("Search processes, PID or port", text: $text)
+            TextField(prompt, text: $text)
                 .textFieldStyle(.plain)
                 .font(.system(size: 13))
                 .focused($isFocused)

@@ -17,7 +17,6 @@ struct MainWindowView: View {
     var migrationModel: MigrationModel?
 
     @State private var selection: SidebarItem?
-    @State private var searchText = ""
     @State private var detailApp: InstalledApp?
     @State private var mappingApp: InstalledApp?
 
@@ -79,8 +78,7 @@ struct MainWindowView: View {
             GlassSidebar(
                 viewModel: viewModel,
                 formulaeModel: formulaeModel,
-                selection: $selection,
-                searchText: $searchText
+                selection: $selection
             )
             topBar
             ZStack {
@@ -112,11 +110,11 @@ struct MainWindowView: View {
                 onSelectHistory: showDetail(for:)
             )
         case .allApps:
-            InstalledAppsTable(viewModel: viewModel, apps: filteredApps, migrationModel: migrationModel)
+            InstalledAppsTable(viewModel: viewModel, apps: viewModel.installedApps, migrationModel: migrationModel)
         case .updates:
-            UpdatesListView(viewModel: viewModel, updates: filteredUpdates(nil))
+            UpdatesListView(viewModel: viewModel, updates: viewModel.updates)
         case .source(let kind):
-            UpdatesListView(viewModel: viewModel, updates: filteredUpdates(kind))
+            UpdatesListView(viewModel: viewModel, updates: viewModel.updates.filter { $0.source == kind })
         case .commandLineTools:
             FormulaeView(model: formulaeModel)
         case .insights:
@@ -138,23 +136,22 @@ struct MainWindowView: View {
             UpdateHistoryView(
                 entries: viewModel.history,
                 onClear: { Task { await viewModel.clearHistory() } },
-                onSelect: showDetail(for:),
-                externalSearchText: searchText
+                onSelect: showDetail(for:)
             )
         case .excluded:
             ExcludedView(viewModel: viewModel)
         case .cleanup:
             CleanupView(model: cleanupModel)
         case .diskUsage:
-            DiskUsageView(model: diskUsageModel, searchText: searchText)
+            DiskUsageView(model: diskUsageModel)
         case .system:
             SystemMonitorView(model: monitorModel)
         case .processes:
-            ProcessesView(model: monitorModel, searchText: searchText)
+            ProcessesView(model: monitorModel)
         case .startup:
-            StartupItemsView(model: startupModel, searchText: searchText)
+            StartupItemsView(model: startupModel)
         case .security:
-            SecurityView(model: securityModel, searchText: searchText)
+            SecurityView(model: securityModel)
         }
     }
 
@@ -170,19 +167,6 @@ struct MainWindowView: View {
             ignore: { viewModel.ignore($0) },
             selectApp: { detailApp = $0 }
         )
-    }
-
-    private var filteredApps: [InstalledApp] {
-        guard !searchText.isEmpty else { return viewModel.installedApps }
-        return viewModel.installedApps.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
-    }
-
-    private func filteredUpdates(_ kind: UpdateSourceKind?) -> [AvailableUpdate] {
-        viewModel.updates.filter { update in
-            let matchesSource = kind.map { update.source == $0 } ?? true
-            let matchesSearch = searchText.isEmpty || update.app.name.localizedCaseInsensitiveContains(searchText)
-            return matchesSource && matchesSearch
-        }
     }
 
     private var subtitle: String {

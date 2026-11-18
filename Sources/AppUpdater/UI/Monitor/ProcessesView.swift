@@ -3,11 +3,10 @@ import MonitorCore
 import SwiftUI
 
 /// Task manager: process groups (apps with their helpers) with live CPU, memory, ports and quit actions.
-/// Clicking a row opens `ProcessInspector` on the right. Search: the page field wins while it has text,
-/// otherwise the sidebar search (`searchText`) applies; both match name, bundle id, PID and port.
+/// Clicking a row opens `ProcessInspector` on the right. The page search matches name, bundle id,
+/// PID and port.
 struct ProcessesView: View {
     let model: MonitorModel
-    let searchText: String
 
     @AppStorage("processes.filter") private var filter: ProcessFilter = .apps
     @AppStorage("processes.chips") private var chipsRaw = ""
@@ -21,7 +20,7 @@ struct ProcessesView: View {
     private var query: ProcessListQuery {
         ProcessListQuery(
             filter: filter, chips: chips, sort: sort,
-            search: ProcessListQuery.effectiveSearch(page: pageSearch, sidebar: searchText)
+            search: pageSearch
         )
     }
 
