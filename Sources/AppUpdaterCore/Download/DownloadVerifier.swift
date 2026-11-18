@@ -39,11 +39,12 @@ struct DownloadVerifier: Sendable {
         do {
             try Quarantine.apply(to: fileURL)
             try verify(fileURL, for: update, expected: expected ?? ExpectedChecksum(sha256Of: update))
+            // Extension-less downloads get the extension their bytes prove (dmg/zip/pkg only).
+            return try PackageSniffer.labelling(fileURL)
         } catch {
             try? FileManager.default.removeItem(at: fileURL.deletingLastPathComponent())
             throw error
         }
-        return fileURL
     }
 
     // MARK: - File placement

@@ -189,7 +189,7 @@ struct SparkleSourceTests {
     }
 
     // H-1: an enclosure outside the dmg/zip/pkg allowlist is reported, but only as a manual download.
-    @Test("unknown enclosure formats become manual-only updates", arguments: ["Update.terminal", "Update.tar.xz", "download"])
+    @Test("unknown enclosure formats become manual-only updates", arguments: ["Update.terminal", "Update.rar"])
     func unknownEnclosureIsManualOnly(fileName: String) async throws {
         let xml = """
         <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"><channel><item>
@@ -200,5 +200,17 @@ struct SparkleSourceTests {
         let update = try #require(try await makeSource(xml).checkForUpdate(app))
         #expect(InstallMethod(update: update) == .manualDownload)
         #expect(InstallMethod.manualDownloadPage(for: update) == update.downloadURL)
+    }
+
+    @Test("an extension-less enclosure is identified after downloading")
+    func extensionlessEnclosureIsDetectedAfterDownload() async throws {
+        let xml = """
+        <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"><channel><item>
+          <enclosure url="https://example.com/download" sparkle:version="200" sparkle:shortVersionString="2.0"/>
+        </item></channel></rss>
+        """
+        let app = TestApps.make(shortVersion: "1.0", buildVersion: "100", sparkleFeedURL: feedURL)
+        let update = try #require(try await makeSource(xml).checkForUpdate(app))
+        #expect(InstallMethod(update: update) == .detectedAfterDownload)
     }
 }

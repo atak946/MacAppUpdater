@@ -153,6 +153,15 @@ struct ViewModelExtras {
     var exclusionStore: (any ExclusionRulesStoring)?
     /// Never shells out to `codesign`.
     var detailsReader = AppDetailsReader(verifier: StubSignatureVerifier())
+    var sizeProbe: (any DownloadSizeProbing)?
+    var detectedFormats: (any DetectedFormatStoring)?
+}
+
+/// HEAD answers by URL.
+struct StubDownloadProbe: DownloadSizeProbing {
+    var hints: [URL: DownloadHint]
+    func size(of url: URL) async -> Int64? { hints[url]?.size }
+    func inspect(_ url: URL) async -> DownloadHint? { hints[url] }
 }
 
 struct StubSignatureVerifier: SignatureVerifying {
@@ -211,7 +220,9 @@ func makeViewModel(
         vendorDetector: StubVendorDetector(managed: extras.vendorManaged),
         vendorInstallStrategy: { update in update.source == .vendor ? strategies[update.app.bundleIdentifier] : nil },
         downloadHosts: UserDefaultsDownloadHostStore(defaults: defaults),
-        managed: extras.managed
+        managed: extras.managed,
+        sizeProbe: extras.sizeProbe,
+        detectedFormats: extras.detectedFormats
     )
     return UpdatesViewModel(
         scanner: extras.scanner ?? StubScanner(apps: updates.map(\.app)),

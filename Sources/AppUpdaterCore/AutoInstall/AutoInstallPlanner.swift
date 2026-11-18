@@ -39,6 +39,8 @@ public struct AutoInstallInput: Sendable {
     public let isCompatible: @Sendable (AvailableUpdate) -> Bool
     /// Security-critical updates bypass the soak period (not the system conditions).
     public let isUrgent: @Sendable (AvailableUpdate) -> Bool
+    /// Format an extension-less download proved to be before (`DetectedFormatStoring`).
+    public let knownFormat: @Sendable (AvailableUpdate) -> PackageFormat?
 
     public init(
         updates: [AvailableUpdate],
@@ -47,8 +49,10 @@ public struct AutoInstallInput: Sendable {
         conditions: SystemConditionsSnapshot,
         releaseDates: [String: ReleaseDate] = [:],
         isCompatible: @escaping @Sendable (AvailableUpdate) -> Bool = { _ in true },
-        isUrgent: @escaping @Sendable (AvailableUpdate) -> Bool = { _ in false }
+        isUrgent: @escaping @Sendable (AvailableUpdate) -> Bool = { _ in false },
+        knownFormat: @escaping @Sendable (AvailableUpdate) -> PackageFormat? = { _ in nil }
     ) {
+        self.knownFormat = knownFormat
         self.updates = updates
         self.policies = policies
         self.exclusions = exclusions
@@ -91,17 +95,21 @@ public struct AutoInstallPlanner: Sendable {
     // MARK: Rules
 
     private func eligibilityVerdict(for update: AvailableUpdate, input: AutoInstallInput) -> AutoInstallVerdict? {
-        switch InstallMethod(update: update) {
+        let knownFormat = input.knownFormat(update)
+        switch InstallMethod(update: update, knownFormat: knownFormat) {
         case .appStore: return .skip(reason: String(coreLocalized: "App Store updates are installed by the App Store"))
         case .installerPackage: return .skip(reason: String(coreLocalized: "Installer packages need your approval"))
         case .manualDownload: return .skip(reason: String(coreLocalized: "This download format must be installed manually"))
+        case .detectedAfterDownload:
+            return .skip(reason: String(coreLocalized: "The download format is only known after downloading — install it yourself"))
         case .automatic: break
         }
-        // Belt and braces: only dmg/zip are ever installed unattended (security review H-1).
-        guard InstallMethod.isInPlaceFormat(PackageFormat(fileURL: update.downloadURL)) else {
+        // Belt and braces: only dmg/zip/tar, named by the URL or proved by an earlier download,
+        // are ever installed unattended (security review H-1).
+        guard InstallMethod.isInPlaceFormat(InstallMethod.effectiveFormat(of: update, knownFormat: knownFormat)) else {
             return .skip(reason: String(coreLocalized: "This download format must be installed manually"))
         }
-        guard input.policies.shouldAutoInstall(update) else {
+        guard input.policies.shouldAutoInstall(update, knownFormat: knownFormat) else {
             return .skip(reason: String(coreLocalized: "Automatic installs are off for this app"))
         }
         if let reason = input.exclusions.exclusionReason(for: update) { return .skip(reason: reason) }

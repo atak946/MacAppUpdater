@@ -258,8 +258,8 @@ struct UpdatesViewModelInstallFlowTests {
         #expect(await viewModel.installRoute(for: update) == .installerApp)
     }
 
-    @Test("an unknown download format is never downloaded or opened; only the https page is opened",
-          arguments: ["app.tar.gz", "Update.terminal", "download"])
+    @Test("a known non-package format is never downloaded or opened; only the https page is opened",
+          arguments: ["app.7z", "Update.terminal", "Update.webloc"])
     func unknownFormatOpensPageOnly(file: String) async {
         let update = Fixtures.update("app", file: file)
         let workspace = RecordingWorkspace()
@@ -327,6 +327,97 @@ struct UpdatesViewModelInstallFlowTests {
         #expect(workspace.opened == [update.downloadURL])
         #expect(viewModel.installState(for: update).isManualAction)
         #expect(!FileManager.default.fileExists(atPath: folder.path))
+    }
+
+    private func downloadedFile(named name: String, in folder: URL) throws -> URL {
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        let file = folder.appendingPathComponent(name)
+        try Data("payload".utf8).write(to: file)
+        return file
+    }
+
+    @Test("an extension-less download identified as a disk image is installed in place")
+    func extensionlessDownloadDetectedAsDiskImageIsInstalled() async throws {
+        let update = Fixtures.update("app", file: "download")
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("AppUpdater-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: folder) }
+        // DownloadVerifier labels a sniffed dmg as "<name>.dmg".
+        let file = try downloadedFile(named: "download.dmg", in: folder)
+        let workspace = RecordingWorkspace()
+        let installer = RecordingInstaller()
+        let viewModel = makeViewModel(
+            updates: [update], installer: installer,
+            extras: ViewModelExtras(workspace: workspace, downloader: FileDownloader(file: file))
+        )
+        await viewModel.refresh()
+
+        #expect(await viewModel.installRoute(for: update) == .detectAfterDownload)
+        #expect(viewModel.installableUpdates.map(\.id) == [update.id])
+        await viewModel.install(update)
+
+        #expect(await installer.installed == [update.id])
+        #expect(workspace.opened.isEmpty)
+        #expect(viewModel.installState(for: update) == .installed)
+        #expect(!FileManager.default.fileExists(atPath: folder.path))
+    }
+
+    @Test("an extension-less download whose bytes match no package is deleted; the page is opened")
+    func extensionlessUnrecognisedDownloadOpensPage() async throws {
+        let update = Fixtures.update("app", file: "download")
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("AppUpdater-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: folder) }
+        let file = try downloadedFile(named: "download", in: folder)
+        let workspace = RecordingWorkspace()
+        let installer = RecordingInstaller()
+        let viewModel = makeViewModel(
+            updates: [update], installer: installer,
+            extras: ViewModelExtras(workspace: workspace, downloader: FileDownloader(file: file))
+        )
+        await viewModel.refresh()
+
+        await viewModel.install(update)
+
+        #expect(await installer.installed.isEmpty)
+        #expect(workspace.opened == [update.downloadURL])
+        #expect(!workspace.opened.contains(file))
+        #expect(viewModel.installState(for: update).isManualAction)
+        #expect(!FileManager.default.fileExists(atPath: folder.path))
+    }
+
+    @Test("an extension-less download identified as a package opens Installer.app without the helper")
+    func extensionlessDownloadDetectedAsPackageOpensInstaller() async throws {
+        let update = Fixtures.update("app", file: "download")
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("AppUpdater-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: folder) }
+        let file = try downloadedFile(named: "download.pkg", in: folder)
+        let workspace = RecordingWorkspace()
+        let viewModel = makeViewModel(
+            updates: [update], extras: ViewModelExtras(workspace: workspace, downloader: FileDownloader(file: file))
+        )
+        await viewModel.refresh()
+
+        await viewModel.install(update)
+
+        #expect(workspace.opened == [file])
+        #expect(viewModel.installState(for: update).isManualAction)
+    }
+
+    @Test("a download that turns out to be the installed version marks the app current, not failed")
+    func alreadyInstalledIsNotAFailure() async throws {
+        let update = Fixtures.update("app")
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("AppUpdater-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: folder) }
+        let file = try downloadedFile(named: "app.dmg", in: folder)
+        let viewModel = makeViewModel(
+            updates: [update], installer: RecordingInstaller(failingWith: .alreadyInstalled(version: "1.0")),
+            extras: ViewModelExtras(downloader: FileDownloader(file: file))
+        )
+        await viewModel.refresh()
+
+        await viewModel.install(update)
+
+        #expect(viewModel.installState(for: update) == .installed)
+        #expect(viewModel.history.isEmpty)
     }
 
     @Test("a failed in-place install also removes its AppUpdater-* download folder")

@@ -101,14 +101,22 @@ public struct GitHubReleasesSource: SourceMatching {
         return String(tag.dropFirst())
     }
 
+    /// dmg/zip/pkg first; a tarball only when none exists and its name says macOS (releases
+    /// often carry Linux tarballs and the auto-generated source archives).
     func preferredAsset(in assets: [GitHubRelease.Asset]) -> GitHubRelease.Asset? {
-        let candidates = assets.filter { asset in
-            let ext = URL(fileURLWithPath: asset.name).pathExtension.lowercased()
-            return Self.packageExtensions.contains(ext)
-                && asset.browserDownloadURL.scheme?.lowercased() == "https"
-        }
+        let secure = assets.filter { $0.browserDownloadURL.scheme?.lowercased() == "https" }
+        let packages = secure.filter { Self.packageExtensions.contains(URL(fileURLWithPath: $0.name).pathExtension.lowercased()) }
+        let candidates = packages.isEmpty ? secure.filter(Self.isMacTarball) : packages
         // max(by:) keeps the last max on ties, so iterate reversed to favour the first.
         return candidates.reversed().max { architecture.score(fileName: $0.name) < architecture.score(fileName: $1.name) }
+    }
+
+    private static let macNameHints = ["mac", "darwin", "osx", "apple"]
+
+    static func isMacTarball(_ asset: GitHubRelease.Asset) -> Bool {
+        let name = asset.name.lowercased()
+        return PackageFormat(fileURL: URL(fileURLWithPath: name)) == .tarball
+            && macNameHints.contains { name.contains($0) }
     }
 
 

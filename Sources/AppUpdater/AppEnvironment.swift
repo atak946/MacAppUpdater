@@ -143,7 +143,8 @@ final class AppEnvironment {
             downloadHosts: downloadHosts,
             managed: managed,
             sizeProbe: DownloadSizeProbe(),
-            versionAliases: InstalledVersionAliasStore()
+            versionAliases: InstalledVersionAliasStore(),
+            detectedFormats: UserDefaultsDetectedFormatStore()
         )
         let viewModel = UpdatesViewModel(
             scanner: AppScanner(),

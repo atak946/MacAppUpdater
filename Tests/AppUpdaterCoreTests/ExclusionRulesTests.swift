@@ -68,9 +68,12 @@ struct ExclusionRulesTests {
         ("https://example.com/App.dmg", .homebrew, .automatic),
         ("https://example.com/App.zip", .github, .automatic),
         ("https://example.com/App.mpkg", .homebrew, .installerPackage),
-        // H-1: anything outside the dmg/zip/pkg allowlist is manual-only (never opened or auto-installed).
-        ("https://example.com/download", .github, .manualDownload),
-        ("https://example.com/App.tar.gz", .sparkle, .manualDownload),
+        // No extension: downloaded and identified by its bytes before anything is installed.
+        ("https://example.com/download", .github, .detectedAfterDownload),
+        ("https://example.com/get.php", .vendor, .detectedAfterDownload),
+        // H-1: known non-package types are manual-only (never downloaded, opened or auto-installed).
+        ("https://example.com/App.7z", .sparkle, .manualDownload),
+        ("https://example.com/App.tar.gz", .github, .automatic),
         ("https://example.com/Update.terminal", .sparkle, .manualDownload),
         ("https://example.com/Update.webloc", .vendor, .manualDownload),
         ("macappstore://apps.apple.com/app/id1", .appStore, .appStore),

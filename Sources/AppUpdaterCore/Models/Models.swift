@@ -50,14 +50,37 @@ public enum PackageFormat: String, Sendable, Codable {
     case dmg
     case zip
     case pkg
+    /// A tar archive, optionally gzip/bzip2/xz compressed (`.tar.gz`, `.tgz`, `.tar.xz`, …).
+    case tarball
     case unknown
 
+    /// Lowercased file-name suffixes of tar archives, longest first.
+    static let tarballSuffixes = [
+        ".tar.gz", ".tar.bz2", ".tar.xz", ".tgz", ".tbz2", ".tbz", ".txz", ".tar",
+    ]
+
     public init(fileURL: URL) {
+        let name = fileURL.lastPathComponent.lowercased()
+        if Self.tarballSuffixes.contains(where: name.hasSuffix) {
+            self = .tarball
+            return
+        }
         switch fileURL.pathExtension.lowercased() {
         case "dmg": self = .dmg
         case "zip": self = .zip
         case "pkg", "mpkg": self = .pkg
         default: self = .unknown
+        }
+    }
+
+    /// Extension given to a download whose bytes proved this format (`PackageSniffer`).
+    var labelExtension: String? {
+        switch self {
+        case .dmg: "dmg"
+        case .zip: "zip"
+        case .pkg: "pkg"
+        case .tarball: "tar"
+        case .unknown: nil
         }
     }
 }

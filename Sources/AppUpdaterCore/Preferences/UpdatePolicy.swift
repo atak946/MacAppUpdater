@@ -91,8 +91,9 @@ public struct UpdatePolicies: Sendable, Codable, Equatable {
     }
 
     /// Only dmg/zip updates are installed unattended; App Store and .pkg always need the user.
-    public func shouldAutoInstall(_ update: AvailableUpdate) -> Bool {
-        guard InstallMethod(update: update) == .automatic else { return false }
+    /// `knownFormat`: what an extension-less download proved to be earlier (`DetectedFormatStoring`).
+    public func shouldAutoInstall(_ update: AvailableUpdate, knownFormat: PackageFormat? = nil) -> Bool {
+        guard InstallMethod(update: update, knownFormat: knownFormat) == .automatic else { return false }
         return policy(for: update.app.bundleIdentifier) == .autoInstall
     }
 

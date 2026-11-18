@@ -296,6 +296,7 @@ struct UpdateRowView: View {
         case .standard(.appStore): return String(localized: "Open")
         case .standard(.installerPackage): return String(localized: "Install…")
         case .standard(.manualDownload): return String(localized: "Open…")
+        case .standard(.detectedAfterDownload): return String(localized: "Update")
         }
     }
 
@@ -307,6 +308,7 @@ struct UpdateRowView: View {
         case .standard(.appStore): return String(localized: "Opens the App Store updates page")
         case .standard(.installerPackage): return String(localized: "Downloads the installer package and opens it — admin password required")
         case .standard(.manualDownload): return String(localized: "This download format can't be installed automatically — opens the vendor's page")
+        case .standard(.detectedAfterDownload): return String(localized: "Downloads and checks the file; installs it if it is a disk image, zip or installer package, otherwise opens the vendor's page")
         }
     }
 

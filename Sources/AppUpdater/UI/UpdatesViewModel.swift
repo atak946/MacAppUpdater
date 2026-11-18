@@ -55,6 +55,8 @@ struct UpdateServices {
     /// Keeps installed updates from being offered again when the source's version string
     /// differs from the bundle's (Homebrew `2026.2.2.8` vs Android Studio `2026.2`).
     var versionAliases: (any InstalledVersionAliasing)?
+    /// Formats extension-less downloads proved to be, per app and host.
+    var detectedFormats: (any DetectedFormatStoring)?
 }
 
 /// Detects vendor-managed apps. Implemented by the core `VendorManagementDetector`.
@@ -101,6 +103,8 @@ final class UpdatesViewModel {
     var downloadStarts: [AvailableUpdate.ID: Date] = [:]
     /// Package size from a HEAD request, known before the download starts.
     var downloadSizes: [AvailableUpdate.ID: Int64] = [:]
+    /// What the server said about extension-less downloads (file name, MIME type).
+    var downloadHints: [AvailableUpdate.ID: DownloadHint] = [:]
     var installTasks: [AvailableUpdate.ID: Task<Void, Never>] = [:]
     var helperStatus: HelperStatus = .notRegistered
     var backups: [String: AppBackup] = [:]
@@ -196,7 +200,7 @@ final class UpdatesViewModel {
 
     private func isUnattended(_ method: ResolvedInstallMethod) -> Bool {
         switch method {
-        case .standard(.automatic): true
+        case .standard(.automatic), .standard(.detectedAfterDownload): true
         case .standard(.installerPackage): helperStatus == .enabled && services.packageInstaller != nil
         case .standard(.appStore), .standard(.manualDownload), .vendorManaged: false
         }

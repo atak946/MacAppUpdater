@@ -175,6 +175,10 @@ public struct AppInstaller: UpdateInstalling {
             try await ArchiveCapacityCheck(commandRunner: commandRunner).check(packageURL, extractingInto: extractDirectory)
             try await commandRunner.run(SystemTool.ditto, arguments: ["-x", "-k", packageURL.path, extractDirectory.path])
             return try locateApp(in: extractDirectory, for: update.app)
+        case .tarball:
+            try await TarballCapacityCheck(commandRunner: commandRunner).check(packageURL, extractingInto: extractDirectory)
+            try await commandRunner.run(SystemTool.tar, arguments: ["-xf", packageURL.path, "-C", extractDirectory.path])
+            return try locateApp(in: extractDirectory, for: update.app)
         case .dmg:
             try await verifyDiskImageSignature(packageURL, team: team)
             return try await stageFromDiskImage(packageURL, for: update.app, in: workDirectory)

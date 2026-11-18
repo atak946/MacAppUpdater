@@ -74,14 +74,17 @@ struct AutoInstallPlannerTests {
     // H-1: only dmg/zip are installed unattended; unknown and extension-less formats never are.
     @Test("Unknown download formats are never auto-installed", arguments: [
         "https://example.com/Update.terminal",
-        "https://example.com/Update.tar.gz",
+        "https://example.com/Update.7z",
         "https://example.com/download",
         "https://example.com/Update.webloc",
     ])
     func neverUnknownFormat(url: String) {
         let policies = autoPolicies.setting(.autoInstall, for: "com.example.app")
         let result = verdict(AutoInstallFixtures.update(url: url, source: .sparkle), policies: policies)
-        #expect(result == .skip(reason: "This download format must be installed manually"))
+        let expected = url.hasSuffix("/download")
+            ? "The download format is only known after downloading — install it yourself"
+            : "This download format must be installed manually"
+        #expect(result == .skip(reason: expected))
     }
 
     @Test func skipsIncompatibleAndExcluded() {

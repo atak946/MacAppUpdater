@@ -125,7 +125,7 @@ struct HomebrewCaskSourceTests {
     // so the installed app's Team ID (enforced by AppInstaller) is the only publisher binding.
     @Test func nonPackageCaskURLIsManualOnlyAndNoCheckHasNoChecksum() async throws {
         let casks = """
-        [{"token": "tool", "version": "2.0", "url": "https://example.com/Tool-2.0.tar.gz",
+        [{"token": "tool", "version": "2.0", "url": "https://example.com/Tool-2.0.7z",
           "sha256": "no_check", "artifacts": [{"app": ["Tool.app"]}]}]
         """
         let source = makeSource(http: MockHTTPClient(strings: [apiURL.absoluteString: casks]))

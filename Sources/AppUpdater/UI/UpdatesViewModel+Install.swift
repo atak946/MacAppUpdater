@@ -14,7 +14,10 @@ enum InstallRoute: Equatable {
     case vendorUpdater(VendorManagement)
     /// Vendor feed with its own updater (Chrome): open the vendor page, never install.
     case vendorDownloadPage
-    /// Unsupported/unknown package format: open the release page in the browser, never
+    /// No recognisable extension: download, identify the bytes, then install dmg/zip in place
+    /// or a pkg via the helper / Installer.app; anything else is deleted and the page opened.
+    case detectAfterDownload
+    /// Known non-package format: open the release page in the browser, never
     /// download or open the file (security review H-1).
     case manualDownload
 }
@@ -50,6 +53,9 @@ extension UpdatesViewModel {
             return .inPlace
         case .standard(.manualDownload):
             return .manualDownload
+        case .standard(.detectedAfterDownload):
+            // The server already said it's a web page or a non-package file: don't download it.
+            return downloadHints[update.id]?.isKnownNonPackage == true ? .manualDownload : .detectAfterDownload
         case .standard(.installerPackage):
             let status = await refreshHelperStatus()
             return status == .enabled && services.packageInstaller != nil ? .helperPackage : .installerApp
@@ -76,6 +82,8 @@ extension UpdatesViewModel {
             openManualDownloadPage(update)
         case .inPlace:
             await runCancellable(update) { await self.installInPlace(update) }
+        case .detectAfterDownload:
+            await runCancellable(update) { await self.installDetectedFormat(update) }
         case .helperPackage:
             await runCancellable(update) { await self.installPackageViaHelper(update) }
         case .installerApp:
@@ -112,23 +120,35 @@ extension UpdatesViewModel {
     }
 
     /// Probes sizes for the listed updates (a few at a time); failures just leave no size.
+    /// Extension-less downloads are probed too: the answer also says whether the link serves a
+    /// package (file name, MIME type) so a web page is opened instead of downloaded.
     func loadDownloadSizes(for updates: [AvailableUpdate]) async {
         guard let probe = services.sizeProbe else { return }
-        // Only real packages: an App Store or vendor page would report the HTML page's size.
         let missing = updates.filter { update in
-            downloadSizes[update.id] == nil && update.source != .appStore
-                && [.dmg, .zip, .pkg].contains(PackageFormat(fileURL: update.downloadURL))
+            downloadSizes[update.id] == nil && downloadHints[update.id] == nil && Self.isProbeable(update)
         }
-        let sizes = await withTaskGroup(of: (AvailableUpdate.ID, Int64?).self) { group in
+        let hints = await withTaskGroup(of: (AvailableUpdate.ID, DownloadHint?).self) { group in
             for update in missing.prefix(Self.maxSizeProbes) {
                 let url = update.downloadURL
-                group.addTask { (update.id, await probe.size(of: url)) }
+                group.addTask { (update.id, await probe.inspect(url)) }
             }
-            var found: [AvailableUpdate.ID: Int64] = [:]
-            for await (id, size) in group { if let size { found[id] = size } }
+            var found: [AvailableUpdate.ID: DownloadHint] = [:]
+            for await (id, hint) in group { if let hint { found[id] = hint } }
             return found
         }
+        let sizes = hints.compactMapValues { $0.isKnownNonPackage ? nil : $0.size }
         downloadSizes = downloadSizes.merging(sizes) { _, new in new }
+        downloadHints = downloadHints.merging(hints) { _, new in new }
+    }
+
+    /// Real packages and extension-less links; an App Store or vendor page would report the
+    /// size of an HTML page.
+    private static func isProbeable(_ update: AvailableUpdate) -> Bool {
+        guard update.source != .appStore else { return false }
+        switch InstallMethod(update: update) {
+        case .automatic, .installerPackage, .detectedAfterDownload: return true
+        case .appStore, .manualDownload: return false
+        }
     }
 
     private static let maxSizeProbes = 40
@@ -204,6 +224,53 @@ extension UpdatesViewModel {
         } catch {
             await handleInstallError(error, for: update)
         }
+    }
+
+    /// Downloads an extension-less update; `DownloadVerifier` labels it by its bytes, then it
+    /// takes the regular path for that format. Unrecognised bytes are deleted, never opened.
+    private func installDetectedFormat(_ update: AvailableUpdate) async {
+        do {
+            setInstallState(.downloading, for: update)
+            let downloaded = try await download(update)
+            try Task.checkCancellation()
+            let format = PackageFormat(fileURL: downloaded)
+            logger.info("Detected \(format.rawValue, privacy: .public) for \(update.app.name, privacy: .public)")
+            services.detectedFormats?.record(format, for: update)
+            switch format {
+            case .dmg, .zip, .tarball:
+                defer { Self.removeDownload(downloaded) }
+                setInstallState(.installing, for: update)
+                try await installer.install(update, from: downloaded)
+                await completeInstall(update)
+            case .pkg:
+                await installDownloadedPackage(update, from: downloaded)
+            case .unknown:
+                Self.removeDownload(downloaded)
+                logger.notice("Manual install needed for \(update.app.name, privacy: .public): unrecognised download")
+                openManualDownloadPage(update)
+            }
+        } catch {
+            await handleInstallError(error, for: update)
+        }
+    }
+
+    /// A sniffed .pkg: the privileged helper when available, else Installer.app (kept on disk
+    /// because Installer.app reads it after `open` returns).
+    private func installDownloadedPackage(_ update: AvailableUpdate, from packageURL: URL) async {
+        let status = await refreshHelperStatus()
+        if status == .enabled, let packageInstaller = services.packageInstaller {
+            defer { Self.removeDownload(packageURL) }
+            do {
+                setInstallState(.installing, for: update)
+                try await packageInstaller.install(update, from: packageURL)
+                await completeInstall(update)
+            } catch {
+                await handleInstallError(error, for: update)
+            }
+            return
+        }
+        workspace.open(packageURL)
+        setInstallState(.needsManualAction(String(localized: "Installer opened — follow its steps to finish.")), for: update)
     }
 
     /// Sends the user to the vendor's page in the browser. Downloaded files are never

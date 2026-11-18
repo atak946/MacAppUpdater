@@ -112,4 +112,6 @@ private final class CompletionCollector: Sendable {
 /// Absolute paths of system tools shared by several components.
 enum SystemTool {
     static let ditto = "/usr/bin/ditto"
+    /// bsdtar: detects gzip/bzip2/xz itself and, without `-P`, strips leading `/` and refuses `..`.
+    static let tar = "/usr/bin/tar"
 }

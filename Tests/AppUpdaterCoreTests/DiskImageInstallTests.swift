@@ -185,7 +185,7 @@ struct AppInstallerDiskImageTests {
         #expect(runner.verbs.last == "detach")
     }
 
-    @Test("unknown package formats are refused before anything runs", arguments: ["Foo.tar.gz", "Foo"])
+    @Test("unknown package formats are refused before anything runs", arguments: ["Foo.7z", "Foo"])
     func unknownFormat(fileName: String) async throws {
         defer { try? FileManager.default.removeItem(at: root) }
         try prepare()

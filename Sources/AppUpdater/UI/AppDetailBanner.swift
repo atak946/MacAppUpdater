@@ -127,6 +127,7 @@ struct UpdateBanner: View {
         case .standard(.appStore): return String(localized: "Open App Store")
         case .standard(.installerPackage): return String(localized: "Download & Install…")
         case .standard(.manualDownload): return String(localized: "Open Download Page")
+        case .standard(.detectedAfterDownload): return String(localized: "Update Now")
         }
     }
 

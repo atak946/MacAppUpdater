@@ -46,7 +46,16 @@ extension UpdatesViewModel {
     }
 
     func resolvedInstallMethod(for update: AvailableUpdate) -> ResolvedInstallMethod {
-        ResolvedInstallMethod(update: update, vendorManagement: vendorManagement(for: update.app))
+        ResolvedInstallMethod(
+            update: update, vendorManagement: vendorManagement(for: update.app), knownFormat: knownFormat(for: update)
+        )
+    }
+
+    /// For an extension-less download: what the server announced (HEAD), else what an
+    /// earlier download from the same app and host turned out to be.
+    func knownFormat(for update: AvailableUpdate) -> PackageFormat? {
+        if let announced = downloadHints[update.id]?.format, announced != .unknown { return announced }
+        return services.detectedFormats?.format(for: update)
     }
 
     func openVendorUpdater(_ management: VendorManagement) {

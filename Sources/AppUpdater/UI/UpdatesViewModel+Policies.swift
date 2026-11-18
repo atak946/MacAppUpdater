@@ -19,14 +19,16 @@ extension UpdatesViewModel {
     /// quiet hours, power, network, running apps). Vendor-owned updates are always skipped.
     func autoInstallDecisions(from updates: [AvailableUpdate], policies: UpdatePolicies) async -> [AutoInstallDecision] {
         let incompatible = Set(updates.filter { compatibilityWarning(for: $0) != nil }.map(\.id))
+        let known = Dictionary(updates.compactMap { update in knownFormat(for: update).map { (update.id, $0) } }) { first, _ in first }
         let input = AutoInstallInput(
             updates: updates,
             policies: policies,
             exclusions: exclusions,
             conditions: await services.conditions.snapshot(),
             releaseDates: releaseDates,
-            isCompatible: { !incompatible.contains($0.id) }
+            isCompatible: { !incompatible.contains($0.id) },
             // isUrgent: no source flags security releases yet (Sparkle criticalUpdate is not parsed).
+            knownFormat: { known[$0.id] }
         )
         let decisions = AutoInstallPlanner().plan(input).map(vetoVendorOwned)
         for decision in decisions where !decision.shouldInstall {
@@ -65,13 +67,15 @@ extension UpdatesViewModel {
     /// "Auto-installs in N days" while the soak period runs; nil when it would not auto-install.
     func autoInstallHint(for update: AvailableUpdate) -> String? {
         let policies = services.policies.load()
-        guard policies.shouldAutoInstall(update), !exclusions.isExcluded(update),
+        guard policies.shouldAutoInstall(update, knownFormat: knownFormat(for: update)), !exclusions.isExcluded(update),
               resolvedInstallMethod(for: update).isAutomatic, !opensVendorUpdater(update)
         else { return nil }
         // Permissive conditions: the hint reflects only the soak period.
+        let known = knownFormat(for: update)
         let input = AutoInstallInput(
             updates: [update], policies: policies, exclusions: exclusions,
-            conditions: SystemConditionsSnapshot(), releaseDates: releaseDates
+            conditions: SystemConditionsSnapshot(), releaseDates: releaseDates,
+            knownFormat: { _ in known }
         )
         let verdict = AutoInstallPlanner().verdict(for: update, input: input)
         return AutoInstallPlanner.hint(for: verdict, now: Date())
