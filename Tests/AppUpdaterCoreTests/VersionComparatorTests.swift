@@ -42,6 +42,18 @@ import Foundation
         #expect(!comparator.isNewer(rhs, than: lhs))
     }
 
+    @Test("A trailing commit hash is ignored", arguments: [
+        ("3.6.11-0102f49a", "3.6.11", ComparisonResult.orderedSame),
+        ("1.2.3-4-g9fceb02", "1.2.3", .orderedDescending),
+        ("1.2.3-4-g9fceb02", "1.2.3.4", .orderedSame),
+        ("27.0.3-58680", "27.0.3", .orderedDescending),
+        ("2.0-beta", "2.0", .orderedAscending),
+        ("3.6.12-0102f49a", "3.6.11", .orderedDescending),
+    ])
+    func commitHashIgnored(lhs: String, rhs: String, expected: ComparisonResult) {
+        #expect(comparator.compare(lhs, rhs) == expected)
+    }
+
     @Test func buildBreaksTieWhenShortVersionsMatch() {
         #expect(comparator.compare(shortVersion: "1.0", build: "42", to: "1.0", build: "41") == .orderedDescending)
         #expect(comparator.compare(shortVersion: "1.0", build: nil, to: "1.0", build: "41") == .orderedSame)

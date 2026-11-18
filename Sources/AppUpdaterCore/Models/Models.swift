@@ -135,6 +135,9 @@ public enum UpdaterError: Error, Sendable, Equatable, LocalizedError {
     case installFailed(String)
     case unsupportedFormat(String)
     case commandFailed(command: String, status: Int32, output: String)
+    /// The downloaded bundle has exactly the installed version: the source advertised a
+    /// version string that differs from, but denotes, what is already installed.
+    case alreadyInstalled(version: String)
 
     public var errorDescription: String? {
         switch self {
@@ -149,6 +152,8 @@ public enum UpdaterError: Error, Sendable, Equatable, LocalizedError {
         case .unsupportedFormat(let format): String(coreLocalized: "Unsupported package format: \(format)")
         case .commandFailed(let command, let status, let output):
             String(coreLocalized: "\(command) exited with \(status): \(output)")
+        case .alreadyInstalled(let version):
+            String(coreLocalized: "Version \(version) is already installed")
         }
     }
 }

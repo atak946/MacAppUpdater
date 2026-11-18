@@ -4,7 +4,8 @@ import Foundation
 ///
 /// Versions are split into numeric and alphabetic tokens (separators are ignored) and compared
 /// token by token. Alphabetic tokens denote pre-releases, so "1.2.0-rc.1" < "1.2.0".
-/// A leading "v", a leading word label ("Build 4215") and build metadata after "+" are ignored.
+/// A leading "v", a leading word label ("Build 4215"), build metadata after "+" and a trailing
+/// commit hash ("3.6.11-0102f49a", "1.2.3-4-g9fceb02") are ignored.
 public struct VersionComparator: VersionComparing {
     public init() {}
 
@@ -67,6 +68,7 @@ extension VersionComparator {
         if let plus = body.firstIndex(of: "+") {
             body = body[..<plus]
         }
+        body = Substring(strippingCommitHash(String(body)))
 
         var tokens: [Token] = []
         var current = ""
@@ -91,6 +93,17 @@ extension VersionComparator {
         }
         flush()
         return tokens
+    }
+
+    /// Drops a trailing `-<hash>` / `-g<hash>` segment: 7–40 lowercase hex characters with at
+    /// least one letter, so numeric builds (`27.0.3-58680`) and labels (`2.0-beta`) are kept.
+    public static func strippingCommitHash(_ version: String) -> String {
+        guard let dash = version.lastIndex(of: "-"), dash != version.startIndex else { return version }
+        var suffix = version[version.index(after: dash)...]
+        if suffix.first == "g", suffix.count > 7 { suffix = suffix.dropFirst() }
+        let isLowerHex = suffix.allSatisfy { $0.isHexDigit && ($0.isNumber || $0.isLowercase) }
+        guard (7...40).contains(suffix.count), isLowerHex, suffix.contains(where: \.isLetter) else { return version }
+        return String(version[..<dash])
     }
 
     private static func normalizedNumber(_ digits: String) -> String {

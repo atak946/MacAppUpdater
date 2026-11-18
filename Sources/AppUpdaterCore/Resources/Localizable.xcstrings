@@ -1230,6 +1230,26 @@
           }
         }
       }
+    },
+    "Version %@ is already installed": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sürümü zaten yüklü"
+          }
+        }
+      }
+    },
+    "The download format is only known after downloading — install it yourself": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirme biçimi ancak indirildikten sonra anlaşılıyor — kendiniz yükleyin"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

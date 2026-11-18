@@ -64,6 +64,31 @@ struct HomebrewCaskSourceTests {
         #expect(update.sha256 == nil)
     }
 
+    @Test(arguments: [
+        ("3.6.11-0102f49a", "3.6.11"),
+        ("1.2.3-abcdef1234567890abcdef1234567890abcdef12", "1.2.3"),
+        ("27.0.3-58680", "27.0.3-58680"),
+        ("2.0-beta", "2.0-beta"),
+        ("1.0-abc12", "1.0-abc12"),
+        ("1.0-ABCDEF12", "1.0-ABCDEF12"),
+    ])
+    func stripsTrailingCommitHash(raw: String, expected: String) {
+        let cask = HomebrewCask(token: "t", version: raw, url: nil, sha256: nil, appNames: [])
+        #expect(cask.comparableVersion == expected)
+    }
+
+    @Test func commitHashSuffixDoesNotLookNewer() async throws {
+        let json = """
+        [{"token": "github", "version": "3.6.11-0102f49a",
+          "url": "https://desktop.githubusercontent.com/GitHubDesktop.zip", "sha256": "abc",
+          "artifacts": [{"app": ["GitHub Desktop.app"]}]}]
+        """
+        let http = MockHTTPClient(strings: [apiURL.absoluteString: json])
+        let source = HomebrewCaskSource(http: http, comparator: VersionComparator(), apiURL: apiURL)
+        let app = TestApps.make(fileName: "GitHub Desktop.app", shortVersion: "3.6.11")
+        #expect(try await source.checkForUpdate(app) == nil)
+    }
+
     @Test func returnsNilWhenUpToDateOrUnknownOrInsecure() async throws {
         let source = makeSource(http: makeHTTP())
         #expect(try await source.checkForUpdate(TestApps.make(fileName: "Firefox.app", shortVersion: "131.0.3")) == nil)

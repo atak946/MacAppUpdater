@@ -222,6 +222,13 @@ struct StagedVersionCheckTests {
         )
     }
 
+    @Test("an identical version is reported as already installed")
+    func sameVersionIsAlreadyInstalled() {
+        #expect(throws: UpdaterError.alreadyInstalled(version: "3.6.11 (3.6.11)")) {
+            try check.validate(staged: ("3.6.11", "3.6.11"), installed: ("3.6.11", "3.6.11"), advertised: "3.6.11-0102f49a")
+        }
+    }
+
     @Test("rejects downgrades and same-version reinstalls", arguments: [
         ("1.0", nil, "2.0", nil),
         ("2.0", nil, "2.0", nil),

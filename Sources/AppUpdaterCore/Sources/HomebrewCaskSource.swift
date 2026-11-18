@@ -30,10 +30,13 @@ struct HomebrewCask: Sendable, Equatable, Decodable {
         appNames = artifacts.flatMap(\.appNames)
     }
 
-    /// Version without the ",build" suffix Homebrew appends for some casks.
+    /// Version without the ",build" suffix Homebrew appends for some casks, and without a
+    /// trailing "-<commit hash>" (GitHub Desktop: `3.6.11-0102f49a`), which would otherwise
+    /// tokenize into extra numeric components and look newer than the installed `3.6.11`.
     var comparableVersion: String? {
         guard let version, version != "latest" else { return nil }
-        return version.split(separator: ",", maxSplits: 1).first.map(String.init)
+        guard let base = version.split(separator: ",", maxSplits: 1).first.map(String.init) else { return nil }
+        return VersionComparator.strippingCommitHash(base)
     }
 
     var verifiedSHA256: String? {
@@ -152,6 +155,19 @@ public struct HomebrewCaskSource: SourceMatching {
         return !comparator.isNewer(caskVersion, than: "\(app.shortVersion).\(build)")
     }
 
+    /// The raw cask version ends in the installed bundle's build (`3.6.11-0102f49a` or
+    /// `3.5.4,20240715` with CFBundleVersion `0102f49a` / `20240715`) while its version part
+    /// matches the installed short version: the cask describes exactly what is installed.
+    static func endsWithInstalledBuild(_ rawVersion: String?, of app: InstalledApp, comparator: any VersionComparing) -> Bool {
+        guard let rawVersion, let build = app.buildVersion?.trimmingCharacters(in: .whitespaces), !build.isEmpty,
+              let separator = rawVersion.lastIndex(where: { $0 == "-" || $0 == "," })
+        else { return false }
+        let suffix = rawVersion[rawVersion.index(after: separator)...]
+        let base = String(rawVersion[..<separator])
+        return suffix.caseInsensitiveCompare(build) == .orderedSame
+            && !comparator.isNewer(base, than: app.shortVersion)
+    }
+
     public func checkForUpdate(_ app: InstalledApp) async throws -> AvailableUpdate? {
         try await lookup(app).update
     }
@@ -173,7 +189,8 @@ public struct HomebrewCaskSource: SourceMatching {
               let downloadURL = URL(string: urlString),
               downloadURL.scheme?.lowercased() == "https",
               comparator.isNewer(version, than: app.shortVersion),
-              !Self.isInstalledBuild(version, of: app, comparator: comparator)
+              !Self.isInstalledBuild(version, of: app, comparator: comparator),
+              !Self.endsWithInstalledBuild(cask.version, of: app, comparator: comparator)
         else { return .upToDate(latestVersion: cask.comparableVersion ?? cask.version ?? "latest") }
         return .update(AvailableUpdate(
             app: app,

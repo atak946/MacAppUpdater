@@ -5,7 +5,8 @@ import Foundation
 /// The feed's version string alone decides that an update is "newer"; this check reads the
 /// staged bundle's own Info.plist instead:
 /// 1. the staged (short version, build) must be newer than the installed one
-///    (builds are compared only when the short versions are equal);
+///    (builds are compared only when the short versions are equal); an identical version
+///    throws `.alreadyInstalled` so the caller can treat the app as up to date;
 /// 2. when the advertised version is a plain dotted number (`1.2.3`, `v2.0`), it must equal the
 ///    staged short version or build, or refine the short version (Homebrew lists Android Studio
 ///    as `2026.2.2.8` while the bundle says `2026.2`). Free-form versions skip this step.
@@ -23,6 +24,9 @@ struct StagedVersionCheck: Sendable {
             shortVersion: staged.shortVersion, build: staged.build,
             to: installed.shortVersion, build: installed.build
         )
+        if order == .orderedSame {
+            throw UpdaterError.alreadyInstalled(version: Self.describe(installed))
+        }
         guard order == .orderedDescending else {
             throw UpdaterError.installFailed(
                 "Update is not newer than the installed version (\(Self.describe(staged)) vs \(Self.describe(installed)))"

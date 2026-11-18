@@ -98,6 +98,18 @@ struct HomebrewBuildSuffixTests {
         #expect(result == expected)
     }
 
+    @Test("a cask version ending in the installed build describes the installed app", arguments: [
+        ("3.6.11-0102f49a", "3.6.11", "0102f49a", true),
+        ("3.5.4,20240715", "3.5.4", "20240715", true),
+        ("3.6.12-0102f49a", "3.6.11", "0102f49a", false),
+        ("3.6.11-0102f49a", "3.6.11", "3.6.11", false),
+        ("3.6.11", "3.6.11", "3.6.11", false),
+    ] as [(String, String, String?, Bool)])
+    func endsWithInstalledBuild(raw: String, short: String, build: String?, expected: Bool) {
+        let result = HomebrewCaskSource.endsWithInstalledBuild(raw, of: Self.app(short: short, build: build), comparator: VersionComparator())
+        #expect(result == expected)
+    }
+
     @Test("Content-Length is parsed; missing or zero is unknown")
     func contentLength() {
         func response(_ headers: [String: String]) -> HTTPURLResponse {

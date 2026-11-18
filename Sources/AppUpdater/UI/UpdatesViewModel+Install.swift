@@ -268,6 +268,22 @@ extension UpdatesViewModel {
         await refreshBackup(for: update.app)
     }
 
+    /// The download turned out to be the installed version (the source spells it differently,
+    /// e.g. `3.6.11-0102f49a` for 3.6.11): remember the spelling so later checks drop it, and
+    /// show the app as current instead of a failure. Nothing was installed, so no history entry.
+    private func markAlreadyInstalled(_ update: AvailableUpdate) async {
+        logger.notice("\(update.app.name, privacy: .public) \(update.newVersion, privacy: .public) is already installed")
+        await services.versionAliases?.record(
+            InstalledVersionAlias(
+                advertisedVersion: update.newVersion,
+                shortVersion: update.app.shortVersion,
+                buildVersion: update.app.buildVersion
+            ),
+            for: update.app.bundleIdentifier
+        )
+        setInstallState(.installed, for: update)
+    }
+
     /// Drops updates we already installed whose advertised version the bundle never reports.
     /// Installs from before the alias store existed are recovered from the history: the last
     /// successful install of exactly this version, while the bundle still shows the same
@@ -299,6 +315,10 @@ extension UpdatesViewModel {
         if error is CancellationError || Task.isCancelled || (error as? URLError)?.code == .cancelled {
             logger.info("Install of \(update.app.name, privacy: .public) cancelled")
             setInstallState(.pending, for: update)
+            return
+        }
+        if case UpdaterError.alreadyInstalled = error {
+            await markAlreadyInstalled(update)
             return
         }
         let message = InstallBlockReason(error: error) == .notNotarized && managedGate.isNotarizationLocked
